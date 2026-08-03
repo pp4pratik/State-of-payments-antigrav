@@ -1,57 +1,68 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { isSupabaseConfigured } from '../lib/supabase'
-import { useMonthlyTrend } from '../lib/queries'
-import { NotConnected } from '../components/NotConnected'
-import { StatCard } from '../components/StatCard'
-import { TrendChart } from '../components/TrendChart'
-import { formatValueCr, formatVolume, pctChange } from '../lib/format'
+import { DashboardProvider, useDashboard } from '../lib/DashboardContext'
+import { useAppStatsAll } from '../lib/queries'
+import { Controls } from '../components/Controls'
+import { UpiView } from '../components/UpiView'
+import { AutoPayView } from '../components/AutoPayView'
+import { RbiCardsView } from '../components/RbiCardsView'
+import { RbiPaymentsView } from '../components/RbiPaymentsView'
+import { CircularsView } from '../components/CircularsView'
 
 export const Route = createFileRoute('/')({
-  component: Overview,
+  component: Dashboard,
 })
 
-function Overview() {
+function Dashboard() {
+  const appStats = useAppStatsAll()
+
+  if (appStats.isPending) return <Shell>Loading…</Shell>
+  if (appStats.error) return <Shell>Failed to load: {appStats.error.message}</Shell>
+
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
-          This month
-        </h2>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          Monthly UPI, card, and RBI payment-system trends, sourced from NPCI and RBI's published
-          statistics via Airtable.
-        </p>
-      </div>
-      {isSupabaseConfigured ? <OverviewContent /> : <NotConnected table="monthly_trend" />}
-    </div>
+    <DashboardProvider months={appStats.data.months}>
+      <Header />
+      <ActiveView />
+    </DashboardProvider>
   )
 }
 
-function OverviewContent() {
-  const { data, isPending, error } = useMonthlyTrend()
-
-  if (isPending) return <p className="text-[var(--text-secondary)]">Loading…</p>
-  if (error) return <p className="text-[#f4715c]">Failed to load: {error.message}</p>
-  if (!data.length) return <NotConnected table="monthly_trend" />
-
-  const latest = data[data.length - 1]
-  const previous = data[data.length - 2]
-
+function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <StatCard
-          label="Total volume"
-          value={formatVolume(latest.total_volume_mn)}
-          delta={previous ? pctChange(latest.total_volume_mn, previous.total_volume_mn) : null}
-        />
-        <StatCard
-          label="Total value"
-          value={formatValueCr(latest.total_value_cr)}
-          delta={previous ? pctChange(latest.total_value_cr, previous.total_value_cr) : null}
-        />
-      </div>
-      <TrendChart rows={data} />
-    </div>
+    <>
+      <Header />
+      <p className="section-note">{children}</p>
+    </>
+  )
+}
+
+function Header() {
+  return (
+    <>
+      <p className="eyebrow">
+        <span className="dot" />
+        NPCI · UPI ecosystem tracker
+      </p>
+      <h1>UPI Pulse</h1>
+      <p className="subtitle">
+        Monthly trends, app leaderboard, ticket size, and circulars for India's Unified Payments
+        Interface — every number sourced from NPCI and RBI via a live database, no click-through
+        required.
+      </p>
+    </>
+  )
+}
+
+function ActiveView() {
+  const { view } = useDashboard()
+  return (
+    <>
+      {/* TODO: a combined "download all" export per view, like UPI-Dash's downloadAllBtn */}
+      <Controls onDownloadAll={() => {}} />
+      {view === 'upi' && <UpiView />}
+      {view === 'autopay' && <AutoPayView />}
+      {view === 'rbi' && <RbiCardsView />}
+      {view === 'rbipayments' && <RbiPaymentsView />}
+      {view === 'circulars' && <CircularsView />}
+    </>
   )
 }
