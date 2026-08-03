@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>State of Payments</title>
+    <meta name="description" content="India's UPI, cards, and payment systems tracked monthly from NPCI and RBI published statistics." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <script>
+      // GitHub Pages SPA routing trick.
+      // GitHub Pages serves 404.html for any path it can't find; 404.html encodes
+      // the original path as ?p= and redirects here. Restore it before the router boots.
+      (function () {
+        var params = new URLSearchParams(window.location.search)
+        var redirect = params.get('p')
+        if (redirect) {
+          window.history.replaceState(null, '', redirect)
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

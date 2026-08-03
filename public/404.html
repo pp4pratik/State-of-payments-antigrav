@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>State of Payments</title>
+    <script>
+      // GitHub Pages SPA routing trick.
+      // GitHub Pages serves this file for any path it can't find.
+      // We encode the original path as ?p= and redirect to the site root so
+      // index.html loads, then the inline script there restores the path
+      // before the router starts.
+      //
+      // Auto-detects deployment context:
+      //   github.io      -> base is the repo subdirectory, e.g. /state-of-payments/
+      //   custom domain  -> base is /
+      var isGithubPages = window.location.hostname.endsWith('.github.io')
+      var base = isGithubPages ? '/' + window.location.pathname.split('/')[1] + '/' : '/'
+      var full = window.location.pathname + window.location.search + window.location.hash
+      window.location.replace(base + '?p=' + encodeURIComponent(full))
+    </script>
+  </head>
+  <body></body>
+</html>
