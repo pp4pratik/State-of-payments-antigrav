@@ -1,8 +1,10 @@
 import { Bar } from 'react-chartjs-2'
+import { TrendingUp } from 'lucide-react'
 import { useAutoPayExecutions, useAutoPayRegistrations, usePspMemberPerformance } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 import { crNum, fullLabel, mnToCr } from '../lib/format'
 
 const USE_CASES = [
@@ -52,7 +54,9 @@ export function AutoPayView() {
             </p>
             <p className="hero-sub">recurring debits processed across the top remitter banks</p>
             <div className="chips">
-              <span className="chip up">~{totalRegCr.toFixed(1)} Cr new registrations, {fullLabel(registrations.data.month)}</span>
+              <span className="chip up">
+                <TrendingUp size={13} />~{totalRegCr.toFixed(1)} Cr new registrations, {fullLabel(registrations.data.month)}
+              </span>
             </div>
           </div>
           <div>
@@ -121,9 +125,10 @@ export function AutoPayView() {
               <p className="section-title">Execution volume by remitter bank</p>
               <div className="section-actions">
                 <p className="section-note">{fullLabel(executions.data.month)}</p>
-                <button className="mini-btn" onClick={() => downloadCSV('upi-pulse-autopayExec.csv', [['Bank', 'Executions (Cr)'], ...execLabels.map((l, i) => [l, execData[i]])])}>
-                  CSV
-                </button>
+                <CsvButton
+                  label="CSV"
+                  onClick={() => downloadCSV('upi-pulse-autopayExec.csv', [['Bank', 'Executions (Cr)'], ...execLabels.map((l, i) => [l, execData[i]])])}
+                />
               </div>
             </div>
             <div style={{ position: 'relative', height: 240 }}>

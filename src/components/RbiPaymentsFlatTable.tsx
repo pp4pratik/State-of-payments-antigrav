@@ -1,4 +1,5 @@
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 import { lakhToCr } from '../lib/format'
 
 export type FlatMetaEntry = [key: string, label: string, depth: 0 | 1 | 2, isGrandTotal?: boolean, formula?: string]
@@ -58,21 +59,20 @@ export function RbiPaymentsFlatTable({
           })}
         </tbody>
       </table>
-      <button
-        className="mini-btn"
-        style={{ marginTop: 10 }}
-        onClick={() =>
-          downloadCSV(csvName, [
-            ['Category', 'Volume (Cr)', 'Value (Cr)', 'Avg ticket (Rs)'],
-            ...rows.map((r) => {
-              const ticket = r.val != null && r.vol ? r.val / r.vol : null
-              return [r.label, r.vol ?? '', r.val ?? '', ticket != null && isFinite(ticket) ? ticket.toFixed(0) : '']
-            }),
-          ])
-        }
-      >
-        CSV
-      </button>
+      <div style={{ marginTop: 10 }}>
+        <CsvButton
+          label="CSV"
+          onClick={() =>
+            downloadCSV(csvName, [
+              ['Category', 'Volume (Cr)', 'Value (Cr)', 'Avg ticket (Rs)'],
+              ...rows.map((r) => {
+                const ticket = r.val != null && r.vol ? r.val / r.vol : null
+                return [r.label, r.vol ?? '', r.val ?? '', ticket != null && isFinite(ticket) ? ticket.toFixed(0) : '']
+              }),
+            ])
+          }
+        />
+      </div>
     </div>
   )
 }

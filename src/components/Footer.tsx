@@ -1,3 +1,5 @@
+import { ExternalLink } from 'lucide-react'
+
 export function Footer({
   sources,
   disclaimer,
@@ -10,8 +12,9 @@ export function Footer({
       <p className="footer-title">Source</p>
       <div className="sources">
         {sources.map((s) => (
-          <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer">
+          <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
             {s.label}
+            <ExternalLink size={12} />
           </a>
         ))}
       </div>

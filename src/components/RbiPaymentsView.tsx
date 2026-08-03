@@ -4,6 +4,7 @@ import { useRbiPaymentsAll } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 import { fullLabel, lakhToCr, shortLabel } from '../lib/format'
 import { RbiPaymentsFlatTable, type FlatMetaEntry } from './RbiPaymentsFlatTable'
 
@@ -263,13 +264,12 @@ export function RbiPaymentsView() {
                 ))}
               </tbody>
             </table>
-            <button
-              className="mini-btn"
-              style={{ marginTop: 10 }}
-              onClick={() => downloadCSV('upi-pulse-rbiPaymentsInfra.csv', [['Metric', 'Count (Cr)'], ...INFRA_META.map(([key, label]) => [label, lakhToCr(row[key]) ?? ''])])}
-            >
-              CSV
-            </button>
+            <div style={{ marginTop: 10 }}>
+              <CsvButton
+                label="CSV"
+                onClick={() => downloadCSV('upi-pulse-rbiPaymentsInfra.csv', [['Metric', 'Count (Cr)'], ...INFRA_META.map(([key, label]) => [label, lakhToCr(row[key]) ?? ''])])}
+              />
+            </div>
           </div>
         </div>
       </div>

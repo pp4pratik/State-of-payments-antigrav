@@ -4,6 +4,7 @@ import { useRbiCardsAll, type RbiCardsRow } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 import { fullLabel, rbiCountToCr, rbiValueToCr, shortLabel } from '../lib/format'
 
 const RBI_CHANNELS = [
@@ -190,17 +191,15 @@ export function RbiCardsView() {
               <p className="section-title">Transactions by channel</p>
               <div className="section-actions">
                 <p className="section-note">{fullLabel(row.month)}</p>
-                <button
-                  className="mini-btn"
+                <CsvButton
+                  label="CSV"
                   onClick={() =>
                     downloadCSV('upi-pulse-rbiChannel.csv', [
                       ['Channel', 'Volume (Cr)', 'Value (Cr)', 'Avg ticket (Rs)'],
                       ...channelRows.map((c) => [c.label, c.vol, c.val, isFinite(c.ticket) ? c.ticket.toFixed(0) : '']),
                     ])
                   }
-                >
-                  CSV
-                </button>
+                />
               </div>
             </div>
             <div className="table-scroll">

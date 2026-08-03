@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { CsvButton } from './CsvButton'
 
 export function SectionHead({
   title,
@@ -24,15 +26,11 @@ export function SectionHead({
         {note && <p className="section-note">{note}</p>}
         {children}
         {onRawToggle && (
-          <button className="mini-btn" onClick={onRawToggle}>
-            Raw data {rawOpen ? '▴' : '▾'}
+          <button className="mini-btn" onClick={onRawToggle} style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+            Raw data {rawOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
           </button>
         )}
-        {onCsv && (
-          <button className="mini-btn" onClick={onCsv}>
-            {csvLabel}
-          </button>
-        )}
+        {onCsv && <CsvButton onClick={onCsv} label={csvLabel} />}
       </div>
     </div>
   )

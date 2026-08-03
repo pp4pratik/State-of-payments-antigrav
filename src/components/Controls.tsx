@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Download } from 'lucide-react'
 import { useDashboard, type ViewKey } from '../lib/DashboardContext'
 
 const VIEWS: { value: ViewKey; label: string }[] = [
@@ -105,9 +106,7 @@ export function Controls({ onDownloadAll }: { onDownloadAll: () => void }) {
         )}
       </div>
       <button className="btn-ghost" onClick={onDownloadAll}>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" />
-        </svg>
+        <Download size={14} />
         Download all data (CSV)
       </button>
     </div>

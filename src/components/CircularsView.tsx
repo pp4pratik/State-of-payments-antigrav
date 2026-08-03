@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { ExternalLink, Search } from 'lucide-react'
 import { useCirculars } from '../lib/queries'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 
 export function CircularsView() {
   const circulars = useCirculars()
@@ -23,27 +25,28 @@ export function CircularsView() {
           <p className="section-title">Circulars &amp; notifications</p>
           <div className="section-actions">
             <p className="section-note">NPCI · UPI, newest first</p>
-            <button
-              className="mini-btn"
+            <CsvButton
               onClick={() =>
                 downloadCSV(
                   'upi-pulse-circulars.csv',
                   [['Reference', 'FY', 'Title', 'PDF URL'], ...circulars.data.map((c) => [c.ref, c.fy, c.title, c.pdf_url ?? ''])],
                 )
               }
-            >
-              Download CSV
-            </button>
+            />
           </div>
         </div>
         <div className="card">
-          <input
-            type="text"
-            className="circular-search"
-            placeholder="Search circulars by keyword or OC number..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div style={{ position: 'relative' }}>
+            <Search size={14} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+            <input
+              type="text"
+              className="circular-search"
+              style={{ paddingLeft: 32 }}
+              placeholder="Search circulars by keyword or OC number..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
           <div className="circular-list">
             <table>
               <thead>
@@ -71,8 +74,13 @@ export function CircularsView() {
                     <td className="name">{c.title}</td>
                     <td style={{ whiteSpace: 'nowrap' }}>
                       {c.pdf_url ? (
-                        <a href={c.pdf_url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--teal)', textDecoration: 'none' }}>
-                          View PDF
+                        <a
+                          href={c.pdf_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: 'var(--teal)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                        >
+                          View PDF <ExternalLink size={12} />
                         </a>
                       ) : (
                         <span style={{ color: 'var(--text-muted)' }}>—</span>

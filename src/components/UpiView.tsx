@@ -5,6 +5,7 @@ import { useAppStatsAll, useMerchantCategoriesAll, useMonthlyTrend, useP2pAll, u
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
+import { CsvButton } from './CsvButton'
 import { aposLabel, crNum, fmtPct, fullLabel, mnToCr, mom, rupees, shortLabel, yoy } from '../lib/format'
 
 const APP_COLORS: Record<string, string> = {
@@ -306,12 +307,10 @@ function CategoriesCard({ categories, metric, monthLabel }: { categories: { name
         <p className="section-title">Top merchant categories</p>
         <div className="section-actions">
           <p className="section-note">{monthLabel}</p>
-          <button
-            className="mini-btn"
+          <CsvButton
+            label="CSV"
             onClick={() => downloadCSV('upi-pulse-category.csv', [['Category', 'Volume (Cr)', 'Value (Cr)'], ...sorted.map((c) => [c.name, mnToCr(c.vol), c.val])])}
-          >
-            CSV
-          </button>
+          />
         </div>
       </div>
       <div className="table-scroll">
