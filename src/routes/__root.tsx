@@ -3,6 +3,10 @@ import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 const NAV = [
   { to: '/', label: 'Overview' },
   { to: '/apps', label: 'All apps' },
+  { to: '/spending', label: 'Spending' },
+  { to: '/geography', label: 'Geography' },
+  { to: '/autopay', label: 'AutoPay' },
+  { to: '/rbi', label: 'RBI' },
   { to: '/circulars', label: 'Circulars' },
 ]
 

@@ -1,7 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { isSupabaseConfigured } from '../lib/supabase'
-import { useLatestAppStats } from '../lib/queries'
+import { useLatestAppStats, usePspMemberPerformance } from '../lib/queries'
+import type { PspPerformanceRow } from '../lib/queries'
 import { NotConnected } from '../components/NotConnected'
+import { RankedTable } from '../components/RankedTable'
 import { formatVolume } from '../lib/format'
 
 export const Route = createFileRoute('/apps')({
@@ -10,11 +12,24 @@ export const Route = createFileRoute('/apps')({
 
 function Apps() {
   return (
-    <div className="space-y-6">
-      <h2 className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
-        App leaderboard
-      </h2>
-      {isSupabaseConfigured ? <Leaderboard /> : <NotConnected table="app_stats" />}
+    <div className="space-y-10">
+      <section className="space-y-4">
+        <h2 className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
+          App leaderboard
+        </h2>
+        {isSupabaseConfigured ? <Leaderboard /> : <NotConnected table="app_stats" />}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-mono-label text-xs uppercase tracking-wider text-[var(--text-muted)]">
+          PSP member performance
+        </h2>
+        {isSupabaseConfigured ? (
+          <PspPerformance />
+        ) : (
+          <NotConnected table="psp_member_performance" />
+        )}
+      </section>
     </div>
   )
 }
@@ -29,31 +44,82 @@ function Leaderboard() {
   const total = data.reduce((sum, r) => sum + r.volume_mn, 0)
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-[var(--border)] text-left text-[var(--text-muted)]">
-            <th className="px-6 py-3 font-medium">#</th>
-            <th className="px-6 py-3 font-medium">App</th>
-            <th className="px-6 py-3 text-right font-medium">Volume</th>
-            <th className="px-6 py-3 text-right font-medium">Share</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, i) => (
-            <tr key={row.app_name} className="border-b border-[var(--border)] last:border-0">
-              <td className="px-6 py-3 text-[var(--text-muted)]">{i + 1}</td>
-              <td className="px-6 py-3">{row.app_name}</td>
-              <td className="px-6 py-3 text-right font-mono-label">
-                {formatVolume(row.volume_mn)}
-              </td>
-              <td className="px-6 py-3 text-right text-[var(--text-secondary)]">
-                {((row.volume_mn / total) * 100).toFixed(2)}%
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <RankedTable
+      rows={data}
+      rowKey={(r) => r.app_name}
+      columns={[
+        { header: 'App', render: (r) => r.app_name },
+        {
+          header: 'Volume',
+          align: 'right',
+          render: (r) => <span className="font-mono-label">{formatVolume(r.volume_mn)}</span>,
+        },
+        {
+          header: 'Share',
+          align: 'right',
+          render: (r) => (
+            <span className="text-[var(--text-secondary)]">
+              {((r.volume_mn / total) * 100).toFixed(2)}%
+            </span>
+          ),
+        },
+      ]}
+    />
+  )
+}
+
+function PspPerformance() {
+  const { data, isPending, error } = usePspMemberPerformance()
+
+  if (isPending) return <p className="text-[var(--text-secondary)]">Loading…</p>
+  if (error) return <p className="text-[#f4715c]">Failed to load: {error.message}</p>
+  if (!data.length) return <NotConnected table="psp_member_performance" />
+
+  const byDirection = new Map<string, PspPerformanceRow[]>()
+  for (const row of data) {
+    const group = byDirection.get(row.direction) ?? []
+    group.push(row)
+    byDirection.set(row.direction, group)
+  }
+
+  return (
+    <div className="space-y-8">
+      {[...byDirection.entries()].map(([direction, rows]) => (
+        <div key={direction} className="space-y-3">
+          <h3 className="text-sm text-[var(--text-secondary)]">{direction}</h3>
+          <RankedTable
+            rows={rows}
+            rowKey={(r) => r.entity_name}
+            columns={[
+              { header: 'Entity', render: (r) => r.entity_name },
+              {
+                header: 'Volume',
+                align: 'right',
+                render: (r) => <span className="font-mono-label">{formatVolume(r.volume_mn)}</span>,
+              },
+              {
+                header: 'Approved',
+                align: 'right',
+                render: (r) => <span className="text-[var(--teal)]">{r.approved_pct.toFixed(1)}%</span>,
+              },
+              {
+                header: 'Bank declined',
+                align: 'right',
+                render: (r) => (
+                  <span className="text-[var(--text-secondary)]">{r.bd_pct.toFixed(1)}%</span>
+                ),
+              },
+              {
+                header: 'Tech declined',
+                align: 'right',
+                render: (r) => (
+                  <span className="text-[#f4715c]">{r.td_pct.toFixed(1)}%</span>
+                ),
+              },
+            ]}
+          />
+        </div>
+      ))}
     </div>
   )
 }
