@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { trackEvent } from './analytics'
 
 export type ViewKey = 'upi' | 'autopay' | 'rbi' | 'rbipayments' | 'circulars'
 export type Metric = 'volume' | 'value'
@@ -16,9 +17,14 @@ type DashboardState = {
 const DashboardCtx = createContext<DashboardState | null>(null)
 
 export function DashboardProvider({ months, children }: { months: string[]; children: ReactNode }) {
-  const [view, setView] = useState<ViewKey>('upi')
+  const [view, setViewState] = useState<ViewKey>('upi')
   const [metric, setMetric] = useState<Metric>('volume')
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null)
+
+  const setView = (v: ViewKey) => {
+    setViewState(v)
+    trackEvent('view_changed', { view: v })
+  }
 
   const effectiveMonth = selectedMonth ?? months[months.length - 1] ?? null
 
