@@ -537,6 +537,51 @@ def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, rows,
     print(f"  Supabase: upserted {len(rows)} row(s) into {pg_table}")
 
 
+def supabase_get(supabase_url, service_role_key, pg_table, select_cols, filter_qs):
+    headers = {"apikey": service_role_key, "Authorization": f"Bearer {service_role_key}"}
+    url = f"{supabase_url}/rest/v1/{pg_table}?select={','.join(select_cols)}&{filter_qs}"
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req) as resp:
+        return json.loads(resp.read())
+
+
+def supabase_delete_by_ids(supabase_url, service_role_key, pg_table, ids):
+    if not ids:
+        return
+    headers = {"apikey": service_role_key, "Authorization": f"Bearer {service_role_key}"}
+    id_list = ",".join(str(i) for i in ids)
+    req = urllib.request.Request(
+        f"{supabase_url}/rest/v1/{pg_table}?id=in.({id_list})", headers=headers, method="DELETE"
+    )
+    with urllib.request.urlopen(req) as resp:
+        resp.read()
+
+
+def supabase_replace_month(supabase_url, service_role_key, pg_table, unique_cols, rows, dry_run):
+    """Upsert never deletes rows absent from the new batch, so a renamed or
+    dropped entity (confirmed the hard way: NPCI silently renamed 'FamApp' to
+    'FamApp by Trio' between syncs) leaves a stale orphaned row behind forever.
+    Upsert first (safe, additive - matches the create-before-delete rule used for
+    Airtable), then delete anything left over for that month whose natural key
+    isn't in the fresh batch."""
+    if not rows:
+        return
+    month_val = rows[0]["month"]
+    if dry_run:
+        print(f"  [dry-run] Supabase: would replace all {pg_table} rows for {month_val}")
+        return
+    supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, rows, dry_run=False)
+
+    fresh_keys = {tuple(r.get(c) for c in unique_cols) for r in rows}
+    existing = supabase_get(
+        supabase_url, service_role_key, pg_table, ["id"] + unique_cols, f"month=eq.{month_val}"
+    )
+    stale_ids = [r["id"] for r in existing if tuple(r.get(c) for c in unique_cols) not in fresh_keys]
+    supabase_delete_by_ids(supabase_url, service_role_key, pg_table, stale_ids)
+    if stale_ids:
+        print(f"  Supabase: removed {len(stale_ids)} stale row(s) for {month_val} (renamed/dropped entities)")
+
+
 def to_pg_rows(field_rows):
     return [{("month" if k == "Month" else snake(k)): v for k, v in row.items()} for row in field_rows]
 
@@ -594,7 +639,7 @@ def main():
                     continue
                 print(f"  Found {len(rows)} row(s) for {rows[0]['Month']}")
                 airtable_replace_month_rows(base_id, table_id, airtable_token, rows, dry_run)
-                supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
+                supabase_replace_month(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
 
             elif kind == "circulars":
                 rows = fetch_circulars(page, years=[2025, 2026])
