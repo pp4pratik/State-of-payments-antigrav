@@ -521,6 +521,35 @@ def airtable_replace_all_circulars(base_id, table_id, token, field_rows, dry_run
     print(f"  Airtable: upserted {len(field_rows)} circular(s) ({len(to_delete)} replaced, {len(field_rows) - len(to_delete)} new)")
 
 
+def normalize_key(s):
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def normalize_names(rows, field, known_names):
+    """NPCI's raw app_name spelling isn't stable month to month - confirmed live:
+    PhonePe (17 months) became "Phone Pe" (with a space) for one month, silently
+    splitting an 18-month entity into two, which broke the App Trend line chart (it
+    plots by name, so "PhonePe" showed a flat historical line with nothing for the
+    latest month, and "Phone Pe" showed a single new point with no history - neither
+    looked like a top-ranked app's real trend). Snap any incoming name back to the
+    already-established spelling when they match case/whitespace-insensitively, so
+    a genuinely new entity ("FamApp by Trio" vs "FamApp") still gets its own row,
+    but a pure formatting drift doesn't fork the time series."""
+    known_by_key = {}
+    for n in known_names:
+        known_by_key.setdefault(normalize_key(n), n)
+    renamed = 0
+    for row in rows:
+        key = normalize_key(row[field])
+        established = known_by_key.get(key)
+        if established and established != row[field]:
+            row[field] = established
+            renamed += 1
+    if renamed:
+        print(f"  Normalized {renamed} name(s) back to their established spelling")
+    return rows
+
+
 def snake(label):
     # Must match supabase/schema.sql's original generator (scratchpad gen_schema.mjs)
     # exactly, including replacing % with "pct" before the generic collapse -
@@ -558,6 +587,30 @@ def supabase_get(supabase_url, service_role_key, pg_table, select_cols, filter_q
     req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read())
+
+
+def supabase_distinct_values(supabase_url, service_role_key, pg_table, column, exclude_filter=None):
+    # exclude_filter (e.g. "month=neq.2026-06-01") matters: without it, a month
+    # already written with bad-cased names in a previous run pollutes its own
+    # reference set, so normalization can't tell which spelling is "established"
+    # anymore - confirmed the hard way when this picked "Cred"/"Whatsapp" instead
+    # of "CRED"/"WhatsApp" because the wrong casing was already sitting in the table
+    # from before this fix existed.
+    headers = {"apikey": service_role_key, "Authorization": f"Bearer {service_role_key}"}
+    values = set()
+    offset = 0
+    page_size = 1000
+    while True:
+        url = f"{supabase_url}/rest/v1/{pg_table}?select={column}&limit={page_size}&offset={offset}"
+        if exclude_filter:
+            url += f"&{exclude_filter}"
+        req = urllib.request.Request(url, headers=headers)
+        data = json.loads(urllib.request.urlopen(req).read())
+        values.update(r[column] for r in data if r[column])
+        if len(data) < page_size:
+            break
+        offset += page_size
+    return values
 
 
 def supabase_delete_by_ids(supabase_url, service_role_key, pg_table, ids):
@@ -613,6 +666,17 @@ DOMAINS = {
     "circulars": ("Circulars", "circulars", ["fy", "ref"], None, "circulars"),
 }
 
+# Domains with a free-text entity name prone to NPCI's spelling drift ("PhonePe" vs
+# "Phone Pe") that would otherwise fork a time series. Not applied to Merchant
+# Categories (MCC is a stable numeric code, not a name) or Statewise (state/district
+# names don't drift).
+NAME_FIELDS = {
+    "app_stats": "App Name",
+    "psp_member_performance": "Entity Name",
+    "autopay_registrations": "PSP",
+    "autopay_executions": "Bank",
+}
+
 
 def main():
     dry_run = "--dry-run" in sys.argv
@@ -652,6 +716,13 @@ def main():
                 if not rows:
                     print("  No rows found, skipping")
                     continue
+                name_field = NAME_FIELDS.get(key)
+                if name_field:
+                    target_month = rows[0]["Month"]
+                    known_names = supabase_distinct_values(
+                        supabase_url, service_role_key, pg_table, unique_cols[0], exclude_filter=f"month=neq.{target_month}"
+                    )
+                    rows = normalize_names(rows, name_field, known_names)
                 print(f"  Found {len(rows)} row(s) for {rows[0]['Month']}")
                 airtable_replace_month_rows(base_id, table_id, airtable_token, rows, dry_run)
                 supabase_replace_month(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
