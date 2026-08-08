@@ -280,7 +280,7 @@ export function AutoPayView() {
             <div style={{ padding: '14px 16px', background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
               <p className="kpi-label" style={{ marginBottom: 6 }}>
                 <ShieldCheck size={13} />
-                Standard limit (soft)
+                Standard limit
               </p>
               <p className="kpi-value" style={{ fontSize: 20 }}>
                 ₹15,000
@@ -293,7 +293,7 @@ export function AutoPayView() {
             <div style={{ padding: '14px 16px', background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
               <p className="kpi-label" style={{ marginBottom: 6 }}>
                 <ShieldAlert size={13} />
-                Enhanced limit (hard)
+                Enhanced limit
               </p>
               <p className="kpi-value" style={{ fontSize: 20 }}>
                 ₹1,00,000
