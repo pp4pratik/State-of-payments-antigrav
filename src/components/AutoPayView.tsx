@@ -1,5 +1,4 @@
 import { Bar } from 'react-chartjs-2'
-import { TrendingUp } from 'lucide-react'
 import { useAutoPayExecutions, useAutoPayRegistrations } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
@@ -38,7 +37,6 @@ export function AutoPayView() {
     if (!vol) return null
     return rows.reduce((s, r) => s + r.executions_mn * r[key]!, 0) / vol
   }
-  const approvalRate = weightedExec('approved_pct')
   const bdRate = weightedExec('bd_pct')
   const tdRate = weightedExec('td_pct')
 
@@ -67,63 +65,28 @@ export function AutoPayView() {
 
   return (
     <div>
-      <div className="hero">
-        <div className="hero-grid">
-          <div>
-            <p className="hero-label">{fullLabel(executions.data.month)} · mandate executions (top remitter banks)</p>
-            <p className="hero-value">
-              {totalExecCr.toFixed(0)}
-              <span> Cr</span>
-            </p>
-            <p className="hero-sub">recurring debits processed across the top remitter banks</p>
-            <div className="chips">
-              <span className="chip up">
-                <TrendingUp size={13} />~{totalRegCr.toFixed(1)} Cr new registrations, {fullLabel(registrations.data.month)}
-              </span>
-            </div>
-          </div>
-          <div>
-            <svg className="pulse-svg" viewBox="0 0 400 90" preserveAspectRatio="none">
-              <polyline
-                points="0,75 60,72 100,68 140,58 180,50 220,42 260,35 300,28 340,20 400,10"
-                fill="none"
-                stroke="#3FC1A8"
-                strokeWidth={2}
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div className="kpi-strip five">
+      <div className="kpi-strip four">
         <div className="kpi">
-          <p className="kpi-label">Registrations, {fullLabel(registrations.data.month)}</p>
-          <p className="kpi-value">{crNum(totalRegCr)} Cr</p>
-          <p className="kpi-sub">Total (attempts) · across {registrations.data.rows.length} payer PSPs</p>
-          <div className="chips" style={{ marginTop: 8 }}>
-            <span className="chip up">
-              <TrendingUp size={13} />
-              {totalRegFinalCr == null ? 'Final volume — not yet available' : `~${crNum(totalRegFinalCr)} Cr final (approved), ~${regApprovalPct!.toFixed(1)}%`}
-            </span>
-          </div>
+          <p className="kpi-label">Registrations, {fullLabel(registrations.data.month)} · final (approved)</p>
+          <p className="kpi-value" style={{ color: 'var(--green)' }}>
+            {totalRegFinalCr == null ? '—' : `${crNum(totalRegFinalCr)} Cr`}
+            {totalRegFinalCr != null && <span style={{ fontSize: 13, fontWeight: 500, marginLeft: 6 }}>~{regApprovalPct!.toFixed(1)}%</span>}
+          </p>
+          <p className="kpi-sub">
+            {totalRegFinalCr == null && 'Approval % not yet available · '}
+            {crNum(totalRegCr)} Cr attempted (total) · across {registrations.data.rows.length} payer PSPs
+          </p>
         </div>
         <div className="kpi">
-          <p className="kpi-label">Executions, {fullLabel(executions.data.month)}</p>
-          <p className="kpi-value">{crNum(totalExecCr)} Cr</p>
-          <p className="kpi-sub">Total (attempts) · across {executions.data.rows.length} remitter banks</p>
-          <div className="chips" style={{ marginTop: 8 }}>
-            <span className="chip up">
-              <TrendingUp size={13} />
-              {totalExecFinalCr == null ? 'Final volume — not yet available' : `~${crNum(totalExecFinalCr)} Cr final (approved), ~${execApprovalPct!.toFixed(1)}%`}
-            </span>
-          </div>
-        </div>
-        <div className="kpi">
-          <p className="kpi-label">Weighted approval rate</p>
-          <p className="kpi-value">{approvalRate == null ? '—' : `~${approvalRate.toFixed(1)}%`}</p>
-          <p className="kpi-sub">of execution attempts</p>
+          <p className="kpi-label">Executions, {fullLabel(executions.data.month)} · final (approved)</p>
+          <p className="kpi-value" style={{ color: 'var(--green)' }}>
+            {totalExecFinalCr == null ? '—' : `${crNum(totalExecFinalCr)} Cr`}
+            {totalExecFinalCr != null && <span style={{ fontSize: 13, fontWeight: 500, marginLeft: 6 }}>~{execApprovalPct!.toFixed(1)}%</span>}
+          </p>
+          <p className="kpi-sub">
+            {totalExecFinalCr == null && 'Approval % not yet available · '}
+            {crNum(totalExecCr)} Cr attempted (total) · across {executions.data.rows.length} remitter banks
+          </p>
         </div>
         <div className="kpi">
           <p className="kpi-label">Weighted business decline</p>
