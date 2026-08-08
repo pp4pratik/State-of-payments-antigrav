@@ -5,6 +5,7 @@ import { LineChart, MapPin, PieChart, Receipt, ShoppingBag, TrendingDown, Trendi
 import { useDashboard } from '../lib/DashboardContext'
 import { useAppStatsAll, useMerchantCategoriesAll, useMonthlyTrend, useP2pAll, useStatewiseAll, type AppStatsAll } from '../lib/queries'
 import { SectionHead } from './SectionHead'
+import { LiveCounter } from './LiveCounter'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
@@ -18,6 +19,16 @@ const APP_COLORS: Record<string, string> = {
   'super.money': '#9A7FD1',
 }
 const FALLBACK_COLORS = ['#5FD97A', '#7DD3E0', '#E8B4D8', '#C9A876', '#3A4759']
+
+// NPCI publishes a total for the month, not a live feed - this spreads that total
+// evenly across the month's real seconds to get a plausible per-second rate for
+// the live ticker. Not a real-time signal, just a reasonable estimate from the
+// latest published average.
+function upiTxnsPerSecond(monthIso: string, totalVolumeMn: number): number {
+  const [y, m] = monthIso.split('-').map(Number)
+  const daysInMonth = new Date(y, m, 0).getDate()
+  return (totalVolumeMn * 1_000_000) / (daysInMonth * 86400)
+}
 
 export function UpiView() {
   const trend = useMonthlyTrend()
@@ -35,8 +46,12 @@ export function UpiView() {
   const idx = appStats.data.months.indexOf(selectedMonth ?? '')
   if (idx < 0) return null
 
+  const latestTrend = trend.data[trend.data.length - 1]
+  const liveRate = latestTrend ? upiTxnsPerSecond(latestTrend.month, latestTrend.total_volume_mn) : 0
+
   return (
     <div>
+      <LiveCounter perSecondRate={liveRate} />
       <TrendSection months={trend.data.map((r) => r.month)} mVol={trend.data.map((r) => mnToCr(r.total_volume_mn)!)} mVal={trend.data.map((r) => r.total_value_cr)} />
       <LeaderboardSection appStats={appStats.data} idx={idx} metric={metric} monthLabel={fullLabel(appStats.data.months[idx])} />
       <div className="section">
