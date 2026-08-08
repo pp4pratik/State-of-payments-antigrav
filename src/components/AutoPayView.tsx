@@ -1,6 +1,6 @@
+import { useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import { useAutoPayExecutions, useAutoPayRegistrations } from '../lib/queries'
-import { SectionHead } from './SectionHead'
+import { useAutoPayExecutions, useAutoPayExecutionsByPsp, useAutoPayRegistrations, useAutoPayRegistrationsByBank } from '../lib/queries'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
@@ -16,11 +16,17 @@ const USE_CASES = [
 ]
 
 export function AutoPayView() {
+  const [mode, setMode] = useState<'registration' | 'execution'>('registration')
+
   const registrations = useAutoPayRegistrations()
   const executions = useAutoPayExecutions()
+  const registrationsByBank = useAutoPayRegistrationsByBank()
+  const executionsByPsp = useAutoPayExecutionsByPsp()
 
-  if (registrations.isPending || executions.isPending) return <p className="section-note">Loading…</p>
-  const err = registrations.error || executions.error
+  if (registrations.isPending || executions.isPending || registrationsByBank.isPending || executionsByPsp.isPending) {
+    return <p className="section-note">Loading…</p>
+  }
+  const err = registrations.error || executions.error || registrationsByBank.error || executionsByPsp.error
   if (err) return <p className="section-note">Failed to load: {err.message}</p>
 
   const totalRegCr = registrations.data.rows.reduce((s, r) => s + r.registrations_mn, 0) / 10
@@ -47,21 +53,65 @@ export function AutoPayView() {
   const finalCr = (volumeMn: number, approvedPct: number | null) =>
     approvedPct == null ? null : mnToCr((volumeMn * approvedPct) / 100)!
 
-  const regLabels = registrations.data.rows.map((r) => r.psp)
-  const regTotalData = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
-  const regFinalData = registrations.data.rows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
-  const execFinalDataAll = executions.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
-  const execLabels = executions.data.rows.slice(0, 10).map((r) => r.bank)
-  const execTotalData = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
-  const execFinalData = execFinalDataAll.slice(0, 10)
+  // "By PSP" and "by remitter bank" for Registrations, and the mirror pair for
+  // Executions - NPCI's Ecosystem Statistics page has all 4 as separate tabs, so
+  // these are 4 independently-fetched tables, not one dataset sliced two ways.
+  // PSP counts are small (~13-19) so every PSP gets a bar; remitter bank counts run
+  // up to 50, so those charts cap at the top 10 like Geography's district table does.
+  const regByPspLabels = registrations.data.rows.map((r) => r.psp)
+  const regByPspTotal = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
+  const regByPspFinal = registrations.data.rows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
+
+  const regByBankLabels = registrationsByBank.data.rows.slice(0, 10).map((r) => r.remitter_bank)
+  const regByBankTotal = registrationsByBank.data.rows.slice(0, 10).map((r) => mnToCr(r.registrations_mn)!)
+  const regByBankFinal = registrationsByBank.data.rows.slice(0, 10).map((r) => finalCr(r.registrations_mn, r.approved_pct))
+
+  const execByBankLabels = executions.data.rows.slice(0, 10).map((r) => r.bank)
+  const execByBankTotal = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
+  const execByBankFinal = executions.data.rows.slice(0, 10).map((r) => finalCr(r.executions_mn, r.approved_pct))
+
+  const execByPspLabels = executionsByPsp.data.rows.map((r) => r.psp)
+  const execByPspTotal = executionsByPsp.data.rows.map((r) => mnToCr(r.executions_mn)!)
+  const execByPspFinal = executionsByPsp.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
 
   // Same Total-vs-Final split as the bar charts, rolled up into one headline pair per
   // KPI tile - null (not 0) if any entity is missing Approved % that month, so an
-  // incomplete sum never gets presented as a real approved total.
-  const totalRegFinalCr = regFinalData.some((v) => v == null) ? null : regFinalData.reduce<number>((s, v) => s + (v ?? 0), 0)
+  // incomplete sum never gets presented as a real approved total. KPI tiles use the
+  // by-PSP tables' full totals (not the by-bank tables), matching what the hero
+  // figures always represented before this breakdown existed.
+  const totalRegFinalCr = regByPspFinal.some((v) => v == null) ? null : regByPspFinal.reduce<number>((s, v) => s + (v ?? 0), 0)
   const regApprovalPct = totalRegFinalCr != null && totalRegCr ? (totalRegFinalCr / totalRegCr) * 100 : null
-  const totalExecFinalCr = execFinalDataAll.some((v) => v == null) ? null : execFinalDataAll.reduce<number>((s, v) => s + (v ?? 0), 0)
+  const execByBankFinalAll = executions.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
+  const totalExecFinalCr = execByBankFinalAll.some((v) => v == null) ? null : execByBankFinalAll.reduce<number>((s, v) => s + (v ?? 0), 0)
   const execApprovalPct = totalExecFinalCr != null && totalExecCr ? (totalExecFinalCr / totalExecCr) * 100 : null
+
+  const isReg = mode === 'registration'
+  const modeLabel = isReg ? 'Registrations' : 'Executions'
+  const modeMonth = fullLabel(isReg ? registrations.data.month : executions.data.month)
+  const modeColor = isReg ? '#3FC1A8' : '#F5A524'
+  const modeColorFaint = isReg ? 'rgba(63,193,168,0.35)' : 'rgba(245,165,36,0.35)'
+  const modeUnit = isReg ? 'Registrations' : 'Executions'
+  const pspLabels = isReg ? regByPspLabels : execByPspLabels
+  const pspTotal = isReg ? regByPspTotal : execByPspTotal
+  const pspFinal = isReg ? regByPspFinal : execByPspFinal
+  const pspApprovedPcts = (isReg ? registrations.data.rows : executionsByPsp.data.rows).map((r) => r.approved_pct)
+  const bankLabels = isReg ? regByBankLabels : execByBankLabels
+  const bankTotal = isReg ? regByBankTotal : execByBankTotal
+  const bankFinal = isReg ? regByBankFinal : execByBankFinal
+  const bankApprovedPcts = (isReg ? registrationsByBank.data.rows.slice(0, 10) : executions.data.rows.slice(0, 10)).map((r) => r.approved_pct)
+
+  const barOptions = (horizontal: boolean) => ({
+    indexAxis: horizontal ? ('y' as const) : ('x' as const),
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: horizontal
+      ? { x: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } }, y: { grid: { display: false } } }
+      : { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } } },
+    plugins: {
+      legend: { display: true, position: 'top' as const, labels: { boxWidth: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: (c: { dataset: { label?: string }; raw: unknown }) => `${c.dataset.label}: ${c.raw == null ? '—' : Number(c.raw).toFixed(2) + ' Cr'}` } },
+    },
+  })
 
   return (
     <div>
@@ -101,102 +151,101 @@ export function AutoPayView() {
       </div>
 
       <div className="section">
-        <SectionHead
-          title="Registrations by PSP"
-          note={`${fullLabel(registrations.data.month)} · Total Volume (attempts) vs Final Volume (approved)`}
-          onCsv={() =>
-            downloadCSV('upi-pulse-autopayReg.csv', [
-              ['PSP', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
-              ...regLabels.map((l, i) => [l, regTotalData[i], regFinalData[i] ?? '', registrations.data.rows[i].approved_pct ?? '']),
-            ])
-          }
-        />
-        <div className="card">
-          <div style={{ position: 'relative', height: 260 }}>
-            <Bar
-              data={{
-                labels: regLabels,
-                datasets: [
-                  { label: 'Total Volume (Cr)', data: regTotalData, backgroundColor: 'rgba(63,193,168,0.35)', borderRadius: 4 },
-                  { label: 'Final Volume (Cr)', data: regFinalData, backgroundColor: '#3FC1A8', borderRadius: 4 },
-                ],
-              }}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } } },
-                plugins: {
-                  legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
-                  tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw == null ? '—' : Number(c.raw).toFixed(2) + ' Cr'}` } },
-                },
-              }}
-            />
+        <div className="section-head">
+          <p className="section-title">{modeLabel}</p>
+          <div className="section-actions">
+            <p className="section-note">{modeMonth} · Total vs Final (approved)</p>
+            <div className="toggle" role="tablist">
+              <button className={`toggle-btn ${isReg ? 'active' : ''}`} role="tab" aria-selected={isReg} onClick={() => setMode('registration')}>
+                Registration
+              </button>
+              <button className={`toggle-btn ${!isReg ? 'active' : ''}`} role="tab" aria-selected={!isReg} onClick={() => setMode('execution')}>
+                Execution
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="section">
         <div className="row-2">
           <div className="card">
             <div className="section-head">
-              <p className="section-title">Execution volume by remitter bank</p>
-              <div className="section-actions">
-                <p className="section-note">{fullLabel(executions.data.month)} · Total vs Final (approved)</p>
-                <CsvButton
-                  label="CSV"
-                  onClick={() =>
-                    downloadCSV('upi-pulse-autopayExec.csv', [
-                      ['Bank', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
-                      ...execLabels.map((l, i) => [l, execTotalData[i], execFinalData[i] ?? '', executions.data.rows[i].approved_pct ?? '']),
-                    ])
-                  }
-                />
-              </div>
+              <p className="section-title">By PSP</p>
+              <CsvButton
+                label="CSV"
+                onClick={() =>
+                  downloadCSV(`upi-pulse-autopay-${mode}-by-psp.csv`, [
+                    ['PSP', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
+                    ...pspLabels.map((l, i) => [l, pspTotal[i], pspFinal[i] ?? '', pspApprovedPcts[i] ?? '']),
+                  ])
+                }
+              />
             </div>
-            <div style={{ position: 'relative', height: 240 }}>
+            <div style={{ position: 'relative', height: 260 }}>
               <Bar
                 data={{
-                  labels: execLabels,
+                  labels: pspLabels,
                   datasets: [
-                    { label: 'Total Volume (Cr)', data: execTotalData, backgroundColor: 'rgba(245,165,36,0.35)', borderRadius: 4 },
-                    { label: 'Final Volume (Cr)', data: execFinalData, backgroundColor: '#F5A524', borderRadius: 4 },
+                    { label: 'Total Volume (Cr)', data: pspTotal, backgroundColor: modeColorFaint, borderRadius: 4 },
+                    { label: 'Final Volume (Cr)', data: pspFinal, backgroundColor: modeColor, borderRadius: 4 },
                   ],
                 }}
-                options={{
-                  indexAxis: 'y' as const,
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  scales: { x: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } }, y: { grid: { display: false } } },
-                  plugins: {
-                    legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
-                    tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw == null ? '—' : Number(c.raw).toFixed(2) + ' Cr'}` } },
-                  },
-                }}
+                options={barOptions(false)}
               />
             </div>
           </div>
           <div className="card">
             <div className="section-head">
-              <p className="section-title">Common use cases</p>
-              <p className="section-note">Qualitative — NPCI doesn't publish a category split</p>
+              <p className="section-title">By remitter bank</p>
+              <CsvButton
+                label="CSV"
+                onClick={() =>
+                  downloadCSV(`upi-pulse-autopay-${mode}-by-bank.csv`, [
+                    ['Bank', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
+                    ...bankLabels.map((l, i) => [l, bankTotal[i], bankFinal[i] ?? '', bankApprovedPcts[i] ?? '']),
+                  ])
+                }
+              />
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {USE_CASES.map((u) => (
-                <span key={u} className="tag">
-                  {u}
-                </span>
-              ))}
+            <div style={{ position: 'relative', height: 260 }}>
+              <Bar
+                data={{
+                  labels: bankLabels,
+                  datasets: [
+                    { label: 'Total Volume (Cr)', data: bankTotal, backgroundColor: modeColorFaint, borderRadius: 4 },
+                    { label: 'Final Volume (Cr)', data: bankFinal, backgroundColor: modeColor, borderRadius: 4 },
+                  ],
+                }}
+                options={barOptions(true)}
+              />
             </div>
-            <p className="section-note" style={{ marginTop: 16 }}>
-              NPCI raised the AFA limit for recurring credit card bill, mutual fund, and insurance payments from ₹15,000 to ₹1,00,000.
-            </p>
           </div>
+        </div>
+        <p className="section-note" style={{ marginTop: 10 }}>
+          {modeUnit} by remitter bank shows the top 10 of {isReg ? registrationsByBank.data.rows.length : executions.data.rows.length} banks NPCI publishes.
+        </p>
+      </div>
+
+      <div className="section">
+        <div className="card">
+          <div className="section-head">
+            <p className="section-title">Common use cases</p>
+            <p className="section-note">Qualitative — NPCI doesn't publish a category split</p>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {USE_CASES.map((u) => (
+              <span key={u} className="tag">
+                {u}
+              </span>
+            ))}
+          </div>
+          <p className="section-note" style={{ marginTop: 16 }}>
+            NPCI raised the AFA limit for recurring credit card bill, mutual fund, and insurance payments from ₹15,000 to ₹1,00,000.
+          </p>
         </div>
       </div>
 
       <Footer
         sources={[{ href: 'https://www.npci.org.in/product/ecosystem-statistics/autopay', label: 'NPCI — AutoPay Ecosystem Statistics' }]}
-        disclaimer="Pulled from NPCI's AutoPay Ecosystem Statistics via Airtable. Registrations and executions each show the latest month NPCI has published, which may differ by one month from each other. Total Volume is every attempt NPCI logged; Final Volume is the subset actually approved (Total Volume x Approved %). Approval/business-decline/technical-decline rates are volume-weighted averages across AutoPay's own remitter banks for the latest available execution month."
+        disclaimer="Pulled from NPCI's AutoPay Ecosystem Statistics via Airtable, which publishes Registrations and Executions each broken down two ways - by payer PSP and by remitter bank. Registrations and executions each show the latest month NPCI has published, which may differ by one month from each other. Total Volume is every attempt NPCI logged; Final Volume is the subset actually approved (Total Volume x Approved %). Approval/business-decline/technical-decline rates in the KPI strip are volume-weighted averages across AutoPay's own remitter banks for the latest available execution month."
       />
     </div>
   )

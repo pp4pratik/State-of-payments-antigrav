@@ -377,6 +377,73 @@ def fetch_autopay_executions(page):
     ]
 
 
+def fetch_autopay_registrations_by_bank(page):
+    """Same 'Top 50 Remitter Banks' tab as fetch_autopay_executions, but
+    type_name=reg instead of execution - NPCI's Mandate Registration view of
+    that tab, broken down by remitter bank rather than by payer PSP."""
+
+    def url_for(y, m):
+        return (
+            f"https://www.npci.org.in/api/ecosystem-statistics/get-statistics"
+            f"?product_name=Autopay&tab_name=top50-remitter&type_name=reg&year={y}&month={m}"
+            f"&page_no=1&sort_by=asc&size=1&locale=en"
+        )
+
+    y, m, _ = find_latest_month(page, url_for)
+    rows = fetch_all_pages(
+        page,
+        lambda pn, sz: (
+            f"https://www.npci.org.in/api/ecosystem-statistics/get-statistics"
+            f"?product_name=Autopay&tab_name=top50-remitter&type_name=reg&year={y}&month={m}"
+            f"&page_no={pn}&sort_by=asc&size={sz}&locale=en"
+        ),
+    )
+    return [
+        {
+            "Remitter Bank": r["remitter_bank"],
+            "Month": month_iso(y, m),
+            "Registrations (Mn)": num(r["total_volume"]),
+            "Approved %": num(r["approved_percent"]),
+            "BD %": num(r["bd_percent"]),
+            "TD %": num(r["td_percent"]),
+        }
+        for r in rows
+    ]
+
+
+def fetch_autopay_executions_by_psp(page):
+    """NPCI's 'PSP Wise execution' tab - the payer-PSP-level counterpart to
+    fetch_autopay_executions (which is remitter-bank-level)."""
+
+    def url_for(y, m):
+        return (
+            f"https://www.npci.org.in/api/ecosystem-statistics/get-statistics"
+            f"?product_name=Autopay&tab_name=psp-wise-execution&type_name=payer&year={y}&month={m}"
+            f"&page_no=1&sort_by=asc&size=1&locale=en"
+        )
+
+    y, m, _ = find_latest_month(page, url_for)
+    rows = fetch_all_pages(
+        page,
+        lambda pn, sz: (
+            f"https://www.npci.org.in/api/ecosystem-statistics/get-statistics"
+            f"?product_name=Autopay&tab_name=psp-wise-execution&type_name=payer&year={y}&month={m}"
+            f"&page_no={pn}&sort_by=asc&size={sz}&locale=en"
+        ),
+    )
+    return [
+        {
+            "PSP": r["payer_psp"],
+            "Month": month_iso(y, m),
+            "Executions (Mn)": num(r["total_volume"]),
+            "Approved %": num(r["approved_percent"]),
+            "BD %": num(r["bd_percent"]),
+            "TD %": num(r["td_percent"]),
+        }
+        for r in rows
+    ]
+
+
 def parse_circular(r):
     """NPCI's fileName freetext is wildly inconsistent (en-dashes vs pipes, missing
     separators, non-'UPI' categories like 'Product Compliance'/'PCOMP Portal'). Only
@@ -677,6 +744,8 @@ DOMAINS = {
     "psp_member_performance": ("PSP Member Performance", "psp_member_performance", ["entity_name", "direction", "month"], fetch_psp_member_performance, "multi"),
     "autopay_registrations": ("AutoPay Registrations", "autopay_registrations", ["psp", "month"], fetch_autopay_registrations, "multi"),
     "autopay_executions": ("AutoPay Executions", "autopay_executions", ["bank", "month"], fetch_autopay_executions, "multi"),
+    "autopay_registrations_by_bank": ("AutoPay Registrations by Bank", "autopay_registrations_by_bank", ["remitter_bank", "month"], fetch_autopay_registrations_by_bank, "multi"),
+    "autopay_executions_by_psp": ("AutoPay Executions by PSP", "autopay_executions_by_psp", ["psp", "month"], fetch_autopay_executions_by_psp, "multi"),
     "circulars": ("Circulars", "circulars", ["fy", "ref"], None, "circulars"),
 }
 
@@ -689,6 +758,8 @@ NAME_FIELDS = {
     "psp_member_performance": "Entity Name",
     "autopay_registrations": "PSP",
     "autopay_executions": "Bank",
+    "autopay_registrations_by_bank": "Remitter Bank",
+    "autopay_executions_by_psp": "PSP",
 }
 
 

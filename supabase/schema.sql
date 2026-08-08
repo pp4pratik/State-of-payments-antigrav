@@ -117,6 +117,36 @@ alter table public.autopay_executions enable row level security;
 drop policy if exists "public read" on public.autopay_executions;
 create policy "public read" on public.autopay_executions for select using (true);
 
+create table if not exists public.autopay_registrations_by_bank (
+  id bigint generated always as identity primary key,
+  remitter_bank text,
+  month date,
+  registrations_mn numeric,
+  approved_pct numeric,
+  bd_pct numeric,
+  td_pct numeric,
+  unique (remitter_bank, month)
+);
+
+alter table public.autopay_registrations_by_bank enable row level security;
+drop policy if exists "public read" on public.autopay_registrations_by_bank;
+create policy "public read" on public.autopay_registrations_by_bank for select using (true);
+
+create table if not exists public.autopay_executions_by_psp (
+  id bigint generated always as identity primary key,
+  psp text,
+  month date,
+  executions_mn numeric,
+  approved_pct numeric,
+  bd_pct numeric,
+  td_pct numeric,
+  unique (psp, month)
+);
+
+alter table public.autopay_executions_by_psp enable row level security;
+drop policy if exists "public read" on public.autopay_executions_by_psp;
+create policy "public read" on public.autopay_executions_by_psp for select using (true);
+
 create table if not exists public.psp_member_performance (
   id bigint generated always as identity primary key,
   entity_name text,

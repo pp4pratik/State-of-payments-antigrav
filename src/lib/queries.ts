@@ -192,6 +192,44 @@ export function useAutoPayExecutions() {
   })
 }
 
+// ---------- AutoPay: the same two flows, broken down the other way - registrations
+// by remitter bank (NPCI's "Top 50 Remitter Banks / Mandate Registration" tab) and
+// executions by payer PSP (NPCI's "PSP Wise execution" tab) ----------
+export type AutoPayRegistrationByBankRow = { remitter_bank: string; registrations_mn: number; approved_pct: number | null }
+export type AutoPayExecutionByPspRow = { psp: string; executions_mn: number; approved_pct: number | null }
+
+export function useAutoPayRegistrationsByBank() {
+  return useQuery({
+    queryKey: ['autopay_registrations_by_bank', 'latest'],
+    queryFn: async (): Promise<{ month: string; rows: AutoPayRegistrationByBankRow[] }> => {
+      const month = await latestMonthOf('autopay_registrations_by_bank')
+      const { data, error } = await supabase
+        .from('autopay_registrations_by_bank')
+        .select('remitter_bank, registrations_mn, approved_pct')
+        .eq('month', month)
+        .order('registrations_mn', { ascending: false })
+      if (error) throw error
+      return { month, rows: data }
+    },
+  })
+}
+
+export function useAutoPayExecutionsByPsp() {
+  return useQuery({
+    queryKey: ['autopay_executions_by_psp', 'latest'],
+    queryFn: async (): Promise<{ month: string; rows: AutoPayExecutionByPspRow[] }> => {
+      const month = await latestMonthOf('autopay_executions_by_psp')
+      const { data, error } = await supabase
+        .from('autopay_executions_by_psp')
+        .select('psp, executions_mn, approved_pct')
+        .eq('month', month)
+        .order('executions_mn', { ascending: false })
+      if (error) throw error
+      return { month, rows: data }
+    },
+  })
+}
+
 // ---------- PSP member performance, latest month - drives AutoPay's weighted KPI cards ----------
 export type PspPerformanceRow = {
   entity_name: string
