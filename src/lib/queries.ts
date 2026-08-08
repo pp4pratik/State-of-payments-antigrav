@@ -147,7 +147,7 @@ export function useStatewiseAll() {
 
 // ---------- AutoPay: latest month registrations/executions ----------
 export type AutoPayRegistrationRow = { psp: string; registrations_mn: number; approved_pct: number | null }
-export type AutoPayExecutionRow = { bank: string; executions_mn: number; approved_pct: number | null }
+export type AutoPayExecutionRow = { bank: string; executions_mn: number; approved_pct: number | null; bd_pct: number | null; td_pct: number | null }
 
 async function latestMonthOf(table: string): Promise<string> {
   const { data, error } = await supabase
@@ -183,7 +183,7 @@ export function useAutoPayExecutions() {
       const month = await latestMonthOf('autopay_executions')
       const { data, error } = await supabase
         .from('autopay_executions')
-        .select('bank, executions_mn, approved_pct')
+        .select('bank, executions_mn, approved_pct, bd_pct, td_pct')
         .eq('month', month)
         .order('executions_mn', { ascending: false })
       if (error) throw error

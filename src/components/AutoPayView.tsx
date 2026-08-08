@@ -1,6 +1,6 @@
 import { Bar } from 'react-chartjs-2'
 import { TrendingUp } from 'lucide-react'
-import { useAutoPayExecutions, useAutoPayRegistrations, usePspMemberPerformance } from '../lib/queries'
+import { useAutoPayExecutions, useAutoPayRegistrations } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
@@ -19,23 +19,28 @@ const USE_CASES = [
 export function AutoPayView() {
   const registrations = useAutoPayRegistrations()
   const executions = useAutoPayExecutions()
-  const perf = usePspMemberPerformance()
 
-  if (registrations.isPending || executions.isPending || perf.isPending) return <p className="section-note">Loading…</p>
-  const err = registrations.error || executions.error || perf.error
+  if (registrations.isPending || executions.isPending) return <p className="section-note">Loading…</p>
+  const err = registrations.error || executions.error
   if (err) return <p className="section-note">Failed to load: {err.message}</p>
 
   const totalRegCr = registrations.data.rows.reduce((s, r) => s + r.registrations_mn, 0) / 10
   const totalExecCr = executions.data.rows.reduce((s, r) => s + r.executions_mn, 0) / 10
 
-  const weighted = (key: 'approved_pct' | 'bd_pct' | 'td_pct') => {
-    const totalVol = perf.data.rows.reduce((s, r) => s + r.volume_mn, 0)
-    if (!totalVol) return null
-    return perf.data.rows.reduce((s, r) => s + r.volume_mn * r[key], 0) / totalVol
+  // Approved/BD/TD % straight from AutoPay's own Executions table (bank-level, weighted
+  // by that bank's execution volume) - replaces an earlier approximation borrowed from
+  // the general UPI PSP Member Performance table, which wasn't AutoPay-specific at all.
+  // Rows missing a given % (not yet backfilled for older months) are excluded from that
+  // rate's average rather than treated as 0, so one gap doesn't drag the whole rate down.
+  const weightedExec = (key: 'approved_pct' | 'bd_pct' | 'td_pct') => {
+    const rows = executions.data.rows.filter((r) => r[key] != null)
+    const vol = rows.reduce((s, r) => s + r.executions_mn, 0)
+    if (!vol) return null
+    return rows.reduce((s, r) => s + r.executions_mn * r[key]!, 0) / vol
   }
-  const approvalRate = weighted('approved_pct')
-  const bdRate = weighted('bd_pct')
-  const tdRate = weighted('td_pct')
+  const approvalRate = weightedExec('approved_pct')
+  const bdRate = weightedExec('bd_pct')
+  const tdRate = weightedExec('td_pct')
 
   // Total Volume = every attempt NPCI logged; Final Volume = the subset that actually
   // went through (Total Volume x Approved %). Approved % can be null for months
@@ -47,15 +52,18 @@ export function AutoPayView() {
   const regLabels = registrations.data.rows.map((r) => r.psp)
   const regTotalData = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
   const regFinalData = registrations.data.rows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
+  const execFinalDataAll = executions.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
   const execLabels = executions.data.rows.slice(0, 10).map((r) => r.bank)
   const execTotalData = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
-  const execFinalData = executions.data.rows.slice(0, 10).map((r) => finalCr(r.executions_mn, r.approved_pct))
+  const execFinalData = execFinalDataAll.slice(0, 10)
 
-  // Same Total-vs-Final split as the "Registrations by PSP" chart, rolled up into one
-  // headline pair for the KPI strip - null (not 0) if any PSP is missing Approved %
-  // that month, so an incomplete sum never gets presented as a real approved total.
-  const totalRegFinalCr = regFinalData.some((v) => v == null) ? null : regFinalData.reduce((s, v) => s + (v ?? 0), 0)
+  // Same Total-vs-Final split as the bar charts, rolled up into one headline pair per
+  // KPI tile - null (not 0) if any entity is missing Approved % that month, so an
+  // incomplete sum never gets presented as a real approved total.
+  const totalRegFinalCr = regFinalData.some((v) => v == null) ? null : regFinalData.reduce<number>((s, v) => s + (v ?? 0), 0)
   const regApprovalPct = totalRegFinalCr != null && totalRegCr ? (totalRegFinalCr / totalRegCr) * 100 : null
+  const totalExecFinalCr = execFinalDataAll.some((v) => v == null) ? null : execFinalDataAll.reduce<number>((s, v) => s + (v ?? 0), 0)
+  const execApprovalPct = totalExecFinalCr != null && totalExecCr ? (totalExecFinalCr / totalExecCr) * 100 : null
 
   return (
     <div>
@@ -89,7 +97,7 @@ export function AutoPayView() {
         </div>
       </div>
 
-      <div className="kpi-strip four">
+      <div className="kpi-strip five">
         <div className="kpi">
           <p className="kpi-label">Registrations, {fullLabel(registrations.data.month)}</p>
           <p className="kpi-value">{crNum(totalRegCr)} Cr</p>
@@ -98,6 +106,17 @@ export function AutoPayView() {
             <span className="chip up">
               <TrendingUp size={13} />
               {totalRegFinalCr == null ? 'Final volume — not yet available' : `~${crNum(totalRegFinalCr)} Cr final (approved), ~${regApprovalPct!.toFixed(1)}%`}
+            </span>
+          </div>
+        </div>
+        <div className="kpi">
+          <p className="kpi-label">Executions, {fullLabel(executions.data.month)}</p>
+          <p className="kpi-value">{crNum(totalExecCr)} Cr</p>
+          <p className="kpi-sub">Total (attempts) · across {executions.data.rows.length} remitter banks</p>
+          <div className="chips" style={{ marginTop: 8 }}>
+            <span className="chip up">
+              <TrendingUp size={13} />
+              {totalExecFinalCr == null ? 'Final volume — not yet available' : `~${crNum(totalExecFinalCr)} Cr final (approved), ~${execApprovalPct!.toFixed(1)}%`}
             </span>
           </div>
         </div>
@@ -214,7 +233,7 @@ export function AutoPayView() {
 
       <Footer
         sources={[{ href: 'https://www.npci.org.in/product/ecosystem-statistics/autopay', label: 'NPCI — AutoPay Ecosystem Statistics' }]}
-        disclaimer="Pulled from NPCI's AutoPay Ecosystem Statistics via Airtable. Registrations and executions each show the latest month NPCI has published, which may differ by one month from each other. Approval/decline rates are volume-weighted averages across PSP Member Performance entities for the latest available month."
+        disclaimer="Pulled from NPCI's AutoPay Ecosystem Statistics via Airtable. Registrations and executions each show the latest month NPCI has published, which may differ by one month from each other. Total Volume is every attempt NPCI logged; Final Volume is the subset actually approved (Total Volume x Approved %). Approval/business-decline/technical-decline rates are volume-weighted averages across AutoPay's own remitter banks for the latest available execution month."
       />
     </div>
   )
