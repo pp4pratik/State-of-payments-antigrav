@@ -20,6 +20,10 @@ dist-ssr
 # TanStack Router codegen
 src/routeTree.gen.ts
 
+# Python
+__pycache__/
+*.pyc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
