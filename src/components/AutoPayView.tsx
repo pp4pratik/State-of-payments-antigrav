@@ -51,6 +51,12 @@ export function AutoPayView() {
   const execTotalData = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
   const execFinalData = executions.data.rows.slice(0, 10).map((r) => finalCr(r.executions_mn, r.approved_pct))
 
+  // Same Total-vs-Final split as the "Registrations by PSP" chart, rolled up into one
+  // headline pair for the KPI strip - null (not 0) if any PSP is missing Approved %
+  // that month, so an incomplete sum never gets presented as a real approved total.
+  const totalRegFinalCr = regFinalData.some((v) => v == null) ? null : regFinalData.reduce((s, v) => s + (v ?? 0), 0)
+  const regApprovalPct = totalRegFinalCr != null && totalRegCr ? (totalRegFinalCr / totalRegCr) * 100 : null
+
   return (
     <div>
       <div className="hero">
@@ -87,7 +93,13 @@ export function AutoPayView() {
         <div className="kpi">
           <p className="kpi-label">Registrations, {fullLabel(registrations.data.month)}</p>
           <p className="kpi-value">{crNum(totalRegCr)} Cr</p>
-          <p className="kpi-sub">across {registrations.data.rows.length} payer PSPs</p>
+          <p className="kpi-sub">Total (attempts) · across {registrations.data.rows.length} payer PSPs</p>
+          <div className="chips" style={{ marginTop: 8 }}>
+            <span className="chip up">
+              <TrendingUp size={13} />
+              {totalRegFinalCr == null ? 'Final volume — not yet available' : `~${crNum(totalRegFinalCr)} Cr final (approved), ~${regApprovalPct!.toFixed(1)}%`}
+            </span>
+          </div>
         </div>
         <div className="kpi">
           <p className="kpi-label">Weighted approval rate</p>
