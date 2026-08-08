@@ -346,7 +346,9 @@ function GeographySection({
   month: string
   metric: 'volume' | 'value'
 }) {
-  const rows = [...(geo.byMonth[month] ?? [])].sort((a, b) => (metric === 'volume' ? b.vol - a.vol : b.val - a.val))
+  const [rawOpen, setRawOpen] = useState(false)
+  const allRows = [...(geo.byMonth[month] ?? [])].sort((a, b) => (metric === 'volume' ? b.vol - a.vol : b.val - a.val))
+  const rows = allRows.slice(0, 10)
   const granularity = geo.granularityByMonth[month] ?? 'State'
   const maxV = Math.max(...rows.map((r) => (metric === 'volume' ? r.vol : r.val)), 1)
 
@@ -355,7 +357,9 @@ function GeographySection({
       <SectionHead
         title={`Geography — top ${granularity === 'District' ? 'districts' : 'states'} nationally`}
         note={`${fullLabel(month)} · NPCI reports at ${granularity.toLowerCase()} level${granularity === 'State' ? ' for this month' : ''}`}
-        onCsv={() => downloadCSV('upi-pulse-geo.csv', [[granularity, 'Volume Share %', 'Value Share %'], ...rows.map((g) => [g.name, g.vol, g.val])])}
+        onRawToggle={() => setRawOpen((v) => !v)}
+        rawOpen={rawOpen}
+        onCsv={() => downloadCSV('upi-pulse-geo.csv', [[granularity, 'Volume Share %', 'Value Share %'], ...allRows.map((g) => [g.name, g.vol, g.val])])}
       />
       <div className="card">
         <div className="table-scroll">
@@ -396,6 +400,33 @@ function GeographySection({
             </tbody>
           </table>
         </div>
+        <p className="section-note" style={{ marginTop: 10 }}>
+          Showing top 10 of {allRows.length} {granularity.toLowerCase()}s nationally.
+        </p>
+        {rawOpen && (
+          <div className="raw-panel open">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>{granularity}</th>
+                  <th>Volume share</th>
+                  <th>Value share</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allRows.map((g, i) => (
+                  <tr key={g.name}>
+                    <td>{i + 1}</td>
+                    <td className="name">{g.name}</td>
+                    <td>{g.vol}%</td>
+                    <td>{g.val}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   )
