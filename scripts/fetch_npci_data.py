@@ -249,10 +249,25 @@ def fetch_statewise(page):
     )
     out = []
     for r in rows:
+        state = re.sub(r"\s*#\s*$", "", (r["state_union_territory"] or "")).strip()
+        district = (r["district"] or "").strip()
+        is_unclassified = state.lower().startswith("unclassified")
+        # NPCI's response nests a per-state "Total" summary row (district="-") above
+        # that state's own district rows - confirmed the district rows already sum
+        # back to the same total (55.82% vs 55.93%, within rounding), so keeping
+        # both would double: a "Total" row with no district name would rank at the
+        # top of any volume-sorted table, ahead of every real district, showing a
+        # blank/"-" location. Drop those, but keep "Unclassified" (44% of volume
+        # this month - transactions NPCI couldn't attribute to any district) as its
+        # own real entry rather than silently losing that share of the total.
+        if is_unclassified:
+            district = "Unclassified"
+        elif district == "-":
+            continue
         out.append(
             {
-                "State": r["state_union_territory"],
-                "District": r["district"],
+                "State": state,
+                "District": district,
                 "Month": month_iso(y, m),
                 "Volume (Mn)": num(r["volume_in_mn"]),
                 "Volume Share %": num(r["volume_contribution"]),
