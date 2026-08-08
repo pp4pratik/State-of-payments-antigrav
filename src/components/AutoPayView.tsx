@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Bar } from 'react-chartjs-2'
+import { AlertTriangle, Landmark, Repeat, Sparkles, TrendingDown, Wallet, Zap } from 'lucide-react'
 import { useAutoPayExecutions, useAutoPayExecutionsByPsp, useAutoPayRegistrations, useAutoPayRegistrationsByBank } from '../lib/queries'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
 import { crNum, fullLabel, mnToCr } from '../lib/format'
+import { useCountUp } from '../lib/useCountUp'
 
 const USE_CASES = [
   'Mobile & electricity bills',
@@ -23,14 +25,15 @@ export function AutoPayView() {
   const registrationsByBank = useAutoPayRegistrationsByBank()
   const executionsByPsp = useAutoPayExecutionsByPsp()
 
-  if (registrations.isPending || executions.isPending || registrationsByBank.isPending || executionsByPsp.isPending) {
-    return <p className="section-note">Loading…</p>
-  }
-  const err = registrations.error || executions.error || registrationsByBank.error || executionsByPsp.error
-  if (err) return <p className="section-note">Failed to load: {err.message}</p>
+  // Pre-load-safe fallbacks so the KPI number derivations below (and the useCountUp
+  // calls that depend on them) can run unconditionally, before the loading/error
+  // early-return - React requires every hook to run in the same order on every
+  // render, and useCountUp is a hook, so it can't sit after a conditional return.
+  const regRows = registrations.data?.rows ?? []
+  const execRows = executions.data?.rows ?? []
 
-  const totalRegCr = registrations.data.rows.reduce((s, r) => s + r.registrations_mn, 0) / 10
-  const totalExecCr = executions.data.rows.reduce((s, r) => s + r.executions_mn, 0) / 10
+  const totalRegCr = regRows.reduce((s, r) => s + r.registrations_mn, 0) / 10
+  const totalExecCr = execRows.reduce((s, r) => s + r.executions_mn, 0) / 10
 
   // Approved/BD/TD % straight from AutoPay's own Executions table (bank-level, weighted
   // by that bank's execution volume) - replaces an earlier approximation borrowed from
@@ -38,13 +41,13 @@ export function AutoPayView() {
   // Rows missing a given % (not yet backfilled for older months) are excluded from that
   // rate's average rather than treated as 0, so one gap doesn't drag the whole rate down.
   const weightedExec = (key: 'approved_pct' | 'bd_pct' | 'td_pct') => {
-    const rows = executions.data.rows.filter((r) => r[key] != null)
+    const rows = execRows.filter((r) => r[key] != null)
     const vol = rows.reduce((s, r) => s + r.executions_mn, 0)
     if (!vol) return null
     return rows.reduce((s, r) => s + r.executions_mn * r[key]!, 0) / vol
   }
-  const bdRate = weightedExec('bd_pct')
-  const tdRate = weightedExec('td_pct')
+  const bdRateRaw = weightedExec('bd_pct')
+  const tdRateRaw = weightedExec('td_pct')
 
   // Total Volume = every attempt NPCI logged; Final Volume = the subset that actually
   // went through (Total Volume x Approved %). Approved % can be null for months
@@ -53,6 +56,31 @@ export function AutoPayView() {
   const finalCr = (volumeMn: number, approvedPct: number | null) =>
     approvedPct == null ? null : mnToCr((volumeMn * approvedPct) / 100)!
 
+  const regByPspFinal = regRows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
+  const execByBankFinalAll = execRows.map((r) => finalCr(r.executions_mn, r.approved_pct))
+
+  // Same Total-vs-Final split as the bar charts, rolled up into one headline pair per
+  // KPI tile - null (not 0) if any entity is missing Approved % that month, so an
+  // incomplete sum never gets presented as a real approved total. KPI tiles use the
+  // by-PSP tables' full totals (not the by-bank tables), matching what the hero
+  // figures always represented before this breakdown existed.
+  const totalRegFinalCrRaw = regByPspFinal.some((v) => v == null) ? null : regByPspFinal.reduce<number>((s, v) => s + (v ?? 0), 0)
+  const totalExecFinalCrRaw = execByBankFinalAll.some((v) => v == null) ? null : execByBankFinalAll.reduce<number>((s, v) => s + (v ?? 0), 0)
+
+  const totalRegFinalCr = useCountUp(totalRegFinalCrRaw)
+  const totalExecFinalCr = useCountUp(totalExecFinalCrRaw)
+  const bdRate = useCountUp(bdRateRaw)
+  const tdRate = useCountUp(tdRateRaw)
+
+  if (registrations.isPending || executions.isPending || registrationsByBank.isPending || executionsByPsp.isPending) {
+    return <p className="section-note">Loading…</p>
+  }
+  const err = registrations.error || executions.error || registrationsByBank.error || executionsByPsp.error
+  if (err) return <p className="section-note">Failed to load: {err.message}</p>
+
+  const regApprovalPct = totalRegFinalCrRaw != null && totalRegCr ? (totalRegFinalCrRaw / totalRegCr) * 100 : null
+  const execApprovalPct = totalExecFinalCrRaw != null && totalExecCr ? (totalExecFinalCrRaw / totalExecCr) * 100 : null
+
   // "By PSP" and "by remitter bank" for Registrations, and the mirror pair for
   // Executions - NPCI's Ecosystem Statistics page has all 4 as separate tabs, so
   // these are 4 independently-fetched tables, not one dataset sliced two ways.
@@ -60,7 +88,6 @@ export function AutoPayView() {
   // up to 50, so those charts cap at the top 10 like Geography's district table does.
   const regByPspLabels = registrations.data.rows.map((r) => r.psp)
   const regByPspTotal = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
-  const regByPspFinal = registrations.data.rows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
 
   const regByBankLabels = registrationsByBank.data.rows.slice(0, 10).map((r) => r.remitter_bank)
   const regByBankTotal = registrationsByBank.data.rows.slice(0, 10).map((r) => mnToCr(r.registrations_mn)!)
@@ -73,17 +100,6 @@ export function AutoPayView() {
   const execByPspLabels = executionsByPsp.data.rows.map((r) => r.psp)
   const execByPspTotal = executionsByPsp.data.rows.map((r) => mnToCr(r.executions_mn)!)
   const execByPspFinal = executionsByPsp.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
-
-  // Same Total-vs-Final split as the bar charts, rolled up into one headline pair per
-  // KPI tile - null (not 0) if any entity is missing Approved % that month, so an
-  // incomplete sum never gets presented as a real approved total. KPI tiles use the
-  // by-PSP tables' full totals (not the by-bank tables), matching what the hero
-  // figures always represented before this breakdown existed.
-  const totalRegFinalCr = regByPspFinal.some((v) => v == null) ? null : regByPspFinal.reduce<number>((s, v) => s + (v ?? 0), 0)
-  const regApprovalPct = totalRegFinalCr != null && totalRegCr ? (totalRegFinalCr / totalRegCr) * 100 : null
-  const execByBankFinalAll = executions.data.rows.map((r) => finalCr(r.executions_mn, r.approved_pct))
-  const totalExecFinalCr = execByBankFinalAll.some((v) => v == null) ? null : execByBankFinalAll.reduce<number>((s, v) => s + (v ?? 0), 0)
-  const execApprovalPct = totalExecFinalCr != null && totalExecCr ? (totalExecFinalCr / totalExecCr) * 100 : null
 
   const isReg = mode === 'registration'
   const modeLabel = isReg ? 'Registrations' : 'Executions'
@@ -117,7 +133,10 @@ export function AutoPayView() {
     <div>
       <div className="kpi-strip four">
         <div className="kpi">
-          <p className="kpi-label">Registrations, {fullLabel(registrations.data.month)} · final (approved)</p>
+          <p className="kpi-label">
+            <Repeat size={13} />
+            Registrations, {fullLabel(registrations.data.month)} · final (approved)
+          </p>
           <p className="kpi-value" style={{ color: 'var(--green)' }}>
             {totalRegFinalCr == null ? '—' : `${crNum(totalRegFinalCr)} Cr`}
             {totalRegFinalCr != null && <span style={{ fontSize: 13, fontWeight: 500, marginLeft: 6 }}>~{regApprovalPct!.toFixed(1)}%</span>}
@@ -128,7 +147,10 @@ export function AutoPayView() {
           </p>
         </div>
         <div className="kpi">
-          <p className="kpi-label">Executions, {fullLabel(executions.data.month)} · final (approved)</p>
+          <p className="kpi-label">
+            <Zap size={13} />
+            Executions, {fullLabel(executions.data.month)} · final (approved)
+          </p>
           <p className="kpi-value" style={{ color: 'var(--green)' }}>
             {totalExecFinalCr == null ? '—' : `${crNum(totalExecFinalCr)} Cr`}
             {totalExecFinalCr != null && <span style={{ fontSize: 13, fontWeight: 500, marginLeft: 6 }}>~{execApprovalPct!.toFixed(1)}%</span>}
@@ -139,12 +161,18 @@ export function AutoPayView() {
           </p>
         </div>
         <div className="kpi">
-          <p className="kpi-label">Weighted business decline</p>
+          <p className="kpi-label">
+            <TrendingDown size={13} />
+            Weighted business decline
+          </p>
           <p className="kpi-value">{bdRate == null ? '—' : `~${bdRate.toFixed(1)}%`}</p>
           <p className="kpi-sub">insufficient balance & similar</p>
         </div>
         <div className="kpi">
-          <p className="kpi-label">Weighted technical decline</p>
+          <p className="kpi-label">
+            <AlertTriangle size={13} />
+            Weighted technical decline
+          </p>
           <p className="kpi-value">{tdRate == null ? '—' : `~${tdRate.toFixed(1)}%`}</p>
           <p className="kpi-sub">bank/NPCI system issues</p>
         </div>
@@ -156,10 +184,12 @@ export function AutoPayView() {
           <div className="section-actions">
             <p className="section-note">{modeMonth} · Total vs Final (approved)</p>
             <div className="toggle" role="tablist">
-              <button className={`toggle-btn ${isReg ? 'active' : ''}`} role="tab" aria-selected={isReg} onClick={() => setMode('registration')}>
+              <button className={`toggle-btn ${isReg ? 'active' : ''}`} role="tab" aria-selected={isReg} onClick={() => setMode('registration')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <Repeat size={13} />
                 Registration
               </button>
-              <button className={`toggle-btn ${!isReg ? 'active' : ''}`} role="tab" aria-selected={!isReg} onClick={() => setMode('execution')}>
+              <button className={`toggle-btn ${!isReg ? 'active' : ''}`} role="tab" aria-selected={!isReg} onClick={() => setMode('execution')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <Zap size={13} />
                 Execution
               </button>
             </div>
@@ -168,7 +198,10 @@ export function AutoPayView() {
         <div className="row-2">
           <div className="card">
             <div className="section-head">
-              <p className="section-title">By PSP</p>
+              <p className="section-title">
+                <Wallet size={16} />
+                By PSP
+              </p>
               <CsvButton
                 label="CSV"
                 onClick={() =>
@@ -194,7 +227,10 @@ export function AutoPayView() {
           </div>
           <div className="card">
             <div className="section-head">
-              <p className="section-title">By remitter bank</p>
+              <p className="section-title">
+                <Landmark size={16} />
+                By remitter bank
+              </p>
               <CsvButton
                 label="CSV"
                 onClick={() =>
@@ -227,7 +263,10 @@ export function AutoPayView() {
       <div className="section">
         <div className="card">
           <div className="section-head">
-            <p className="section-title">Common use cases</p>
+            <p className="section-title">
+              <Sparkles size={16} />
+              Common use cases
+            </p>
             <p className="section-note">Qualitative — NPCI doesn't publish a category split</p>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

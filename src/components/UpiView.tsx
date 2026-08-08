@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Chart as ChartJSComponent, Doughnut, Line, Bar } from 'react-chartjs-2'
+import { LineChart, MapPin, PieChart, Receipt, ShoppingBag, TrendingDown, TrendingUp, Trophy } from 'lucide-react'
 import { useDashboard } from '../lib/DashboardContext'
 import { useAppStatsAll, useMerchantCategoriesAll, useMonthlyTrend, useP2pAll, useStatewiseAll, type AppStatsAll } from '../lib/queries'
 import { SectionHead } from './SectionHead'
@@ -60,11 +61,17 @@ export function UpiView() {
 function TrendSection({ months, mVol, mVal }: { months: string[]; mVol: number[]; mVal: number[] }) {
   const [rawOpen, setRawOpen] = useState(false)
   const labels = months.map(shortLabel)
+  const latestMomPct = mom(mVol, mVol.length - 1)
 
   return (
     <div className="section">
       <SectionHead
-        title="Monthly trend"
+        title={
+          <>
+            <TrendingUp size={17} />
+            Monthly trend
+          </>
+        }
         note={`Volume (bars) & value (line) · ${shortLabel(months[0])} – ${shortLabel(months[months.length - 1])}`}
         onRawToggle={() => setRawOpen((v) => !v)}
         rawOpen={rawOpen}
@@ -82,7 +89,14 @@ function TrendSection({ months, mVol, mVal }: { months: string[]; mVol: number[]
             ]),
           ])
         }
-      />
+      >
+        {latestMomPct != null && (
+          <span className={`chip ${latestMomPct >= 0 ? 'up' : 'down'}`}>
+            {latestMomPct >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+            {fmtPct(latestMomPct)} MoM
+          </span>
+        )}
+      </SectionHead>
       <div className="card">
         <div style={{ position: 'relative', height: 300 }}>
           <ChartJSComponent
@@ -198,7 +212,12 @@ function LeaderboardSection({
   return (
     <div className="section">
       <SectionHead
-        title="Leaderboard — top 10 apps"
+        title={
+          <>
+            <Trophy size={17} />
+            Leaderboard — top 10 apps
+          </>
+        }
         note={`${monthLabel} · sorted by selected metric`}
         onCsv={() =>
           downloadCSV('upi-pulse-leaderboard.csv', [
@@ -270,7 +289,10 @@ function P2pCard({ p2p, idx, monthLabel }: { p2p: { p2p_volume_mn: number; p2p_v
   return (
     <div className="card">
       <div className="section-head">
-        <p className="section-title">P2P vs P2M split</p>
+        <p className="section-title">
+          <PieChart size={16} />
+          P2P vs P2M split
+        </p>
         <p className="section-note">{monthLabel}</p>
       </div>
       <div className="p2p-grid">
@@ -304,7 +326,10 @@ function CategoriesCard({ categories, metric, monthLabel }: { categories: { name
   return (
     <div className="card">
       <div className="section-head">
-        <p className="section-title">Top merchant categories</p>
+        <p className="section-title">
+          <ShoppingBag size={16} />
+          Top merchant categories
+        </p>
         <div className="section-actions">
           <p className="section-note">{monthLabel}</p>
           <CsvButton
@@ -355,7 +380,12 @@ function GeographySection({
   return (
     <div className="section">
       <SectionHead
-        title={`Geography — top ${granularity === 'District' ? 'districts' : 'states'} nationally`}
+        title={
+          <>
+            <MapPin size={17} />
+            Geography — top {granularity === 'District' ? 'districts' : 'states'} nationally
+          </>
+        }
         note={`${fullLabel(month)} · NPCI reports at ${granularity.toLowerCase()} level${granularity === 'State' ? ' for this month' : ''}`}
         onRawToggle={() => setRawOpen((v) => !v)}
         rawOpen={rawOpen}
@@ -448,7 +478,12 @@ function AppTrendSection({ appStats, idx, metric }: { appStats: AppStatsAll; idx
   return (
     <div className="section">
       <SectionHead
-        title={`App trend — ${fullLabel(appStats.months[0])} to ${fullLabel(appStats.months[appStats.months.length - 1])}`}
+        title={
+          <>
+            <LineChart size={17} />
+            App trend — {fullLabel(appStats.months[0])} to {fullLabel(appStats.months[appStats.months.length - 1])}
+          </>
+        }
         note={`${aposLabel(appStats.months[0])} – ${aposLabel(appStats.months[appStats.months.length - 1])}, top 5 apps`}
         onRawToggle={() => setRawOpen((v) => !v)}
         rawOpen={rawOpen}
@@ -518,7 +553,12 @@ function TicketSection({ appStats, idx, monthLabel }: { appStats: AppStatsAll; i
   return (
     <div className="section">
       <SectionHead
-        title="Average ticket size"
+        title={
+          <>
+            <Receipt size={17} />
+            Average ticket size
+          </>
+        }
         note={`${monthLabel}, ₹ per transaction`}
         onCsv={() => downloadCSV('upi-pulse-ticket.csv', [['App', 'Avg ticket size (Rs)'], ...order.map((n, i) => [n, data[i]])])}
       />
