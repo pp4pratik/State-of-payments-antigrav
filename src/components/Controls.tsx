@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { Download } from 'lucide-react'
 import { useDashboard, type ViewKey } from '../lib/DashboardContext'
 
 const VIEWS: { value: ViewKey; label: string }[] = [
@@ -12,7 +11,7 @@ const VIEWS: { value: ViewKey; label: string }[] = [
 
 const VIEWS_WITHOUT_SELECTOR = new Set<ViewKey>(['autopay', 'circulars'])
 
-export function Controls({ onDownloadAll }: { onDownloadAll: () => void }) {
+export function Controls() {
   const { view, setView, metric, setMetric, months, selectedMonth, setSelectedMonth } = useDashboard()
   const showSelector = !VIEWS_WITHOUT_SELECTOR.has(view)
 
@@ -105,10 +104,6 @@ export function Controls({ onDownloadAll }: { onDownloadAll: () => void }) {
           </select>
         )}
       </div>
-      <button className="btn-ghost" onClick={onDownloadAll}>
-        <Download size={14} />
-        Download all data (CSV)
-      </button>
     </div>
   )
 }

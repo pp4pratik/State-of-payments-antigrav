@@ -39,12 +39,8 @@ h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:36px;letter-
 .toggle-btn.active.metric{background:var(--teal-dim);color:var(--teal);}
 .toggle-btn:hover:not(.active){color:var(--text);}
 .toggle-btn:active{transform:scale(0.96);}
-.btn-ghost{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;border-radius:8px;padding:8px 14px;cursor:pointer;transition:border-color 0.15s ease,transform 0.1s ease,background 0.15s ease;}
 .month-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;border-radius:8px;padding:8px 14px;cursor:pointer;transition:border-color 0.15s ease;}
 .month-select:hover{border-color:rgba(255,255,255,0.2);}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.2);background:var(--surface2);}
-.btn-ghost:active{transform:scale(0.97);}
-.btn-ghost svg{flex-shrink:0;}
 .tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal);background:var(--teal-dim);border-radius:20px;padding:6px 12px;transition:background 0.15s ease,transform 0.1s ease;}
 .tag:hover{background:rgba(63,193,168,0.24);}
 .chips{display:flex;gap:8px;flex-wrap:wrap;}

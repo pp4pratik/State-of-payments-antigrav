@@ -56,8 +56,7 @@ function ActiveView() {
   const { view } = useDashboard()
   return (
     <>
-      {/* TODO: a combined "download all" export per view, like UPI-Dash's downloadAllBtn */}
-      <Controls onDownloadAll={() => {}} />
+      <Controls />
       {view === 'upi' && <UpiView />}
       {view === 'autopay' && <AutoPayView />}
       {view === 'rbi' && <RbiCardsView />}
