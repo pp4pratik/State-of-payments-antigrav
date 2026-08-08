@@ -335,7 +335,14 @@ def fetch_autopay_registrations(page):
         ),
     )
     return [
-        {"PSP": r["payer_psp"], "Month": month_iso(y, m), "Registrations (Mn)": num(r["total_volume"])}
+        {
+            "PSP": r["payer_psp"],
+            "Month": month_iso(y, m),
+            "Registrations (Mn)": num(r["total_volume"]),
+            "Approved %": num(r["approved_percent"]),
+            "BD %": num(r["bd_percent"]),
+            "TD %": num(r["td_percent"]),
+        }
         for r in rows
     ]
 
@@ -358,7 +365,14 @@ def fetch_autopay_executions(page):
         ),
     )
     return [
-        {"Bank": r["remitter_bank"], "Month": month_iso(y, m), "Executions (Mn)": num(r["total_volume"])}
+        {
+            "Bank": r["remitter_bank"],
+            "Month": month_iso(y, m),
+            "Executions (Mn)": num(r["total_volume"]),
+            "Approved %": num(r["approved_percent"]),
+            "BD %": num(r["bd_percent"]),
+            "TD %": num(r["td_percent"]),
+        }
         for r in rows
     ]
 

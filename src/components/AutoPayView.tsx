@@ -37,10 +37,19 @@ export function AutoPayView() {
   const bdRate = weighted('bd_pct')
   const tdRate = weighted('td_pct')
 
+  // Total Volume = every attempt NPCI logged; Final Volume = the subset that actually
+  // went through (Total Volume x Approved %). Approved % can be null for months
+  // fetched before this field was captured - final volume falls back to null (shows
+  // as a gap in the chart / blank in the CSV) rather than silently pretending 0.
+  const finalCr = (volumeMn: number, approvedPct: number | null) =>
+    approvedPct == null ? null : mnToCr((volumeMn * approvedPct) / 100)!
+
   const regLabels = registrations.data.rows.map((r) => r.psp)
-  const regData = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
+  const regTotalData = registrations.data.rows.map((r) => mnToCr(r.registrations_mn)!)
+  const regFinalData = registrations.data.rows.map((r) => finalCr(r.registrations_mn, r.approved_pct))
   const execLabels = executions.data.rows.slice(0, 10).map((r) => r.bank)
-  const execData = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
+  const execTotalData = executions.data.rows.slice(0, 10).map((r) => mnToCr(r.executions_mn)!)
+  const execFinalData = executions.data.rows.slice(0, 10).map((r) => finalCr(r.executions_mn, r.approved_pct))
 
   return (
     <div>
@@ -100,18 +109,32 @@ export function AutoPayView() {
       <div className="section">
         <SectionHead
           title="Registrations by PSP"
-          note={fullLabel(registrations.data.month)}
-          onCsv={() => downloadCSV('upi-pulse-autopayReg.csv', [['PSP', 'Registrations (Cr)'], ...regLabels.map((l, i) => [l, regData[i]])])}
+          note={`${fullLabel(registrations.data.month)} · Total Volume (attempts) vs Final Volume (approved)`}
+          onCsv={() =>
+            downloadCSV('upi-pulse-autopayReg.csv', [
+              ['PSP', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
+              ...regLabels.map((l, i) => [l, regTotalData[i], regFinalData[i] ?? '', registrations.data.rows[i].approved_pct ?? '']),
+            ])
+          }
         />
         <div className="card">
           <div style={{ position: 'relative', height: 260 }}>
             <Bar
-              data={{ labels: regLabels, datasets: [{ label: 'Registrations (Cr)', data: regData, backgroundColor: '#3FC1A8', borderRadius: 4 }] }}
+              data={{
+                labels: regLabels,
+                datasets: [
+                  { label: 'Total Volume (Cr)', data: regTotalData, backgroundColor: 'rgba(63,193,168,0.35)', borderRadius: 4 },
+                  { label: 'Final Volume (Cr)', data: regFinalData, backgroundColor: '#3FC1A8', borderRadius: 4 },
+                ],
+              }}
               options={{
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } } },
-                plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${Number(c.raw).toFixed(2)} Cr` } } },
+                plugins: {
+                  legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
+                  tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw == null ? '—' : Number(c.raw).toFixed(2) + ' Cr'}` } },
+                },
               }}
             />
           </div>
@@ -124,22 +147,36 @@ export function AutoPayView() {
             <div className="section-head">
               <p className="section-title">Execution volume by remitter bank</p>
               <div className="section-actions">
-                <p className="section-note">{fullLabel(executions.data.month)}</p>
+                <p className="section-note">{fullLabel(executions.data.month)} · Total vs Final (approved)</p>
                 <CsvButton
                   label="CSV"
-                  onClick={() => downloadCSV('upi-pulse-autopayExec.csv', [['Bank', 'Executions (Cr)'], ...execLabels.map((l, i) => [l, execData[i]])])}
+                  onClick={() =>
+                    downloadCSV('upi-pulse-autopayExec.csv', [
+                      ['Bank', 'Total Volume (Cr)', 'Final Volume (Cr)', 'Approved %'],
+                      ...execLabels.map((l, i) => [l, execTotalData[i], execFinalData[i] ?? '', executions.data.rows[i].approved_pct ?? '']),
+                    ])
+                  }
                 />
               </div>
             </div>
             <div style={{ position: 'relative', height: 240 }}>
               <Bar
-                data={{ labels: execLabels, datasets: [{ label: 'Executions (Cr)', data: execData, backgroundColor: '#F5A524', borderRadius: 4 }] }}
+                data={{
+                  labels: execLabels,
+                  datasets: [
+                    { label: 'Total Volume (Cr)', data: execTotalData, backgroundColor: 'rgba(245,165,36,0.35)', borderRadius: 4 },
+                    { label: 'Final Volume (Cr)', data: execFinalData, backgroundColor: '#F5A524', borderRadius: 4 },
+                  ],
+                }}
                 options={{
                   indexAxis: 'y' as const,
                   responsive: true,
                   maintainAspectRatio: false,
                   scales: { x: { grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Crore', font: { size: 11 } } }, y: { grid: { display: false } } },
-                  plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${Number(c.raw).toFixed(2)} Cr` } } },
+                  plugins: {
+                    legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
+                    tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw == null ? '—' : Number(c.raw).toFixed(2) + ' Cr'}` } },
+                  },
                 }}
               />
             </div>

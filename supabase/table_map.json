@@ -92,7 +92,10 @@
     "fields": {
       "PSP": "psp",
       "Month": "month",
-      "Registrations (Mn)": "registrations_mn"
+      "Registrations (Mn)": "registrations_mn",
+      "Approved %": "approved_pct",
+      "BD %": "bd_pct",
+      "TD %": "td_pct"
     }
   },
   "AutoPay Executions": {
@@ -104,7 +107,10 @@
     "fields": {
       "Bank": "bank",
       "Month": "month",
-      "Executions (Mn)": "executions_mn"
+      "Executions (Mn)": "executions_mn",
+      "Approved %": "approved_pct",
+      "BD %": "bd_pct",
+      "TD %": "td_pct"
     }
   },
   "PSP Member Performance": {

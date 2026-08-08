@@ -92,6 +92,9 @@ create table if not exists public.autopay_registrations (
   psp text,
   month date,
   registrations_mn numeric,
+  approved_pct numeric,
+  bd_pct numeric,
+  td_pct numeric,
   unique (psp, month)
 );
 
@@ -104,6 +107,9 @@ create table if not exists public.autopay_executions (
   bank text,
   month date,
   executions_mn numeric,
+  approved_pct numeric,
+  bd_pct numeric,
+  td_pct numeric,
   unique (bank, month)
 );
 
