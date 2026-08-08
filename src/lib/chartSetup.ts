@@ -3,6 +3,7 @@ import {
   BarElement,
   CategoryScale,
   Chart,
+  Filler,
   Legend,
   LinearScale,
   LineElement,
@@ -17,6 +18,7 @@ Chart.register(
   LineElement,
   PointElement,
   ArcElement,
+  Filler,
   Tooltip,
   Legend,
 )

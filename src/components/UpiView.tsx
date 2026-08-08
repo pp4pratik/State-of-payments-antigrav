@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { ScriptableContext } from 'chart.js'
 import { Chart as ChartJSComponent, Doughnut, Line, Bar } from 'react-chartjs-2'
 import { LineChart, MapPin, PieChart, Receipt, ShoppingBag, TrendingDown, TrendingUp, Trophy } from 'lucide-react'
 import { useDashboard } from '../lib/DashboardContext'
@@ -108,7 +109,14 @@ function TrendSection({ months, mVol, mVal }: { months: string[]; mVol: number[]
                   type: 'bar' as const,
                   label: 'Volume (Cr txns)',
                   data: mVol,
-                  backgroundColor: '#F5A524',
+                  backgroundColor: (ctx: ScriptableContext<'bar'>) => {
+                    const { chartArea, ctx: canvasCtx } = ctx.chart
+                    if (!chartArea) return '#F5A524'
+                    const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom)
+                    gradient.addColorStop(0, '#F5A524')
+                    gradient.addColorStop(1, 'rgba(245,165,36,0.5)')
+                    return gradient
+                  },
                   borderRadius: 3,
                   yAxisID: 'y',
                   order: 2,
@@ -119,7 +127,15 @@ function TrendSection({ months, mVol, mVal }: { months: string[]; mVol: number[]
                   label: 'Value (₹ Cr)',
                   data: mVal,
                   borderColor: '#3FC1A8',
-                  backgroundColor: '#3FC1A8',
+                  backgroundColor: (ctx: ScriptableContext<'line'>) => {
+                    const { chartArea, ctx: canvasCtx } = ctx.chart
+                    if (!chartArea) return 'rgba(63,193,168,0.25)'
+                    const gradient = canvasCtx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom)
+                    gradient.addColorStop(0, 'rgba(63,193,168,0.32)')
+                    gradient.addColorStop(1, 'rgba(63,193,168,0)')
+                    return gradient
+                  },
+                  fill: true,
                   pointRadius: 0,
                   borderWidth: 2,
                   tension: 0.3,
