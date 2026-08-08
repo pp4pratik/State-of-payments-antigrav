@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import { AlertTriangle, Landmark, Repeat, Sparkles, TrendingDown, Wallet, Zap } from 'lucide-react'
+import { AlertTriangle, Gauge, Landmark, Repeat, ShieldAlert, ShieldCheck, TrendingDown, Wallet, Zap } from 'lucide-react'
 import { useAutoPayExecutions, useAutoPayExecutionsByPsp, useAutoPayRegistrations, useAutoPayRegistrationsByBank } from '../lib/queries'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
@@ -8,13 +8,20 @@ import { CsvButton } from './CsvButton'
 import { crNum, fullLabel, mnToCr } from '../lib/format'
 import { useCountUp } from '../lib/useCountUp'
 
-const USE_CASES = [
-  'Mobile & electricity bills',
-  'EMI payments',
-  'OTT subscriptions',
-  'Insurance premiums',
-  'Mutual fund SIPs',
-  'FASTag & NCMC top-ups',
+// NPCI Circular OC-151 / OC-151A (AFA limit enhancement for UPI AutoPay): the
+// default no-PIN execution limit is Rs 15,000 for every category; these 8 MCCs
+// are the only ones RBI/NPCI permit to run without a UPI PIN up to Rs 1,00,000.
+// Above Rs 1,00,000 (any category), every execution needs manual PIN entry -
+// the initial mandate setup always needs PIN regardless of amount either way.
+const AUTOPAY_MCC_LIMITS = [
+  { mcc: '5413', category: 'Credit card bill payments' },
+  { mcc: '5960', category: 'Direct marketing — insurance services' },
+  { mcc: '6012', category: 'Financial institutions — merchandise & services' },
+  { mcc: '6211', category: 'Securities brokers & dealers' },
+  { mcc: '6300', category: 'Insurance sales, underwriting & premiums' },
+  { mcc: '6381', category: 'Insurance premiums' },
+  { mcc: '6399', category: 'Insurance (not elsewhere classified)' },
+  { mcc: '6529', category: 'LIC (Life Insurance Corporation)' },
 ]
 
 export function AutoPayView() {
@@ -264,20 +271,62 @@ export function AutoPayView() {
         <div className="card">
           <div className="section-head">
             <p className="section-title">
-              <Sparkles size={16} />
-              Common use cases
+              <Gauge size={16} />
+              AutoPay limits — MCC & category-wise
             </p>
-            <p className="section-note">Qualitative — NPCI doesn't publish a category split</p>
+            <p className="section-note">NPCI Circular OC-151 / OC-151A</p>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {USE_CASES.map((u) => (
-              <span key={u} className="tag">
-                {u}
-              </span>
-            ))}
+          <div className="row-2" style={{ marginBottom: 18 }}>
+            <div style={{ padding: '14px 16px', background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
+              <p className="kpi-label" style={{ marginBottom: 6 }}>
+                <ShieldCheck size={13} />
+                Standard limit (soft)
+              </p>
+              <p className="kpi-value" style={{ fontSize: 20 }}>
+                ₹15,000
+              </p>
+              <p className="kpi-sub">
+                Default for every category not listed below — mobile/electricity bills, OTT subscriptions, loan EMIs, general
+                subscriptions, FASTag/NCMC top-ups, and everything else. No UPI PIN needed per execution up to this amount.
+              </p>
+            </div>
+            <div style={{ padding: '14px 16px', background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
+              <p className="kpi-label" style={{ marginBottom: 6 }}>
+                <ShieldAlert size={13} />
+                Enhanced limit (hard)
+              </p>
+              <p className="kpi-value" style={{ fontSize: 20 }}>
+                ₹1,00,000
+              </p>
+              <p className="kpi-sub">
+                Only for the 8 MCCs below. Above ₹1,00,000 in any category, every execution needs manual UPI PIN entry — no
+                longer fully automatic.
+              </p>
+            </div>
           </div>
-          <p className="section-note" style={{ marginTop: 16 }}>
-            NPCI raised the AFA limit for recurring credit card bill, mutual fund, and insurance payments from ₹15,000 to ₹1,00,000.
+          <div className="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>MCC</th>
+                  <th>Category</th>
+                  <th>Limit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AUTOPAY_MCC_LIMITS.map((l) => (
+                  <tr key={l.mcc}>
+                    <td>{l.mcc}</td>
+                    <td className="name">{l.category}</td>
+                    <td>₹1,00,000</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="section-note" style={{ marginTop: 14 }}>
+            Limits govern how much can execute without a UPI PIN per debit — the initial mandate setup always requires PIN
+            authentication regardless of amount either way. NPCI/RBI-published list, not derived from the volume data above.
           </p>
         </div>
       </div>
