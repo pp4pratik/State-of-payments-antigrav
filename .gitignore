@@ -16,6 +16,9 @@ dist-ssr
 .env
 .env.*
 !.env.example
+client_secret.json
+token.json
+service_account.json
 
 # TanStack Router codegen
 src/routeTree.gen.ts

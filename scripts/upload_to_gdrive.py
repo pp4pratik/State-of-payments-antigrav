@@ -44,7 +44,8 @@ def main():
         from google.auth.transport.requests import Request
         from google.oauth2.credentials import Credentials
 
-        SCOPES = ['https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
+        os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
+        SCOPES = ['https://www.googleapis.com/auth/drive.file']
         creds = None
         token_path = PROJECT_DIR / "token.json"
         client_secret_path = PROJECT_DIR / "client_secret.json"
