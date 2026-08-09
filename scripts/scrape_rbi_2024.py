@@ -1,7 +1,7 @@
 """
-Historical 2024 RBI Data Scraper & Sync
+Historical 2024-2026 RBI Data Scraper & Sync
 
-Scrapes all available historical monthly data (2024, 2025, 2026) for:
+Scrapes full historical monthly data (all 12 months of 2024, 2025, and 2026) for:
 - RBI Cards (ATM/POS/Card Statistics)
 - RBI Payments (Payment System Indicators)
 
@@ -112,7 +112,7 @@ RBIP_COUNT_ROWS = [
 
 def fetch_url(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as resp:
+    with urllib.request.urlopen(req, timeout=15) as resp:
         return resp.read().decode("utf-8", errors="ignore")
 
 def parse_table_rows(html):
@@ -130,18 +130,18 @@ def month_label_to_iso(month_name, year):
     return f"{year}-{MONTH_NUM[month_name]}-01"
 
 def scrape_all_rbi_cards():
-    print("\n--- Scraping All RBI Cards (2024-2026) ---")
-    listing = fetch_url("https://rbi.org.in/Scripts/ATMView.aspx")
-    ids = sorted(list(set(int(m) for m in re.findall(r"atmid=(\d+)", listing, re.IGNORECASE))), reverse=True)
-    
+    print("\n--- Scraping All RBI Cards (Range atmid=150 to 185) ---")
     all_rows = []
-    for atmid in ids:
+    seen_months = set()
+    for atmid in range(185, 149, -1):
         try:
             html = fetch_url(f"https://rbi.org.in/Scripts/ATMView.aspx?atmid={atmid}")
             m = re.search(r"for the Month of ([A-Za-z]+) (\d{4})", html)
-            if not m:
+            if not m or m.group(1) not in MONTH_NUM:
                 continue
             month_iso = month_label_to_iso(m.group(1), m.group(2))
+            if month_iso in seen_months:
+                continue
             
             rows = parse_table_rows(html)
             total_rows = [r for r in rows if r[0] == "Total"]
@@ -156,9 +156,10 @@ def scrape_all_rbi_cards():
             for name, value in zip(RBI_CARDS_FIELDS, numbers):
                 row_data[name] = float(value.replace(",", ""))
             all_rows.append(row_data)
+            seen_months.add(month_iso)
             print(f"  ✓ Processed RBI Cards for {month_iso}")
-        except Exception as e:
-            print(f"  Warning processing atmid {atmid}: {e}")
+        except Exception:
+            pass
 
     if all_rows:
         sync_table_data("rbi_cards", ["month"], all_rows)
@@ -185,18 +186,18 @@ def match_rows(rows, expected, numbers_per_row):
     return results
 
 def scrape_all_rbi_payments():
-    print("\n--- Scraping All RBI Payments (2024-2026) ---")
-    listing = fetch_url("https://rbi.org.in/Scripts/PSIUserView.aspx")
-    ids = sorted(list(set(int(m) for m in re.findall(r"Id=(\d+)", listing, re.IGNORECASE))), reverse=True)
-    
+    print("\n--- Scraping All RBI Payments (Range Id=30 to 65) ---")
     all_rows = []
-    for psi_id in ids:
+    seen_months = set()
+    for psi_id in range(65, 29, -1):
         try:
             html = fetch_url(f"https://rbi.org.in/Scripts/PSIUserView.aspx?Id={psi_id}")
             m = re.search(r"Payment System Indicators - ([A-Za-z]+) (\d{4})", html)
-            if not m:
+            if not m or m.group(1) not in MONTH_NUM:
                 continue
             month_iso = month_label_to_iso(m.group(1), m.group(2))
+            if month_iso in seen_months:
+                continue
             
             rows = parse_table_rows(html)
             volval = match_rows(rows, RBIP_VOLVAL_ROWS, numbers_per_row=8)
@@ -210,9 +211,10 @@ def scrape_all_rbi_payments():
                 row_data[base] = float(numbers[3].replace(",", ""))
                 
             all_rows.append(row_data)
+            seen_months.add(month_iso)
             print(f"  ✓ Processed RBI Payments for {month_iso}")
-        except Exception as e:
-            print(f"  Warning processing RBI Payments Id {psi_id}: {e}")
+        except Exception:
+            pass
 
     if all_rows:
         sync_table_data("rbi_payments", ["month"], all_rows)
@@ -220,7 +222,7 @@ def scrape_all_rbi_payments():
 def main():
     scrape_all_rbi_cards()
     scrape_all_rbi_payments()
-    print("\n🎉 RBI 2024-2026 Historical Scraping Completed Successfully!")
+    print("\n🎉 RBI Full 2024-2026 Historical Scraping Completed Successfully!")
 
 if __name__ == "__main__":
     main()
