@@ -13504,5 +13504,3002 @@
     "volume_share_pct": 24.67,
     "value_cr": 541530.44,
     "value_share_pct": 23.29
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 1859.79,
+    "volume_share_pct": 20.98,
+    "value_cr": 260344.8,
+    "value_share_pct": 18.39
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 772.62,
+    "volume_share_pct": 8.72,
+    "value_cr": 114007.15,
+    "value_share_pct": 8.05
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 683.07,
+    "volume_share_pct": 7.71,
+    "value_cr": 121761.16,
+    "value_share_pct": 8.6
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 569.78,
+    "volume_share_pct": 6.43,
+    "value_cr": 87585.09,
+    "value_share_pct": 6.19
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 433.99,
+    "volume_share_pct": 4.9,
+    "value_cr": 73484.77,
+    "value_share_pct": 5.19
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 391.83,
+    "volume_share_pct": 4.42,
+    "value_cr": 64347.76,
+    "value_share_pct": 4.55
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 375.53,
+    "volume_share_pct": 4.24,
+    "value_cr": 56076.31,
+    "value_share_pct": 3.96
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 330.04,
+    "volume_share_pct": 3.72,
+    "value_cr": 46799.01,
+    "value_share_pct": 3.31
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 280.81,
+    "volume_share_pct": 3.17,
+    "value_cr": 46154.94,
+    "value_share_pct": 3.26
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 279.96,
+    "volume_share_pct": 3.16,
+    "value_cr": 59444.05,
+    "value_share_pct": 4.2
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 267.97,
+    "volume_share_pct": 3.02,
+    "value_cr": 48787.79,
+    "value_share_pct": 3.45
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 233.46,
+    "volume_share_pct": 2.63,
+    "value_cr": 43922.05,
+    "value_share_pct": 3.1
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 225.35,
+    "volume_share_pct": 2.54,
+    "value_cr": 35256.24,
+    "value_share_pct": 2.49
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 201.13,
+    "volume_share_pct": 2.27,
+    "value_cr": 31243.16,
+    "value_share_pct": 2.21
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 184.79,
+    "volume_share_pct": 2.08,
+    "value_cr": 28296.73,
+    "value_share_pct": 2.0
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 123.33,
+    "volume_share_pct": 1.39,
+    "value_cr": 21576.93,
+    "value_share_pct": 1.52
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 93.42,
+    "volume_share_pct": 1.05,
+    "value_cr": 14905.34,
+    "value_share_pct": 1.05
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 81.02,
+    "volume_share_pct": 0.91,
+    "value_cr": 14333.08,
+    "value_share_pct": 1.01
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 79.24,
+    "volume_share_pct": 0.89,
+    "value_cr": 11091.58,
+    "value_share_pct": 0.78
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 78.23,
+    "volume_share_pct": 0.88,
+    "value_cr": 11254.99,
+    "value_share_pct": 0.8
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 34.96,
+    "volume_share_pct": 0.39,
+    "value_cr": 4786.04,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 28.44,
+    "volume_share_pct": 0.32,
+    "value_cr": 4783.74,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 20.03,
+    "volume_share_pct": 0.23,
+    "value_cr": 2988.02,
+    "value_share_pct": 0.21
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 18.64,
+    "volume_share_pct": 0.21,
+    "value_cr": 2531.42,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 9.52,
+    "volume_share_pct": 0.11,
+    "value_cr": 1432.15,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 8.19,
+    "volume_share_pct": 0.09,
+    "value_cr": 2155.67,
+    "value_share_pct": 0.15
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 6.62,
+    "volume_share_pct": 0.07,
+    "value_cr": 1341.62,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 5.67,
+    "volume_share_pct": 0.06,
+    "value_cr": 641.58,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 5.52,
+    "volume_share_pct": 0.06,
+    "value_cr": 993.56,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 4.26,
+    "volume_share_pct": 0.05,
+    "value_cr": 852.3,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 3.64,
+    "volume_share_pct": 0.04,
+    "value_cr": 982.4,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 3.44,
+    "volume_share_pct": 0.04,
+    "value_cr": 660.99,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 3.25,
+    "volume_share_pct": 0.04,
+    "value_cr": 774.43,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 1.6,
+    "volume_share_pct": 0.02,
+    "value_cr": 334.49,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 1.39,
+    "volume_share_pct": 0.02,
+    "value_cr": 368.52,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-04-01",
+    "volume_mn": 0.09,
+    "volume_share_pct": 0.0,
+    "value_cr": 23.34,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-04-01",
+    "volume_mn": 1162.65,
+    "volume_share_pct": 13.12,
+    "value_cr": 199181.5,
+    "value_share_pct": 14.07
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 1859.62,
+    "volume_share_pct": 19.75,
+    "value_cr": 258141.08,
+    "value_share_pct": 17.33
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 797.62,
+    "volume_share_pct": 8.47,
+    "value_cr": 118039.69,
+    "value_share_pct": 7.93
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 716.76,
+    "volume_share_pct": 7.61,
+    "value_cr": 129532.28,
+    "value_share_pct": 8.7
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 612.76,
+    "volume_share_pct": 6.51,
+    "value_cr": 94729.13,
+    "value_share_pct": 6.36
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 459.82,
+    "volume_share_pct": 4.88,
+    "value_cr": 78145.83,
+    "value_share_pct": 5.25
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 397.53,
+    "volume_share_pct": 4.22,
+    "value_cr": 59740.76,
+    "value_share_pct": 4.01
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 387.94,
+    "volume_share_pct": 4.12,
+    "value_cr": 55560.85,
+    "value_share_pct": 3.73
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 382.58,
+    "volume_share_pct": 4.06,
+    "value_cr": 63055.85,
+    "value_share_pct": 4.23
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 300.2,
+    "volume_share_pct": 3.19,
+    "value_cr": 64986.38,
+    "value_share_pct": 4.36
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 288.57,
+    "volume_share_pct": 3.06,
+    "value_cr": 47894.81,
+    "value_share_pct": 3.22
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 280.34,
+    "volume_share_pct": 2.98,
+    "value_cr": 51363.73,
+    "value_share_pct": 3.45
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 263.52,
+    "volume_share_pct": 2.8,
+    "value_cr": 48233.44,
+    "value_share_pct": 3.24
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 231.21,
+    "volume_share_pct": 2.46,
+    "value_cr": 36868.32,
+    "value_share_pct": 2.48
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 219.5,
+    "volume_share_pct": 2.33,
+    "value_cr": 34118.36,
+    "value_share_pct": 2.29
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 198.14,
+    "volume_share_pct": 2.1,
+    "value_cr": 30136.96,
+    "value_share_pct": 2.02
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 129.87,
+    "volume_share_pct": 1.38,
+    "value_cr": 23478.73,
+    "value_share_pct": 1.58
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 93.45,
+    "volume_share_pct": 0.99,
+    "value_cr": 14415.31,
+    "value_share_pct": 0.97
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 90.18,
+    "volume_share_pct": 0.96,
+    "value_cr": 14937.13,
+    "value_share_pct": 1.0
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 85.32,
+    "volume_share_pct": 0.91,
+    "value_cr": 11994.84,
+    "value_share_pct": 0.81
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 80.75,
+    "volume_share_pct": 0.86,
+    "value_cr": 11514.29,
+    "value_share_pct": 0.77
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 38.5,
+    "volume_share_pct": 0.41,
+    "value_cr": 5312.81,
+    "value_share_pct": 0.36
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 32.13,
+    "volume_share_pct": 0.34,
+    "value_cr": 5046.91,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 19.87,
+    "volume_share_pct": 0.21,
+    "value_cr": 2965.09,
+    "value_share_pct": 0.2
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 18.42,
+    "volume_share_pct": 0.2,
+    "value_cr": 2496.89,
+    "value_share_pct": 0.17
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 10.06,
+    "volume_share_pct": 0.11,
+    "value_cr": 1508.72,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 7.22,
+    "volume_share_pct": 0.08,
+    "value_cr": 1332.48,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 5.95,
+    "volume_share_pct": 0.06,
+    "value_cr": 1016.47,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 5.69,
+    "volume_share_pct": 0.06,
+    "value_cr": 664.54,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 4.4,
+    "volume_share_pct": 0.05,
+    "value_cr": 839.74,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 4.07,
+    "volume_share_pct": 0.04,
+    "value_cr": 1045.51,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 3.79,
+    "volume_share_pct": 0.04,
+    "value_cr": 719.96,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 3.75,
+    "volume_share_pct": 0.04,
+    "value_cr": 910.78,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 2.7,
+    "volume_share_pct": 0.03,
+    "value_cr": 669.27,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 1.72,
+    "volume_share_pct": 0.02,
+    "value_cr": 412.84,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 1.66,
+    "volume_share_pct": 0.02,
+    "value_cr": 336.3,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-05-01",
+    "volume_mn": 0.08,
+    "volume_share_pct": 0.0,
+    "value_cr": 21.79,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-05-01",
+    "volume_mn": 1379.48,
+    "volume_share_pct": 14.65,
+    "value_cr": 216957.59,
+    "value_share_pct": 14.57
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 1958.64,
+    "volume_share_pct": 20.98,
+    "value_cr": 274244.34,
+    "value_share_pct": 18.59
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 812.5,
+    "volume_share_pct": 8.7,
+    "value_cr": 116958.14,
+    "value_share_pct": 7.93
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 710.27,
+    "volume_share_pct": 7.61,
+    "value_cr": 129049.85,
+    "value_share_pct": 8.75
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 596.11,
+    "volume_share_pct": 6.39,
+    "value_cr": 90290.44,
+    "value_share_pct": 6.12
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 458.92,
+    "volume_share_pct": 4.92,
+    "value_cr": 79245.18,
+    "value_share_pct": 5.37
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 427.33,
+    "volume_share_pct": 4.58,
+    "value_cr": 63711.04,
+    "value_share_pct": 4.32
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 386.86,
+    "volume_share_pct": 4.14,
+    "value_cr": 54882.65,
+    "value_share_pct": 3.72
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 337.69,
+    "volume_share_pct": 3.62,
+    "value_cr": 55593.65,
+    "value_share_pct": 3.77
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 295.26,
+    "volume_share_pct": 3.16,
+    "value_cr": 62976.99,
+    "value_share_pct": 4.27
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 277.76,
+    "volume_share_pct": 2.98,
+    "value_cr": 46487.59,
+    "value_share_pct": 3.15
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 273.83,
+    "volume_share_pct": 2.93,
+    "value_cr": 49603.55,
+    "value_share_pct": 3.36
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 262.96,
+    "volume_share_pct": 2.82,
+    "value_cr": 48095.78,
+    "value_share_pct": 3.26
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 226.29,
+    "volume_share_pct": 2.42,
+    "value_cr": 35090.23,
+    "value_share_pct": 2.38
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 215.06,
+    "volume_share_pct": 2.3,
+    "value_cr": 32879.15,
+    "value_share_pct": 2.23
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 197.7,
+    "volume_share_pct": 2.12,
+    "value_cr": 30051.56,
+    "value_share_pct": 2.04
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 124.17,
+    "volume_share_pct": 1.33,
+    "value_cr": 22242.08,
+    "value_share_pct": 1.51
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 89.22,
+    "volume_share_pct": 0.96,
+    "value_cr": 14075.95,
+    "value_share_pct": 0.95
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 88.77,
+    "volume_share_pct": 0.95,
+    "value_cr": 13802.1,
+    "value_share_pct": 0.94
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 79.35,
+    "volume_share_pct": 0.85,
+    "value_cr": 11384.06,
+    "value_share_pct": 0.77
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 73.13,
+    "volume_share_pct": 0.78,
+    "value_cr": 10536.22,
+    "value_share_pct": 0.71
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 37.47,
+    "volume_share_pct": 0.4,
+    "value_cr": 5510.42,
+    "value_share_pct": 0.37
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 30.84,
+    "volume_share_pct": 0.33,
+    "value_cr": 5058.35,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 18.53,
+    "volume_share_pct": 0.2,
+    "value_cr": 2779.41,
+    "value_share_pct": 0.19
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 17.6,
+    "volume_share_pct": 0.19,
+    "value_cr": 2430.14,
+    "value_share_pct": 0.16
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 10.24,
+    "volume_share_pct": 0.11,
+    "value_cr": 1551.66,
+    "value_share_pct": 0.11
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 7.69,
+    "volume_share_pct": 0.08,
+    "value_cr": 1376.41,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 5.62,
+    "volume_share_pct": 0.06,
+    "value_cr": 980.89,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 5.35,
+    "volume_share_pct": 0.06,
+    "value_cr": 651.41,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 5.03,
+    "volume_share_pct": 0.05,
+    "value_cr": 1176.33,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 4.22,
+    "volume_share_pct": 0.05,
+    "value_cr": 811.42,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 3.91,
+    "volume_share_pct": 0.04,
+    "value_cr": 718.62,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 3.74,
+    "volume_share_pct": 0.04,
+    "value_cr": 905.89,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 1.9,
+    "volume_share_pct": 0.02,
+    "value_cr": 497.29,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 1.81,
+    "volume_share_pct": 0.02,
+    "value_cr": 454.94,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 1.56,
+    "volume_share_pct": 0.02,
+    "value_cr": 305.91,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-06-01",
+    "volume_mn": 0.08,
+    "volume_share_pct": 0.0,
+    "value_cr": 20.5,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-06-01",
+    "volume_mn": 1287.64,
+    "volume_share_pct": 13.79,
+    "value_cr": 209034.13,
+    "value_share_pct": 14.17
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 2034.12,
+    "volume_share_pct": 20.41,
+    "value_cr": 278351.31,
+    "value_share_pct": 18.15
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 870.28,
+    "volume_share_pct": 8.73,
+    "value_cr": 122630.19,
+    "value_share_pct": 8.0
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 720.58,
+    "volume_share_pct": 7.23,
+    "value_cr": 127885.79,
+    "value_share_pct": 8.34
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 630.3,
+    "volume_share_pct": 6.33,
+    "value_cr": 90963.74,
+    "value_share_pct": 5.93
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 494.19,
+    "volume_share_pct": 4.96,
+    "value_cr": 83009.09,
+    "value_share_pct": 5.41
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 471.51,
+    "volume_share_pct": 4.73,
+    "value_cr": 66620.88,
+    "value_share_pct": 4.34
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 405.86,
+    "volume_share_pct": 4.07,
+    "value_cr": 63069.1,
+    "value_share_pct": 4.11
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 397.81,
+    "volume_share_pct": 3.99,
+    "value_cr": 54276.07,
+    "value_share_pct": 3.54
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 323.27,
+    "volume_share_pct": 3.24,
+    "value_cr": 67084.86,
+    "value_share_pct": 4.37
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 302.19,
+    "volume_share_pct": 3.03,
+    "value_cr": 49555.82,
+    "value_share_pct": 3.23
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 289.59,
+    "volume_share_pct": 2.91,
+    "value_cr": 50112.15,
+    "value_share_pct": 3.27
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 281.52,
+    "volume_share_pct": 2.83,
+    "value_cr": 46720.09,
+    "value_share_pct": 3.05
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 246.82,
+    "volume_share_pct": 2.48,
+    "value_cr": 37267.08,
+    "value_share_pct": 2.43
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 224.03,
+    "volume_share_pct": 2.25,
+    "value_cr": 33854.52,
+    "value_share_pct": 2.21
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 208.06,
+    "volume_share_pct": 2.09,
+    "value_cr": 31154.66,
+    "value_share_pct": 2.03
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 132.51,
+    "volume_share_pct": 1.33,
+    "value_cr": 23480.6,
+    "value_share_pct": 1.53
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 96.74,
+    "volume_share_pct": 0.97,
+    "value_cr": 14277.91,
+    "value_share_pct": 0.93
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 96.55,
+    "volume_share_pct": 0.97,
+    "value_cr": 14637.06,
+    "value_share_pct": 0.95
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 84.67,
+    "volume_share_pct": 0.85,
+    "value_cr": 11730.08,
+    "value_share_pct": 0.76
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 78.54,
+    "volume_share_pct": 0.79,
+    "value_cr": 10785.35,
+    "value_share_pct": 0.7
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 33.86,
+    "volume_share_pct": 0.34,
+    "value_cr": 4716.73,
+    "value_share_pct": 0.31
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 32.26,
+    "volume_share_pct": 0.32,
+    "value_cr": 5337.27,
+    "value_share_pct": 0.35
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 18.75,
+    "volume_share_pct": 0.19,
+    "value_cr": 2592.68,
+    "value_share_pct": 0.17
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 18.42,
+    "volume_share_pct": 0.18,
+    "value_cr": 2746.69,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 11.1,
+    "volume_share_pct": 0.11,
+    "value_cr": 1653.48,
+    "value_share_pct": 0.11
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 8.14,
+    "volume_share_pct": 0.08,
+    "value_cr": 1373.51,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 6.24,
+    "volume_share_pct": 0.06,
+    "value_cr": 1064.86,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 5.63,
+    "volume_share_pct": 0.06,
+    "value_cr": 677.01,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 5.14,
+    "volume_share_pct": 0.05,
+    "value_cr": 1204.72,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 5.11,
+    "volume_share_pct": 0.05,
+    "value_cr": 950.01,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 4.03,
+    "volume_share_pct": 0.04,
+    "value_cr": 923.43,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 3.81,
+    "volume_share_pct": 0.04,
+    "value_cr": 645.73,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 1.94,
+    "volume_share_pct": 0.02,
+    "value_cr": 483.88,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 1.69,
+    "volume_share_pct": 0.02,
+    "value_cr": 318.73,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 1.59,
+    "volume_share_pct": 0.02,
+    "value_cr": 475.02,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-07-01",
+    "volume_mn": 0.09,
+    "volume_share_pct": 0.0,
+    "value_cr": 21.03,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-07-01",
+    "volume_mn": 1417.69,
+    "volume_share_pct": 14.23,
+    "value_cr": 230885.29,
+    "value_share_pct": 15.06
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 2119.31,
+    "volume_share_pct": 20.02,
+    "value_cr": 282946.53,
+    "value_share_pct": 17.95
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 924.36,
+    "volume_share_pct": 8.73,
+    "value_cr": 126876.33,
+    "value_share_pct": 8.05
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 753.64,
+    "volume_share_pct": 7.12,
+    "value_cr": 127817.82,
+    "value_share_pct": 8.11
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 678.37,
+    "volume_share_pct": 6.41,
+    "value_cr": 94133.08,
+    "value_share_pct": 5.97
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 511.03,
+    "volume_share_pct": 4.83,
+    "value_cr": 84388.17,
+    "value_share_pct": 5.35
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 502.8,
+    "volume_share_pct": 4.75,
+    "value_cr": 67895.74,
+    "value_share_pct": 4.31
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 459.93,
+    "volume_share_pct": 4.34,
+    "value_cr": 69380.56,
+    "value_share_pct": 4.4
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 404.03,
+    "volume_share_pct": 3.82,
+    "value_cr": 52953.64,
+    "value_share_pct": 3.36
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 349.58,
+    "volume_share_pct": 3.3,
+    "value_cr": 69909.85,
+    "value_share_pct": 4.43
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 325.34,
+    "volume_share_pct": 3.07,
+    "value_cr": 51778.19,
+    "value_share_pct": 3.28
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 307.74,
+    "volume_share_pct": 2.91,
+    "value_cr": 47814.69,
+    "value_share_pct": 3.03
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 286.09,
+    "volume_share_pct": 2.7,
+    "value_cr": 48819.44,
+    "value_share_pct": 3.1
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 255.9,
+    "volume_share_pct": 2.42,
+    "value_cr": 38322.05,
+    "value_share_pct": 2.43
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 249.36,
+    "volume_share_pct": 2.36,
+    "value_cr": 37438.7,
+    "value_share_pct": 2.37
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 220.05,
+    "volume_share_pct": 2.08,
+    "value_cr": 30594.38,
+    "value_share_pct": 1.94
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 147.14,
+    "volume_share_pct": 1.39,
+    "value_cr": 24812.53,
+    "value_share_pct": 1.57
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 105.93,
+    "volume_share_pct": 1.0,
+    "value_cr": 15516.16,
+    "value_share_pct": 0.98
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 104.67,
+    "volume_share_pct": 0.99,
+    "value_cr": 14547.31,
+    "value_share_pct": 0.92
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 97.25,
+    "volume_share_pct": 0.92,
+    "value_cr": 12772.92,
+    "value_share_pct": 0.81
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 81.71,
+    "volume_share_pct": 0.77,
+    "value_cr": 10706.66,
+    "value_share_pct": 0.68
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 35.23,
+    "volume_share_pct": 0.33,
+    "value_cr": 4698.18,
+    "value_share_pct": 0.3
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 34.8,
+    "volume_share_pct": 0.33,
+    "value_cr": 5283.63,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 21.26,
+    "volume_share_pct": 0.2,
+    "value_cr": 2829.23,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 20.95,
+    "volume_share_pct": 0.2,
+    "value_cr": 2970.56,
+    "value_share_pct": 0.19
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 11.56,
+    "volume_share_pct": 0.11,
+    "value_cr": 1708.52,
+    "value_share_pct": 0.11
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 8.78,
+    "volume_share_pct": 0.08,
+    "value_cr": 1434.45,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 6.75,
+    "volume_share_pct": 0.06,
+    "value_cr": 1123.71,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 6.23,
+    "volume_share_pct": 0.06,
+    "value_cr": 698.87,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 6.11,
+    "volume_share_pct": 0.06,
+    "value_cr": 1098.18,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 5.5,
+    "volume_share_pct": 0.05,
+    "value_cr": 1245.07,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 4.27,
+    "volume_share_pct": 0.04,
+    "value_cr": 939.12,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 3.87,
+    "volume_share_pct": 0.04,
+    "value_cr": 644.83,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 2.29,
+    "volume_share_pct": 0.02,
+    "value_cr": 770.73,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 2.05,
+    "volume_share_pct": 0.02,
+    "value_cr": 480.89,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 1.84,
+    "volume_share_pct": 0.02,
+    "value_cr": 338.88,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-08-01",
+    "volume_mn": 0.11,
+    "volume_share_pct": 0.0,
+    "value_cr": 23.1,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-08-01",
+    "volume_mn": 1530.17,
+    "volume_share_pct": 14.45,
+    "value_cr": 240823.86,
+    "value_share_pct": 15.28
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 2156.02,
+    "volume_share_pct": 20.43,
+    "value_cr": 286792.45,
+    "value_share_pct": 18.16
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 896.89,
+    "volume_share_pct": 8.5,
+    "value_cr": 125683.26,
+    "value_share_pct": 7.96
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 713.29,
+    "volume_share_pct": 6.76,
+    "value_cr": 121128.45,
+    "value_share_pct": 7.67
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 680.36,
+    "volume_share_pct": 6.45,
+    "value_cr": 95195.96,
+    "value_share_pct": 6.03
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 521.85,
+    "volume_share_pct": 4.94,
+    "value_cr": 85968.46,
+    "value_share_pct": 5.44
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 512.81,
+    "volume_share_pct": 4.86,
+    "value_cr": 69250.13,
+    "value_share_pct": 4.39
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 431.28,
+    "volume_share_pct": 4.09,
+    "value_cr": 66104.53,
+    "value_share_pct": 4.19
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 416.31,
+    "volume_share_pct": 3.94,
+    "value_cr": 55139.92,
+    "value_share_pct": 3.49
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 336.99,
+    "volume_share_pct": 3.19,
+    "value_cr": 67178.11,
+    "value_share_pct": 4.25
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 319.31,
+    "volume_share_pct": 3.02,
+    "value_cr": 51590.99,
+    "value_share_pct": 3.27
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 305.39,
+    "volume_share_pct": 2.89,
+    "value_cr": 48595.98,
+    "value_share_pct": 3.08
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 280.3,
+    "volume_share_pct": 2.66,
+    "value_cr": 48707.55,
+    "value_share_pct": 3.08
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 265.59,
+    "volume_share_pct": 2.52,
+    "value_cr": 39655.16,
+    "value_share_pct": 2.51
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 237.42,
+    "volume_share_pct": 2.25,
+    "value_cr": 35412.25,
+    "value_share_pct": 2.24
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 224.43,
+    "volume_share_pct": 2.13,
+    "value_cr": 31146.94,
+    "value_share_pct": 1.97
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 146.64,
+    "volume_share_pct": 1.39,
+    "value_cr": 24711.78,
+    "value_share_pct": 1.56
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 110.01,
+    "volume_share_pct": 1.04,
+    "value_cr": 15968.78,
+    "value_share_pct": 1.01
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 104.08,
+    "volume_share_pct": 0.99,
+    "value_cr": 14937.74,
+    "value_share_pct": 0.95
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 97.4,
+    "volume_share_pct": 0.92,
+    "value_cr": 12764.1,
+    "value_share_pct": 0.81
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 83.19,
+    "volume_share_pct": 0.79,
+    "value_cr": 11010.69,
+    "value_share_pct": 0.7
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 36.61,
+    "volume_share_pct": 0.35,
+    "value_cr": 5035.77,
+    "value_share_pct": 0.32
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 35.83,
+    "volume_share_pct": 0.34,
+    "value_cr": 5399.43,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 21.45,
+    "volume_share_pct": 0.2,
+    "value_cr": 2853.16,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 20.69,
+    "volume_share_pct": 0.2,
+    "value_cr": 3017.62,
+    "value_share_pct": 0.19
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 11.4,
+    "volume_share_pct": 0.11,
+    "value_cr": 1688.3,
+    "value_share_pct": 0.11
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 9.41,
+    "volume_share_pct": 0.09,
+    "value_cr": 1498.65,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 7.52,
+    "volume_share_pct": 0.07,
+    "value_cr": 1274.91,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 6.32,
+    "volume_share_pct": 0.06,
+    "value_cr": 718.59,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 5.64,
+    "volume_share_pct": 0.05,
+    "value_cr": 1240.15,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 5.41,
+    "volume_share_pct": 0.05,
+    "value_cr": 959.02,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 4.6,
+    "volume_share_pct": 0.04,
+    "value_cr": 1000.59,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 4.1,
+    "volume_share_pct": 0.04,
+    "value_cr": 683.81,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 3.53,
+    "volume_share_pct": 0.03,
+    "value_cr": 1069.54,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 2.1,
+    "volume_share_pct": 0.02,
+    "value_cr": 481.1,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 1.87,
+    "volume_share_pct": 0.02,
+    "value_cr": 347.87,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-09-01",
+    "volume_mn": 0.13,
+    "volume_share_pct": 0.0,
+    "value_cr": 25.16,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-09-01",
+    "volume_mn": 1539.54,
+    "volume_share_pct": 14.58,
+    "value_cr": 244896.29,
+    "value_share_pct": 15.51
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 2225.55,
+    "volume_share_pct": 19.51,
+    "value_cr": 297168.32,
+    "value_share_pct": 17.32
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 957.72,
+    "volume_share_pct": 8.39,
+    "value_cr": 133243.89,
+    "value_share_pct": 7.77
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 778.04,
+    "volume_share_pct": 6.82,
+    "value_cr": 132269.35,
+    "value_share_pct": 7.71
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 752.99,
+    "volume_share_pct": 6.6,
+    "value_cr": 107856.43,
+    "value_share_pct": 6.29
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 588.01,
+    "volume_share_pct": 5.15,
+    "value_cr": 81040.7,
+    "value_share_pct": 4.72
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 538.52,
+    "volume_share_pct": 4.72,
+    "value_cr": 87385.36,
+    "value_share_pct": 5.09
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 461.98,
+    "volume_share_pct": 4.05,
+    "value_cr": 72771.58,
+    "value_share_pct": 4.24
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 449.9,
+    "volume_share_pct": 3.94,
+    "value_cr": 60577.68,
+    "value_share_pct": 3.53
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 364.34,
+    "volume_share_pct": 3.19,
+    "value_cr": 57809.55,
+    "value_share_pct": 3.37
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 361.83,
+    "volume_share_pct": 3.17,
+    "value_cr": 71941.95,
+    "value_share_pct": 4.19
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 343.88,
+    "volume_share_pct": 3.01,
+    "value_cr": 54202.12,
+    "value_share_pct": 3.16
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 321.25,
+    "volume_share_pct": 2.82,
+    "value_cr": 54677.68,
+    "value_share_pct": 3.19
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 293.23,
+    "volume_share_pct": 2.57,
+    "value_cr": 44962.4,
+    "value_share_pct": 2.62
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 254.32,
+    "volume_share_pct": 2.23,
+    "value_cr": 36657.16,
+    "value_share_pct": 2.14
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 243.43,
+    "volume_share_pct": 2.13,
+    "value_cr": 34574.49,
+    "value_share_pct": 2.02
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 159.72,
+    "volume_share_pct": 1.4,
+    "value_cr": 27543.17,
+    "value_share_pct": 1.61
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 120.12,
+    "volume_share_pct": 1.05,
+    "value_cr": 17712.04,
+    "value_share_pct": 1.03
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 118.93,
+    "volume_share_pct": 1.04,
+    "value_cr": 16946.85,
+    "value_share_pct": 0.99
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 101.78,
+    "volume_share_pct": 0.89,
+    "value_cr": 13782.56,
+    "value_share_pct": 0.8
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 96.06,
+    "volume_share_pct": 0.84,
+    "value_cr": 13132.59,
+    "value_share_pct": 0.77
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 41.56,
+    "volume_share_pct": 0.36,
+    "value_cr": 5717.15,
+    "value_share_pct": 0.33
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 39.88,
+    "volume_share_pct": 0.35,
+    "value_cr": 6198.21,
+    "value_share_pct": 0.36
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 24.06,
+    "volume_share_pct": 0.21,
+    "value_cr": 3467.39,
+    "value_share_pct": 0.2
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 23.01,
+    "volume_share_pct": 0.2,
+    "value_cr": 3120.47,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 12.31,
+    "volume_share_pct": 0.11,
+    "value_cr": 1767.06,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 9.81,
+    "volume_share_pct": 0.09,
+    "value_cr": 1604.37,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 8.47,
+    "volume_share_pct": 0.07,
+    "value_cr": 1429.11,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 7.1,
+    "volume_share_pct": 0.06,
+    "value_cr": 787.39,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 6.03,
+    "volume_share_pct": 0.05,
+    "value_cr": 1350.3,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 5.93,
+    "volume_share_pct": 0.05,
+    "value_cr": 1063.95,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 4.87,
+    "volume_share_pct": 0.04,
+    "value_cr": 1067.95,
+    "value_share_pct": 0.06
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 4.09,
+    "volume_share_pct": 0.04,
+    "value_cr": 1333.58,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 3.85,
+    "volume_share_pct": 0.03,
+    "value_cr": 697.17,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 2.11,
+    "volume_share_pct": 0.02,
+    "value_cr": 396.87,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 2.02,
+    "volume_share_pct": 0.02,
+    "value_cr": 468.85,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-10-01",
+    "volume_mn": 0.17,
+    "volume_share_pct": 0.0,
+    "value_cr": 30.13,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-10-01",
+    "volume_mn": 1681.93,
+    "volume_share_pct": 14.74,
+    "value_cr": 269012.53,
+    "value_share_pct": 15.68
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 2083.44,
+    "volume_share_pct": 18.54,
+    "value_cr": 289387.43,
+    "value_share_pct": 16.63
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 935.02,
+    "volume_share_pct": 8.32,
+    "value_cr": 132126.57,
+    "value_share_pct": 7.59
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 786.83,
+    "volume_share_pct": 7.0,
+    "value_cr": 118988.81,
+    "value_share_pct": 6.84
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 764.77,
+    "volume_share_pct": 6.81,
+    "value_cr": 131905.47,
+    "value_share_pct": 7.58
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 525.3,
+    "volume_share_pct": 4.68,
+    "value_cr": 87369.93,
+    "value_share_pct": 5.02
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 510.51,
+    "volume_share_pct": 4.54,
+    "value_cr": 72171.99,
+    "value_share_pct": 4.15
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 451.81,
+    "volume_share_pct": 4.02,
+    "value_cr": 74471.53,
+    "value_share_pct": 4.28
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 431.73,
+    "volume_share_pct": 3.84,
+    "value_cr": 61568.09,
+    "value_share_pct": 3.54
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 376.19,
+    "volume_share_pct": 3.35,
+    "value_cr": 74054.42,
+    "value_share_pct": 4.26
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 375.47,
+    "volume_share_pct": 3.34,
+    "value_cr": 60451.55,
+    "value_share_pct": 3.47
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 338.54,
+    "volume_share_pct": 3.01,
+    "value_cr": 58262.18,
+    "value_share_pct": 3.35
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 312.97,
+    "volume_share_pct": 2.79,
+    "value_cr": 53753.8,
+    "value_share_pct": 3.09
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 279.29,
+    "volume_share_pct": 2.49,
+    "value_cr": 45139.63,
+    "value_share_pct": 2.59
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 258.38,
+    "volume_share_pct": 2.3,
+    "value_cr": 36759.86,
+    "value_share_pct": 2.11
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 244.19,
+    "volume_share_pct": 2.17,
+    "value_cr": 34247.19,
+    "value_share_pct": 1.97
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 154.3,
+    "volume_share_pct": 1.37,
+    "value_cr": 28826.5,
+    "value_share_pct": 1.66
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 122.61,
+    "volume_share_pct": 1.09,
+    "value_cr": 17742.21,
+    "value_share_pct": 1.02
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 120.23,
+    "volume_share_pct": 1.07,
+    "value_cr": 17829.16,
+    "value_share_pct": 1.02
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 93.91,
+    "volume_share_pct": 0.84,
+    "value_cr": 13195.54,
+    "value_share_pct": 0.76
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 90.04,
+    "volume_share_pct": 0.8,
+    "value_cr": 12869.19,
+    "value_share_pct": 0.74
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 40.7,
+    "volume_share_pct": 0.36,
+    "value_cr": 5732.29,
+    "value_share_pct": 0.33
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 40.66,
+    "volume_share_pct": 0.36,
+    "value_cr": 6345.35,
+    "value_share_pct": 0.36
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 24.47,
+    "volume_share_pct": 0.22,
+    "value_cr": 3516.93,
+    "value_share_pct": 0.2
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 22.35,
+    "volume_share_pct": 0.2,
+    "value_cr": 3189.81,
+    "value_share_pct": 0.18
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 11.83,
+    "volume_share_pct": 0.11,
+    "value_cr": 1749.0,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 10.24,
+    "volume_share_pct": 0.09,
+    "value_cr": 1663.05,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 7.98,
+    "volume_share_pct": 0.07,
+    "value_cr": 1343.51,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 7.13,
+    "volume_share_pct": 0.06,
+    "value_cr": 835.34,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 6.55,
+    "volume_share_pct": 0.06,
+    "value_cr": 1169.9,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 5.82,
+    "volume_share_pct": 0.05,
+    "value_cr": 1349.79,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 5.4,
+    "volume_share_pct": 0.05,
+    "value_cr": 1170.88,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 4.29,
+    "volume_share_pct": 0.04,
+    "value_cr": 1434.65,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 3.84,
+    "volume_share_pct": 0.03,
+    "value_cr": 662.18,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 2.22,
+    "volume_share_pct": 0.02,
+    "value_cr": 427.62,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 1.71,
+    "volume_share_pct": 0.02,
+    "value_cr": 369.58,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-11-01",
+    "volume_mn": 0.2,
+    "volume_share_pct": 0.0,
+    "value_cr": 32.3,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-11-01",
+    "volume_mn": 1784.35,
+    "volume_share_pct": 15.88,
+    "value_cr": 287627.38,
+    "value_share_pct": 16.53
+  },
+  {
+    "state": "MAHARASHTRA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 1746.49,
+    "volume_share_pct": 14.53,
+    "value_cr": 229753.56,
+    "value_share_pct": 12.6
+  },
+  {
+    "state": "KARNATAKA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 921.02,
+    "volume_share_pct": 7.66,
+    "value_cr": 128746.92,
+    "value_share_pct": 7.06
+  },
+  {
+    "state": "UTTAR PRADESH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 774.15,
+    "volume_share_pct": 6.44,
+    "value_cr": 115581.23,
+    "value_share_pct": 6.34
+  },
+  {
+    "state": "TELANGANA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 679.54,
+    "volume_share_pct": 5.65,
+    "value_cr": 118318.89,
+    "value_share_pct": 6.49
+  },
+  {
+    "state": "TAMIL NADU",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 511.92,
+    "volume_share_pct": 4.26,
+    "value_cr": 83498.19,
+    "value_share_pct": 4.58
+  },
+  {
+    "state": "RAJASTHAN",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 458.04,
+    "volume_share_pct": 3.81,
+    "value_cr": 74773.6,
+    "value_share_pct": 4.1
+  },
+  {
+    "state": "ANDHRA PRADESH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 437.75,
+    "volume_share_pct": 3.64,
+    "value_cr": 84149.99,
+    "value_share_pct": 4.62
+  },
+  {
+    "state": "MADHYA PRADESH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 384.08,
+    "volume_share_pct": 3.2,
+    "value_cr": 53739.43,
+    "value_share_pct": 2.95
+  },
+  {
+    "state": "DELHI",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 358.56,
+    "volume_share_pct": 2.98,
+    "value_cr": 49607.1,
+    "value_share_pct": 2.72
+  },
+  {
+    "state": "GUJARAT",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 341.58,
+    "volume_share_pct": 2.84,
+    "value_cr": 57762.41,
+    "value_share_pct": 3.17
+  },
+  {
+    "state": "BIHAR",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 332.74,
+    "volume_share_pct": 2.77,
+    "value_cr": 55538.69,
+    "value_share_pct": 3.05
+  },
+  {
+    "state": "WEST BENGAL",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 303.96,
+    "volume_share_pct": 2.53,
+    "value_cr": 53216.78,
+    "value_share_pct": 2.92
+  },
+  {
+    "state": "HARYANA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 290.86,
+    "volume_share_pct": 2.42,
+    "value_cr": 45897.55,
+    "value_share_pct": 2.52
+  },
+  {
+    "state": "KERALA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 273.68,
+    "volume_share_pct": 2.28,
+    "value_cr": 39059.74,
+    "value_share_pct": 2.14
+  },
+  {
+    "state": "ODISHA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 239.01,
+    "volume_share_pct": 1.99,
+    "value_cr": 34650.83,
+    "value_share_pct": 1.9
+  },
+  {
+    "state": "PUNJAB",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 151.53,
+    "volume_share_pct": 1.26,
+    "value_cr": 28595.01,
+    "value_share_pct": 1.57
+  },
+  {
+    "state": "JHARKHAND",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 132.25,
+    "volume_share_pct": 1.1,
+    "value_cr": 19260.59,
+    "value_share_pct": 1.06
+  },
+  {
+    "state": "ASSAM",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 117.11,
+    "volume_share_pct": 0.97,
+    "value_cr": 17256.71,
+    "value_share_pct": 0.95
+  },
+  {
+    "state": "CHHATTISGARH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 106.17,
+    "volume_share_pct": 0.88,
+    "value_cr": 14542.44,
+    "value_share_pct": 0.8
+  },
+  {
+    "state": "UTTARAKHAND",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 82.74,
+    "volume_share_pct": 0.69,
+    "value_cr": 11377.31,
+    "value_share_pct": 0.62
+  },
+  {
+    "state": "HIMACHAL PRADESH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 42.16,
+    "volume_share_pct": 0.35,
+    "value_cr": 5760.84,
+    "value_share_pct": 0.32
+  },
+  {
+    "state": "JAMMU AND KASHMIR",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 39.71,
+    "volume_share_pct": 0.33,
+    "value_cr": 6135.21,
+    "value_share_pct": 0.34
+  },
+  {
+    "state": "GOA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 27.96,
+    "volume_share_pct": 0.23,
+    "value_cr": 4110.01,
+    "value_share_pct": 0.23
+  },
+  {
+    "state": "CHANDIGARH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 20.47,
+    "volume_share_pct": 0.17,
+    "value_cr": 2737.91,
+    "value_share_pct": 0.15
+  },
+  {
+    "state": "PUDUCHERRY",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 12.87,
+    "volume_share_pct": 0.11,
+    "value_cr": 1834.69,
+    "value_share_pct": 0.1
+  },
+  {
+    "state": "ARUNACHAL PRADESH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 11.55,
+    "volume_share_pct": 0.1,
+    "value_cr": 1937.35,
+    "value_share_pct": 0.11
+  },
+  {
+    "state": "TRIPURA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 8.26,
+    "volume_share_pct": 0.07,
+    "value_cr": 1381.1,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "DADRA & NAGAR HAVELI & DAMAN & DIU",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 8.22,
+    "volume_share_pct": 0.07,
+    "value_cr": 907.49,
+    "value_share_pct": 0.05
+  },
+  {
+    "state": "MEGHALAYA",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 7.04,
+    "volume_share_pct": 0.06,
+    "value_cr": 1341.47,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "MANIPUR",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 5.71,
+    "volume_share_pct": 0.05,
+    "value_cr": 1630.29,
+    "value_share_pct": 0.09
+  },
+  {
+    "state": "NAGALAND",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 5.56,
+    "volume_share_pct": 0.05,
+    "value_cr": 1401.33,
+    "value_share_pct": 0.08
+  },
+  {
+    "state": "MIZORAM",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 5.49,
+    "volume_share_pct": 0.05,
+    "value_cr": 1217.18,
+    "value_share_pct": 0.07
+  },
+  {
+    "state": "SIKKIM",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 4.59,
+    "volume_share_pct": 0.04,
+    "value_cr": 806.34,
+    "value_share_pct": 0.04
+  },
+  {
+    "state": "ANDAMAN & NICOBAR",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 2.64,
+    "volume_share_pct": 0.02,
+    "value_cr": 491.18,
+    "value_share_pct": 0.03
+  },
+  {
+    "state": "LADAKH",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 1.74,
+    "volume_share_pct": 0.01,
+    "value_cr": 368.7,
+    "value_share_pct": 0.02
+  },
+  {
+    "state": "LAKSHADWEEP",
+    "district": "",
+    "month": "2023-12-01",
+    "volume_mn": 0.25,
+    "volume_share_pct": 0.0,
+    "value_cr": 36.4,
+    "value_share_pct": 0.0
+  },
+  {
+    "state": "UNCLASSIFIED",
+    "district": "Unclassified",
+    "month": "2023-12-01",
+    "volume_mn": 3172.83,
+    "volume_share_pct": 26.4,
+    "value_cr": 475524.96,
+    "value_share_pct": 26.09
   }
 ]
