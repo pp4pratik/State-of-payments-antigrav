@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardProvider, useDashboard } from '../lib/DashboardContext'
 import { useAppStatsAll } from '../lib/queries'
 import { Controls } from '../components/Controls'
+import { LandingView } from '../components/LandingView'
 import { UpiView } from '../components/UpiView'
 import { AutoPayView } from '../components/AutoPayView'
 import { RbiCardsView } from '../components/RbiCardsView'
@@ -9,8 +11,14 @@ import { RbiPaymentsView } from '../components/RbiPaymentsView'
 import { CircularsView } from '../components/CircularsView'
 
 export const Route = createFileRoute('/')({
-  component: Dashboard,
+  component: Landing,
 })
+
+function Landing() {
+  const [entered, setEntered] = useState(false)
+  if (!entered) return <LandingView onEnter={() => setEntered(true)} />
+  return <Dashboard />
+}
 
 function Dashboard() {
   const appStats = useAppStatsAll()
