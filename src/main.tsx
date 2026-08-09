@@ -9,7 +9,8 @@ import { routeTree } from './routeTree.gen'
 
 initAnalytics()
 
-const router = createRouter({ routeTree, basepath: '/state-of-payments' })
+const basepath = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+const router = createRouter({ routeTree, basepath })
 
 declare module '@tanstack/react-router' {
   interface Register {
