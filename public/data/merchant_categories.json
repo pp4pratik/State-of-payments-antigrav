@@ -1,42 +1,1262 @@
 [
   {
-    "mcc": "5411",
-    "description": "Groceries & Supermarkets",
-    "type": "Everyday",
-    "month": "2025-01",
-    "volume_mn": 3200.0,
-    "value_cr": 150000.0
-  },
-  {
-    "mcc": "5812",
-    "description": "Restaurants & Dining",
-    "type": "Food",
-    "month": "2025-01",
-    "volume_mn": 1800.0,
-    "value_cr": 65000.0
-  },
-  {
-    "mcc": "5541",
-    "description": "Fuel Stations",
-    "type": "Utilities",
-    "month": "2025-01",
-    "volume_mn": 1200.0,
-    "value_cr": 85000.0
-  },
-  {
-    "mcc": "5311",
-    "description": "Department Stores",
-    "type": "Shopping",
-    "month": "2025-01",
-    "volume_mn": 950.0,
-    "value_cr": 72000.0
-  },
-  {
+    "id": 1,
+    "description": "Drug stores and pharmacies",
     "mcc": "5912",
-    "description": "Pharmacies",
-    "type": "Health",
-    "month": "2025-01",
-    "volume_mn": 780.0,
-    "value_cr": 34000.0
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 287.1,
+    "value_cr": 11811.37
+  },
+  {
+    "id": 2,
+    "description": "Debt collection agencies",
+    "mcc": "7322",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 189.95,
+    "value_cr": 60373.41
+  },
+  {
+    "id": 3,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-03-01",
+    "volume_mn": 1127.01,
+    "value_cr": 13740.91
+  },
+  {
+    "id": 4,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-12-01",
+    "volume_mn": 863.19,
+    "value_cr": 22744.78
+  },
+  {
+    "id": 5,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 658.64,
+    "value_cr": 42571.65
+  },
+  {
+    "id": 6,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-11-01",
+    "volume_mn": 3222.99,
+    "value_cr": 71129.56
+  },
+  {
+    "id": 8,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-07-01",
+    "volume_mn": 612.49,
+    "value_cr": 35188.88
+  },
+  {
+    "id": 9,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 249.08,
+    "value_cr": 2450.63
+  },
+  {
+    "id": 10,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-06-01",
+    "volume_mn": 591.24,
+    "value_cr": 35909.85
+  },
+  {
+    "id": 12,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-03-01",
+    "volume_mn": 2730.18,
+    "value_cr": 61999.7
+  },
+  {
+    "id": 13,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 254.44,
+    "value_cr": 3171.96
+  },
+  {
+    "id": 14,
+    "description": "Grocery Stores, Supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 3419.81,
+    "value_cr": 76833.09
+  },
+  {
+    "id": 16,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 3872.78,
+    "value_cr": 85243.71
+  },
+  {
+    "id": 17,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-05-01",
+    "volume_mn": 2826.09,
+    "value_cr": 64483.81
+  },
+  {
+    "id": 18,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-10-01",
+    "volume_mn": 3273.16,
+    "value_cr": 76073.21
+  },
+  {
+    "id": 19,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-03-01",
+    "volume_mn": 896.41,
+    "value_cr": 20150.23
+  },
+  {
+    "id": 20,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-09-01",
+    "volume_mn": 3126.25,
+    "value_cr": 66408.93
+  },
+  {
+    "id": 21,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 286.87,
+    "value_cr": 4404.69
+  },
+  {
+    "id": 22,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-08-01",
+    "volume_mn": 1182.83,
+    "value_cr": 19432.25
+  },
+  {
+    "id": 23,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-09-01",
+    "volume_mn": 619.5,
+    "value_cr": 34040.2
+  },
+  {
+    "id": 24,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-01-01",
+    "volume_mn": 1004.01,
+    "value_cr": 16271.84
+  },
+  {
+    "id": 27,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-05-01",
+    "volume_mn": 879.66,
+    "value_cr": 19907.48
+  },
+  {
+    "id": 28,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-10-01",
+    "volume_mn": 1357.89,
+    "value_cr": 16798.24
+  },
+  {
+    "id": 29,
+    "description": "Dairies",
+    "mcc": "5451",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 234.71,
+    "value_cr": 5720.09
+  },
+  {
+    "id": 30,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 372.25,
+    "value_cr": 5354.13
+  },
+  {
+    "id": 31,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-07-01",
+    "volume_mn": 1153.4,
+    "value_cr": 18212.77
+  },
+  {
+    "id": 33,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-04-01",
+    "volume_mn": 2699.03,
+    "value_cr": 60073.81
+  },
+  {
+    "id": 35,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-11-01",
+    "volume_mn": 657.73,
+    "value_cr": 40320.95
+  },
+  {
+    "id": 36,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-01-01",
+    "volume_mn": 510.96,
+    "value_cr": 30520.41
+  },
+  {
+    "id": 38,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-09-01",
+    "volume_mn": 829,
+    "value_cr": 20882.02
+  },
+  {
+    "id": 39,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 1382.81,
+    "value_cr": 15639.68
+  },
+  {
+    "id": 40,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 3722.2,
+    "value_cr": 80449.2
+  },
+  {
+    "id": 41,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-11-01",
+    "volume_mn": 1202.63,
+    "value_cr": 19547.09
+  },
+  {
+    "id": 42,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-07-01",
+    "volume_mn": 1221.46,
+    "value_cr": 13794.22
+  },
+  {
+    "id": 43,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 878.66,
+    "value_cr": 22840.64
+  },
+  {
+    "id": 44,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 674.46,
+    "value_cr": 44180.28
+  },
+  {
+    "id": 45,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 1165.56,
+    "value_cr": 19070.54
+  },
+  {
+    "id": 47,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-07-01",
+    "volume_mn": 871.88,
+    "value_cr": 21628.8
+  },
+  {
+    "id": 48,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 1252.31,
+    "value_cr": 21202.58
+  },
+  {
+    "id": 49,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 380.86,
+    "value_cr": 2329.34
+  },
+  {
+    "id": 50,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-10-01",
+    "volume_mn": 1190.63,
+    "value_cr": 20842.26
+  },
+  {
+    "id": 51,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 362.23,
+    "value_cr": 2253.23
+  },
+  {
+    "id": 52,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-10-01",
+    "volume_mn": 867.86,
+    "value_cr": 22168.74
+  },
+  {
+    "id": 54,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-02-01",
+    "volume_mn": 494.38,
+    "value_cr": 29937.81
+  },
+  {
+    "id": 55,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-05-01",
+    "volume_mn": 1160.3,
+    "value_cr": 14132
+  },
+  {
+    "id": 56,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-06-01",
+    "volume_mn": 2848.11,
+    "value_cr": 63307.98
+  },
+  {
+    "id": 57,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-02-01",
+    "volume_mn": 2337.3,
+    "value_cr": 53191.68
+  },
+  {
+    "id": 58,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 3283.85,
+    "value_cr": 74127.95
+  },
+  {
+    "id": 59,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-09-01",
+    "volume_mn": 1294.94,
+    "value_cr": 14377.65
+  },
+  {
+    "id": 60,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-12-01",
+    "volume_mn": 1508.67,
+    "value_cr": 17570.77
+  },
+  {
+    "id": 61,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-05-01",
+    "volume_mn": 590.57,
+    "value_cr": 36592.74
+  },
+  {
+    "id": 62,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-02-01",
+    "volume_mn": 774.88,
+    "value_cr": 17922.78
+  },
+  {
+    "id": 63,
+    "description": "Drug stores and pharmacies",
+    "mcc": "5912",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 324.06,
+    "value_cr": 12886.1
+  },
+  {
+    "id": 65,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-10-01",
+    "volume_mn": 657.36,
+    "value_cr": 38072.43
+  },
+  {
+    "id": 66,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 395.07,
+    "value_cr": 2503.45
+  },
+  {
+    "id": 67,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 885.33,
+    "value_cr": 23996.44
+  },
+  {
+    "id": 69,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-03-01",
+    "volume_mn": 1059.15,
+    "value_cr": 17014.22
+  },
+  {
+    "id": 70,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-04-01",
+    "volume_mn": 1104.47,
+    "value_cr": 13153.73
+  },
+  {
+    "id": 71,
+    "description": "Dairies",
+    "mcc": "5451",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 176.34,
+    "value_cr": 4721.54
+  },
+  {
+    "id": 72,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 1474.74,
+    "value_cr": 17237.27
+  },
+  {
+    "id": 73,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-12-01",
+    "volume_mn": 1262.24,
+    "value_cr": 21100.7
+  },
+  {
+    "id": 74,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-02-01",
+    "volume_mn": 950.1,
+    "value_cr": 14811.62
+  },
+  {
+    "id": 75,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-08-01",
+    "volume_mn": 1263.07,
+    "value_cr": 14542
+  },
+  {
+    "id": 79,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-02-01",
+    "volume_mn": 1048.77,
+    "value_cr": 12706.77
+  },
+  {
+    "id": 81,
+    "description": "Dairies",
+    "mcc": "5451",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 265.48,
+    "value_cr": 6157.64
+  },
+  {
+    "id": 82,
+    "description": "Drug stores and pharmacies",
+    "mcc": "5912",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 295.93,
+    "value_cr": 12378.02
+  },
+  {
+    "id": 83,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 1474.47,
+    "value_cr": 17597.17
+  },
+  {
+    "id": 84,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 219.63,
+    "value_cr": 3926.47
+  },
+  {
+    "id": 85,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 401.47,
+    "value_cr": 2587.77
+  },
+  {
+    "id": 86,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-08-01",
+    "volume_mn": 3129.4,
+    "value_cr": 68115.89
+  },
+  {
+    "id": 87,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-11-01",
+    "volume_mn": 817.83,
+    "value_cr": 21399.7
+  },
+  {
+    "id": 88,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-03-01",
+    "volume_mn": 551.45,
+    "value_cr": 32535.12
+  },
+  {
+    "id": 89,
+    "description": "Drug stores and pharmacies",
+    "mcc": "5912",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 294.66,
+    "value_cr": 11921.67
+  },
+  {
+    "id": 91,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-09-01",
+    "volume_mn": 1164.23,
+    "value_cr": 18004.68
+  },
+  {
+    "id": 93,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 1291.12,
+    "value_cr": 22860.66
+  },
+  {
+    "id": 94,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-05-01",
+    "volume_mn": 1133.93,
+    "value_cr": 18755.38
+  },
+  {
+    "id": 95,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 222.83,
+    "value_cr": 3032.41
+  },
+  {
+    "id": 96,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-06-01",
+    "volume_mn": 1144.14,
+    "value_cr": 13511.21
+  },
+  {
+    "id": 97,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 3751.09,
+    "value_cr": 81879.85
+  },
+  {
+    "id": 98,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 1502.57,
+    "value_cr": 17483.76
+  },
+  {
+    "id": 99,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-04-01",
+    "volume_mn": 552.2,
+    "value_cr": 33921.33
+  },
+  {
+    "id": 100,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 1503.82,
+    "value_cr": 18705.24
+  },
+  {
+    "id": 101,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 1250.99,
+    "value_cr": 20784.67
+  },
+  {
+    "id": 104,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-12-01",
+    "volume_mn": 3358.74,
+    "value_cr": 74921.67
+  },
+  {
+    "id": 105,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 418.54,
+    "value_cr": 2764.33
+  },
+  {
+    "id": 106,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-12-01",
+    "volume_mn": 661.28,
+    "value_cr": 40884.7
+  },
+  {
+    "id": 107,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-01-01",
+    "volume_mn": 1116.13,
+    "value_cr": 13324.51
+  },
+  {
+    "id": 110,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 264.89,
+    "value_cr": 3927.7
+  },
+  {
+    "id": 112,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-04-01",
+    "volume_mn": 857.14,
+    "value_cr": 19323.48
+  },
+  {
+    "id": 113,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 914.48,
+    "value_cr": 23723.04
+  },
+  {
+    "id": 114,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 658.84,
+    "value_cr": 40053.68
+  },
+  {
+    "id": 115,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 294.7,
+    "value_cr": 4258.89
+  },
+  {
+    "id": 116,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 633.99,
+    "value_cr": 38811.08
+  },
+  {
+    "id": 117,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2025-11-01",
+    "volume_mn": 1406.7,
+    "value_cr": 16149.43
+  },
+  {
+    "id": 118,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2025-08-01",
+    "volume_mn": 626.95,
+    "value_cr": 34546.82
+  },
+  {
+    "id": 119,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 869.99,
+    "value_cr": 23098.97
+  },
+  {
+    "id": 121,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-01-01",
+    "volume_mn": 1258.98,
+    "value_cr": 21184.95
+  },
+  {
+    "id": 122,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-05-01",
+    "volume_mn": 708.67,
+    "value_cr": 48547.39
+  },
+  {
+    "id": 125,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 245.22,
+    "value_cr": 2499.02
+  },
+  {
+    "id": 126,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-06-01",
+    "volume_mn": 1102.1,
+    "value_cr": 18217.2
+  },
+  {
+    "id": 127,
+    "description": "Drug stores and pharmacies",
+    "mcc": "5912",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 302.5,
+    "value_cr": 12315.9
+  },
+  {
+    "id": 128,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-08-01",
+    "volume_mn": 865.65,
+    "value_cr": 21218.15
+  },
+  {
+    "id": 129,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-01-01",
+    "volume_mn": 827.32,
+    "value_cr": 19568.1
+  },
+  {
+    "id": 130,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2025-04-01",
+    "volume_mn": 1072.96,
+    "value_cr": 17279.32
+  },
+  {
+    "id": 131,
+    "description": "Dairies",
+    "mcc": "5451",
+    "type": "High Transacting",
+    "month": "2026-03-01",
+    "volume_mn": 213.46,
+    "value_cr": 5353.95
+  },
+  {
+    "id": 133,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-02-01",
+    "volume_mn": 794.75,
+    "value_cr": 20715.85
+  },
+  {
+    "id": 134,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-04-01",
+    "volume_mn": 322.4,
+    "value_cr": 4617.38
+  },
+  {
+    "id": 138,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-07-01",
+    "volume_mn": 3032.59,
+    "value_cr": 64881.98
+  },
+  {
+    "id": 139,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2025-01-01",
+    "volume_mn": 2421.74,
+    "value_cr": 56040.86
+  },
+  {
+    "id": 140,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2025-06-01",
+    "volume_mn": 843.97,
+    "value_cr": 19946.5
+  },
+  {
+    "id": 103,
+    "description": "Groceries and supermarkets",
+    "mcc": "5411",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 3739.59,
+    "value_cr": 79705.02
+  },
+  {
+    "id": 135,
+    "description": "Fast food restaurants",
+    "mcc": "5814",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 1449.1,
+    "value_cr": 17418.12
+  },
+  {
+    "id": 64,
+    "description": "Eating places and restaurants",
+    "mcc": "5812",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 1242.19,
+    "value_cr": 21485.16
+  },
+  {
+    "id": 92,
+    "description": "Telecommunication services, including local and long distance calls, credit card calls, calls through use of magnetic stripe reading telephones and faxes",
+    "mcc": "4814",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 824.26,
+    "value_cr": 22964.97
+  },
+  {
+    "id": 123,
+    "description": "Service stations (with or without ancillary services)",
+    "mcc": "5541",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 716.87,
+    "value_cr": 47183.84
+  },
+  {
+    "id": 77,
+    "description": "Cigar shops and stands",
+    "mcc": "5993",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 416.69,
+    "value_cr": 2723.91
+  },
+  {
+    "id": 90,
+    "description": "Bakeries",
+    "mcc": "5462",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 396.69,
+    "value_cr": 5432.0
+  },
+  {
+    "id": 137,
+    "description": "Drug stores and pharmacies",
+    "mcc": "5912",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 294.16,
+    "value_cr": 12428.84
+  },
+  {
+    "id": 11,
+    "description": "Dairies",
+    "mcc": "5451",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 268.25,
+    "value_cr": 5925.48
+  },
+  {
+    "id": 68,
+    "description": "Purchase of digital gold",
+    "mcc": "5412",
+    "type": "High Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 232.94,
+    "value_cr": 2552.53
+  },
+  {
+    "id": 53,
+    "description": "Package shops beer, wine and liquor",
+    "mcc": "5921",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 216.69,
+    "value_cr": 9164.63
+  },
+  {
+    "id": 46,
+    "description": "Debt collection agencies",
+    "mcc": "7322",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 196.66,
+    "value_cr": 69032.6
+  },
+  {
+    "id": 15,
+    "description": "Online Marketplaces",
+    "mcc": "5262",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 158.01,
+    "value_cr": 9046.32
+  },
+  {
+    "id": 136,
+    "description": "Candy, nut and confectionery shops",
+    "mcc": "5441",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 148.88,
+    "value_cr": 2800.95
+  },
+  {
+    "id": 78,
+    "description": "Government services not elsewhere classified",
+    "mcc": "9399",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 144.57,
+    "value_cr": 10370.66
+  },
+  {
+    "id": 124,
+    "description": "Utilities electric, gas, water and sanitary",
+    "mcc": "4900",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 143.97,
+    "value_cr": 23911.27
+  },
+  {
+    "id": 7,
+    "description": "Freezer and locker meat provisioners",
+    "mcc": "5422",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 125.67,
+    "value_cr": 4312.09
+  },
+  {
+    "id": 80,
+    "description": "Mens and womens clothing shops",
+    "mcc": "5691",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 119.23,
+    "value_cr": 11792.93
+  },
+  {
+    "id": 109,
+    "description": "Drinking places (alcoholic beverages) bars, taverns, night-clubs, cocktail lounges and discothques",
+    "mcc": "5813",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 93.11,
+    "value_cr": 3779.25
+  },
+  {
+    "id": 37,
+    "description": "Department stores",
+    "mcc": "5311",
+    "type": "Medium Transacting",
+    "month": "2026-06-01",
+    "volume_mn": 89.24,
+    "value_cr": 5394.07
+  },
+  {
+    "id": 111,
+    "description": "Electronics shops",
+    "mcc": "5732",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 88.14,
+    "value_cr": 12052.04
+  },
+  {
+    "id": 102,
+    "description": "Variety stores",
+    "mcc": "5331",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 86.9,
+    "value_cr": 3885.75
+  },
+  {
+    "id": 34,
+    "description": "Beauty and barber shops",
+    "mcc": "7230",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 85.96,
+    "value_cr": 2403.16
+  },
+  {
+    "id": 120,
+    "description": "Electronics repair shops",
+    "mcc": "7622",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 83.57,
+    "value_cr": 2486.61
+  },
+  {
+    "id": 132,
+    "description": "Family clothing shops",
+    "mcc": "5651",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 80.35,
+    "value_cr": 7059.78
+  },
+  {
+    "id": 26,
+    "description": "Taxi-cabs and limousines",
+    "mcc": "4121",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 77.55,
+    "value_cr": 1227.59
+  },
+  {
+    "id": 25,
+    "description": "Securities brokers and dealers",
+    "mcc": "6211",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 74.22,
+    "value_cr": 60945.24
+  },
+  {
+    "id": 108,
+    "description": "Mens, womens and childrens uniforms and commercial clothing",
+    "mcc": "5137",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 73.57,
+    "value_cr": 6955.47
+  },
+  {
+    "id": 76,
+    "description": "Passenger railways",
+    "mcc": "4112",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 69.41,
+    "value_cr": 4771.27
+  },
+  {
+    "id": 231,
+    "description": "Others",
+    "mcc": "",
+    "type": "All Other",
+    "month": "2026-06-01",
+    "volume_mn": 2691.4400000000023,
+    "value_cr": 391785.58999999997
   }
 ]
