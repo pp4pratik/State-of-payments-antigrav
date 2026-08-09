@@ -43,11 +43,7 @@ function Header() {
         NPCI · UPI ecosystem tracker
       </p>
       <h1>UPI Pulse</h1>
-      <p className="subtitle">
-        Monthly trends, app leaderboard, ticket size, and circulars for India's Unified Payments
-        Interface — every number sourced from NPCI and RBI via a live database, no click-through
-        required.
-      </p>
+      <p className="subtitle">India's UPI &amp; RBI payments data, live from NPCI and RBI.</p>
     </>
   )
 }

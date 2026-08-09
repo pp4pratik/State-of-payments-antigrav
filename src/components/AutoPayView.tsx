@@ -113,7 +113,6 @@ export function AutoPayView() {
   const modeMonth = fullLabel(isReg ? registrations.data.month : executions.data.month)
   const modeColor = isReg ? '#3FC1A8' : '#F5A524'
   const modeColorFaint = isReg ? 'rgba(63,193,168,0.35)' : 'rgba(245,165,36,0.35)'
-  const modeUnit = isReg ? 'Registrations' : 'Executions'
   const pspLabels = isReg ? regByPspLabels : execByPspLabels
   const pspTotal = isReg ? regByPspTotal : execByPspTotal
   const pspFinal = isReg ? regByPspFinal : execByPspFinal
@@ -142,7 +141,7 @@ export function AutoPayView() {
         <div className="kpi">
           <p className="kpi-label">
             <Repeat size={13} />
-            Registrations, {fullLabel(registrations.data.month)} · final (approved)
+            Registrations, {fullLabel(registrations.data.month)}
           </p>
           <p className="kpi-value" style={{ color: 'var(--green)' }}>
             {totalRegFinalCr == null ? '—' : `${crNum(totalRegFinalCr)} Cr`}
@@ -150,13 +149,13 @@ export function AutoPayView() {
           </p>
           <p className="kpi-sub">
             {totalRegFinalCr == null && 'Approval % not yet available · '}
-            {crNum(totalRegCr)} Cr attempted (total) · across {registrations.data.rows.length} payer PSPs
+            {crNum(totalRegCr)} Cr attempted · {registrations.data.rows.length} PSPs
           </p>
         </div>
         <div className="kpi">
           <p className="kpi-label">
             <Zap size={13} />
-            Executions, {fullLabel(executions.data.month)} · final (approved)
+            Executions, {fullLabel(executions.data.month)}
           </p>
           <p className="kpi-value" style={{ color: 'var(--green)' }}>
             {totalExecFinalCr == null ? '—' : `${crNum(totalExecFinalCr)} Cr`}
@@ -164,7 +163,7 @@ export function AutoPayView() {
           </p>
           <p className="kpi-sub">
             {totalExecFinalCr == null && 'Approval % not yet available · '}
-            {crNum(totalExecCr)} Cr attempted (total) · across {executions.data.rows.length} remitter banks
+            {crNum(totalExecCr)} Cr attempted · {executions.data.rows.length} banks
           </p>
         </div>
         <div className="kpi">
@@ -263,7 +262,7 @@ export function AutoPayView() {
           </div>
         </div>
         <p className="section-note" style={{ marginTop: 10 }}>
-          {modeUnit} by remitter bank shows the top 10 of {isReg ? registrationsByBank.data.rows.length : executions.data.rows.length} banks NPCI publishes.
+          Top 10 of {isReg ? registrationsByBank.data.rows.length : executions.data.rows.length} banks shown.
         </p>
       </div>
 
@@ -285,10 +284,7 @@ export function AutoPayView() {
               <p className="kpi-value" style={{ fontSize: 20 }}>
                 ₹15,000
               </p>
-              <p className="kpi-sub">
-                Default for every category not listed below — mobile/electricity bills, OTT subscriptions, loan EMIs, general
-                subscriptions, FASTag/NCMC top-ups, and everything else. No UPI PIN needed per execution up to this amount.
-              </p>
+              <p className="kpi-sub">Default for every category not listed below. No PIN needed per execution.</p>
             </div>
             <div style={{ padding: '14px 16px', background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
               <p className="kpi-label" style={{ marginBottom: 6 }}>
@@ -298,10 +294,7 @@ export function AutoPayView() {
               <p className="kpi-value" style={{ fontSize: 20 }}>
                 ₹1,00,000
               </p>
-              <p className="kpi-sub">
-                Only for the 8 MCCs below. Above ₹1,00,000 in any category, every execution needs manual UPI PIN entry — no
-                longer fully automatic.
-              </p>
+              <p className="kpi-sub">Only for the 8 MCCs below. Above this, PIN entry is required each time.</p>
             </div>
           </div>
           <div className="table-scroll">
@@ -325,15 +318,14 @@ export function AutoPayView() {
             </table>
           </div>
           <p className="section-note" style={{ marginTop: 14 }}>
-            Limits govern how much can execute without a UPI PIN per debit — the initial mandate setup always requires PIN
-            authentication regardless of amount either way. NPCI/RBI-published list, not derived from the volume data above.
+            Mandate setup always requires PIN. Source: NPCI/RBI, not derived from the volume data above.
           </p>
         </div>
       </div>
 
       <Footer
         sources={[{ href: 'https://www.npci.org.in/product/ecosystem-statistics/autopay', label: 'NPCI — AutoPay Ecosystem Statistics' }]}
-        disclaimer="Pulled from NPCI's AutoPay Ecosystem Statistics via Airtable, which publishes Registrations and Executions each broken down two ways - by payer PSP and by remitter bank. Registrations and executions each show the latest month NPCI has published, which may differ by one month from each other. Total Volume is every attempt NPCI logged; Final Volume is the subset actually approved (Total Volume x Approved %). Approval/business-decline/technical-decline rates in the KPI strip are volume-weighted averages across AutoPay's own remitter banks for the latest available execution month."
+        disclaimer="Sourced from NPCI's AutoPay Ecosystem Statistics. Registrations and Executions may lag by a month. Final Volume = Total Volume × Approved %."
       />
     </div>
   )

@@ -92,19 +92,18 @@ export function CircularsView() {
             </table>
           </div>
           <p className="section-note" style={{ marginTop: 14 }}>
-            Covers all circulars synced from the Airtable base ({circulars.data.length} total). Earlier/archived
-            circulars are on{' '}
+            {circulars.data.length} circulars synced. Earlier ones on{' '}
             <a href="https://www.npci.org.in/circulars/upi" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--teal)' }}>
               NPCI's site
-            </a>{' '}
-            directly.
+            </a>
+            .
           </p>
         </div>
       </div>
 
       <Footer
         sources={[{ href: 'https://www.npci.org.in/circulars/upi', label: 'NPCI — UPI Circulars & Notifications' }]}
-        disclaimer="Operating circulars and notifications issued by NPCI for UPI, synced via Airtable. This is a reference/document list, not numeric statistics — there's no month or metric to select, which is why the selector and Volume/Value toggle are hidden on this view."
+        disclaimer="Operating circulars issued by NPCI for UPI, synced via Airtable."
       />
     </div>
   )

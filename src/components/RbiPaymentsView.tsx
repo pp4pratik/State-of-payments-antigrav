@@ -276,7 +276,7 @@ export function RbiPaymentsView() {
 
       <Footer
         sources={[{ href: 'https://rbi.org.in/Scripts/Statistics.aspx', label: 'RBI — Payment System Indicators' }]}
-        disclaimer="National totals from RBI's monthly Payment System Indicators release. This is RBI's own economy-wide payment-systems dataset — a different release from NPCI's UPI figures and from RBI's Bank-wise ATM/POS/Card Statistics (the RBI Cards view), so figures for overlapping categories like UPI or card payments may not exactly match those other views; each view reflects its own source exactly as published, with no reconciliation between them. Volumes are converted from RBI's native lakh unit to Crore; values are already published in ₹ Crore. RBI states the data is provisional and subject to revision."
+        disclaimer="From RBI's Payment System Indicators — a separate release from the UPI and RBI Cards views, so overlapping figures may not match exactly. Provisional, subject to revision."
       />
     </div>
   )

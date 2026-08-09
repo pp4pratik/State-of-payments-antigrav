@@ -68,7 +68,7 @@ export function UpiView() {
           { href: 'https://www.npci.org.in/product/upi/product-statistics', label: 'NPCI — UPI Product Statistics' },
           { href: 'https://www.npci.org.in/product/ecosystem-statistics/upi', label: 'NPCI — UPI Ecosystem Statistics' },
         ]}
-        disclaimer="All figures pulled directly from NPCI's official statistics pages, synced via Airtable into a live database. App leaderboard, P2P/P2M split, merchant categories, geography, and average ticket size are all month-selectable via the picker above. NPCI only published a district-level geography breakdown from March 2026 onward; earlier months show state-level figures instead since that's all NPCI published for those months. Ticket size (overall and by P2P/P2M) is computed by this dashboard from NPCI's volume/value figures, not published directly by NPCI. NPCI states it makes no warranty on completeness or continued validity of this data."
+        disclaimer="Sourced from NPCI's official statistics. Geography is district-level from March 2026 onward, state-level before. Ticket size is computed from volume/value, not published directly by NPCI."
       />
     </div>
   )
@@ -184,7 +184,7 @@ function TrendSection({ months, mVol, mVal }: { months: string[]; mVol: number[]
           />
         </div>
         <p className="section-note" style={{ marginTop: 10 }}>
-          Some months may be missing where NPCI's published tables didn't include them.
+          Some months may be missing from NPCI's data.
         </p>
         {rawOpen && (
           <div className="raw-panel open">

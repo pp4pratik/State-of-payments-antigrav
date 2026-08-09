@@ -230,7 +230,7 @@ export function RbiCardsView() {
 
       <Footer
         sources={[{ href: 'https://rbi.org.in/Scripts/Statistics.aspx', label: 'RBI — Bank-wise ATM/POS/Card Statistics' }]}
-        disclaimer="National totals aggregated from the 'Total' row of RBI's monthly Bank-wise ATM/POS/Card Statistics release. This is a separate RBI data bucket, distinct from NPCI's UPI figures — card infrastructure, cards outstanding, and card transaction volumes are not part of UPI. Every figure here is converted to the same Crore unit used elsewhere on this dashboard; cards/ATMs/PoS terminals are as-on-month-end stock counts, not monthly flows. RBI states the data is provisional and subject to revision."
+        disclaimer="From RBI's Bank-wise ATM/POS/Card Statistics — separate from NPCI's UPI data. Cards/ATMs/PoS are month-end stock counts, not flows. Provisional, subject to revision."
       />
     </div>
   )

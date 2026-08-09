@@ -26,7 +26,7 @@ export function LiveCounter({ perSecondRate }: { perSecondRate: number }) {
         <div style={{ minWidth: 0 }}>
           <p style={{ margin: 0, fontSize: 13.5, color: 'var(--text-secondary)' }}>UPI payments since you arrived</p>
           <p style={{ margin: '2px 0 0', fontSize: 11.5, color: 'var(--text-muted)', fontFamily: "'JetBrains Mono',monospace" }}>
-            {formatClock(elapsedSeconds)} elapsed · estimated from NPCI's latest published monthly average, not a live feed
+            {formatClock(elapsedSeconds)} · estimated, not a live feed
           </p>
         </div>
       </div>
