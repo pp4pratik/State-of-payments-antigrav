@@ -1,7 +1,8 @@
-import { Doughnut, Line } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import { useDashboard } from '../lib/DashboardContext'
 import { useRbiPaymentsAll } from '../lib/queries'
 import { SectionHead } from './SectionHead'
+import { SplitBar } from './SplitBar'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
@@ -193,21 +194,15 @@ export function RbiPaymentsView() {
             <p className="section-note" style={{ textAlign: 'center', margin: '0 0 10px' }}>
               {fullLabel(String(row.month))} · {metric === 'volume' ? 'by volume' : 'by value'}
             </p>
-            <div style={{ position: 'relative', height: 220 }}>
-              <Doughnut
-                data={{ labels: RAILS.map((r) => r[1]), datasets: [{ data: splitData, backgroundColor: RAILS.map((r) => r[2]), borderColor: '#111C2B', borderWidth: 2 }] }}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  cutout: '58%',
-                  plugins: {
-                    legend: { display: false },
-                    tooltip: { callbacks: { label: (c) => `${c.label}: ${splitTotal ? ((Number(c.raw) / splitTotal) * 100).toFixed(1) : '0.0'}%` } },
-                  },
-                }}
-              />
-            </div>
-            <div className="legend" style={{ justifyContent: 'center' }}>
+            <SplitBar
+              height={10}
+              segments={RAILS.map(([, label, color], i) => ({
+                label,
+                color,
+                pct: splitTotal ? +((splitData[i] / splitTotal) * 100).toFixed(1) : 0,
+              }))}
+            />
+            <div className="legend" style={{ justifyContent: 'center', marginTop: 12 }}>
               {RAILS.map(([, label, color], i) => (
                 <span key={label}>
                   <i style={{ background: color }} />

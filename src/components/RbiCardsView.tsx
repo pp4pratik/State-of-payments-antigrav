@@ -1,7 +1,8 @@
-import { Doughnut, Line } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import { useDashboard } from '../lib/DashboardContext'
 import { useRbiCardsAll, type RbiCardsRow } from '../lib/queries'
 import { SectionHead } from './SectionHead'
+import { SplitBarPair } from './SplitBar'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
@@ -63,7 +64,12 @@ export function RbiCardsView() {
     return { ...c, vol, val, ticket: val / vol }
   }).sort((a, b) => b.vol - a.vol)
 
-  const donutOpts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+  const volTotal = creditVolCr + debitVolCr
+  const valTotal = creditVal + debitVal
+  const creditVolPct = volTotal ? +((creditVolCr / volTotal) * 100).toFixed(1) : 0
+  const debitVolPct = volTotal ? +((debitVolCr / volTotal) * 100).toFixed(1) : 0
+  const creditValPct = valTotal ? +((creditVal / valTotal) * 100).toFixed(1) : 0
+  const debitValPct = valTotal ? +((debitVal / valTotal) * 100).toFixed(1) : 0
 
   return (
     <div>
@@ -168,22 +174,8 @@ export function RbiCardsView() {
               <p className="section-note">{fullLabel(row.month)}</p>
             </div>
             <div className="p2p-grid">
-              <div>
-                <p className="section-note" style={{ textAlign: 'center', margin: '0 0 6px' }}>By volume</p>
-                <div style={{ position: 'relative', height: 160 }}>
-                  <Doughnut data={{ labels: ['Debit', 'Credit'], datasets: [{ data: [debitVolCr, creditVolCr], backgroundColor: ['#F5A524', '#3FC1A8'], borderWidth: 0 }] }} options={donutOpts} />
-                </div>
-              </div>
-              <div>
-                <p className="section-note" style={{ textAlign: 'center', margin: '0 0 6px' }}>By value</p>
-                <div style={{ position: 'relative', height: 160 }}>
-                  <Doughnut data={{ labels: ['Debit', 'Credit'], datasets: [{ data: [debitVal, creditVal], backgroundColor: ['#F5A524', '#3FC1A8'], borderWidth: 0 }] }} options={donutOpts} />
-                </div>
-              </div>
-            </div>
-            <div className="legend">
-              <span><i style={{ background: '#F5A524' }} />Debit</span>
-              <span><i style={{ background: '#3FC1A8' }} />Credit</span>
+              <SplitBarPair title="Volume" a={{ label: 'Debit', pct: debitVolPct, color: '#F5A524' }} b={{ label: 'Credit', pct: creditVolPct, color: '#3FC1A8' }} />
+              <SplitBarPair title="Value" a={{ label: 'Debit', pct: debitValPct, color: '#F5A524' }} b={{ label: 'Credit', pct: creditValPct, color: '#3FC1A8' }} />
             </div>
           </div>
           <div className="card">

@@ -111,7 +111,10 @@ export function useMerchantCategoriesAll() {
 }
 
 // ---------- Statewise/district geography, all months ----------
-export type GeoRow = { name: string; vol: number; val: number }
+// `state` is retained even for district-level months so the choropleth map
+// (which only has state-level polygons) can aggregate districts back up to
+// their parent state, independent of what granularity NPCI published that month.
+export type GeoRow = { name: string; state: string; vol: number; val: number }
 
 export function useStatewiseAll() {
   return useQuery({
@@ -129,7 +132,7 @@ export function useStatewiseAll() {
       const isStateLevel: Record<string, boolean> = {}
       for (const row of data) {
         const list = (byMonth[row.month] ??= [])
-        list.push({ name: row.district, vol: row.volume_share_pct, val: row.value_share_pct })
+        list.push({ name: row.district, state: row.state, vol: row.volume_share_pct, val: row.value_share_pct })
         if (!(row.month in isStateLevel)) {
           isStateLevel[row.month] = true
         }

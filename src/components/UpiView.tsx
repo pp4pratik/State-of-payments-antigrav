@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { ScriptableContext } from 'chart.js'
-import { Chart as ChartJSComponent, Doughnut, Line, Bar } from 'react-chartjs-2'
+import { Chart as ChartJSComponent, Line, Bar } from 'react-chartjs-2'
 import { LineChart, MapPin, PieChart, Receipt, ShoppingBag, TrendingDown, TrendingUp, Trophy } from 'lucide-react'
 import { useDashboard } from '../lib/DashboardContext'
 import { useAppStatsAll, useMerchantCategoriesAll, useMonthlyTrend, useP2pAll, useStatewiseAll, type AppStatsAll } from '../lib/queries'
 import { SectionHead } from './SectionHead'
 import { LiveCounter } from './LiveCounter'
+import { IndiaMap } from './IndiaMap'
+import { SplitBarPair } from './SplitBar'
 import { Footer } from './Footer'
 import { downloadCSV } from '../lib/csv'
 import { CsvButton } from './CsvButton'
@@ -310,13 +312,6 @@ function P2pCard({ p2p, idx, monthLabel }: { p2p: { p2p_volume_mn: number; p2p_v
   const p2pTicket = d.p2p_value_cr / mnToCr(d.p2p_volume_mn)!
   const p2mTicket = d.p2m_value_cr / mnToCr(d.p2m_volume_mn)!
 
-  const donutOpts = {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '58%',
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c: { label: string; raw: unknown }) => `${c.label}: ${c.raw}%` } } },
-  }
-
   return (
     <div className="card">
       <div className="section-head">
@@ -327,24 +322,10 @@ function P2pCard({ p2p, idx, monthLabel }: { p2p: { p2p_volume_mn: number; p2p_v
         <p className="section-note">{monthLabel}</p>
       </div>
       <div className="p2p-grid">
-        <div>
-          <p className="section-note" style={{ textAlign: 'center', margin: '0 0 6px' }}>By volume</p>
-          <div style={{ position: 'relative', height: 160 }}>
-            <Doughnut data={{ labels: ['P2M', 'P2P'], datasets: [{ data: volData, backgroundColor: ['#F5A524', '#3FC1A8'], borderColor: '#111C2B', borderWidth: 2 }] }} options={donutOpts} />
-          </div>
-        </div>
-        <div>
-          <p className="section-note" style={{ textAlign: 'center', margin: '0 0 6px' }}>By value</p>
-          <div style={{ position: 'relative', height: 160 }}>
-            <Doughnut data={{ labels: ['P2M', 'P2P'], datasets: [{ data: valData, backgroundColor: ['#F5A524', '#3FC1A8'], borderColor: '#111C2B', borderWidth: 2 }] }} options={donutOpts} />
-          </div>
-        </div>
+        <SplitBarPair title="Volume" a={{ label: 'P2M', pct: volData[0], color: '#F5A524' }} b={{ label: 'P2P', pct: volData[1], color: '#3FC1A8' }} />
+        <SplitBarPair title="Value" a={{ label: 'P2M', pct: valData[0], color: '#F5A524' }} b={{ label: 'P2P', pct: valData[1], color: '#3FC1A8' }} />
       </div>
-      <div className="legend">
-        <span><i style={{ background: '#F5A524' }} />P2M</span>
-        <span><i style={{ background: '#3FC1A8' }} />P2P</span>
-      </div>
-      <div className="legend" style={{ marginTop: 6 }}>
+      <div className="legend" style={{ marginTop: 14 }}>
         <span><i style={{ background: '#3FC1A8' }} />P2P avg ticket: {rupees(p2pTicket)}</span>
         <span><i style={{ background: '#F5A524' }} />P2M avg ticket: {rupees(p2mTicket)}</span>
       </div>
@@ -393,78 +374,107 @@ function CategoriesCard({ categories, metric, monthLabel }: { categories: { name
   )
 }
 
+function titleCase(upper: string): string {
+  return upper
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
 function GeographySection({
   geo,
   month,
   metric,
 }: {
-  geo: { byMonth: Record<string, { name: string; vol: number; val: number }[]>; granularityByMonth: Record<string, 'State' | 'District'> }
+  geo: { byMonth: Record<string, { name: string; state: string; vol: number; val: number }[]>; granularityByMonth: Record<string, 'State' | 'District'> }
   month: string
   metric: 'volume' | 'value'
 }) {
   const [rawOpen, setRawOpen] = useState(false)
-  const allRows = [...(geo.byMonth[month] ?? [])].sort((a, b) => (metric === 'volume' ? b.vol - a.vol : b.val - a.val))
-  const rows = allRows.slice(0, 10)
+  const [selectedState, setSelectedState] = useState<string | null>(null)
+
+  useEffect(() => setSelectedState(null), [month])
+
+  // "Unclassified" (transactions NPCI couldn't attribute to any district) has no
+  // polygon to shade and no real place on a map or in a per-state drill-down, so it's
+  // dropped from this view entirely rather than shown as a top-ranked phantom "place".
+  const monthRows = (geo.byMonth[month] ?? []).filter((r) => r.name.trim().toUpperCase() !== 'UNCLASSIFIED')
   const granularity = geo.granularityByMonth[month] ?? 'State'
-  const maxV = Math.max(...rows.map((r) => (metric === 'volume' ? r.vol : r.val)), 1)
+  const canDrillDown = granularity === 'District'
+  const scopedRows = selectedState && canDrillDown ? monthRows.filter((r) => r.state.trim().toUpperCase() === selectedState) : monthRows
+
+  const allRows = [...scopedRows].sort((a, b) => (metric === 'volume' ? b.vol - a.vol : b.val - a.val))
+  const rows = allRows.slice(0, 10)
 
   return (
     <div className="section">
       <SectionHead
         title={
-          <>
-            <MapPin size={17} />
-            Geography — top {granularity === 'District' ? 'districts' : 'states'} nationally
-          </>
+          selectedState ? (
+            <>
+              <MapPin size={17} />
+              Geography — districts in {titleCase(selectedState)}
+            </>
+          ) : (
+            <>
+              <MapPin size={17} />
+              Geography — top {granularity === 'District' ? 'districts' : 'states'} nationally
+            </>
+          )
         }
         note={`${fullLabel(month)} · NPCI reports at ${granularity.toLowerCase()} level${granularity === 'State' ? ' for this month' : ''}`}
         onRawToggle={() => setRawOpen((v) => !v)}
         rawOpen={rawOpen}
-        onCsv={() => downloadCSV('upi-pulse-geo.csv', [[granularity, 'Volume Share %', 'Value Share %'], ...allRows.map((g) => [g.name, g.vol, g.val])])}
-      />
-      <div className="card">
-        <div className="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>{granularity}</th>
-                <th>Volume share</th>
-                <th>Value share</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((g) => {
-                const v = metric === 'volume' ? g.vol : g.val
-                const pct = (v / maxV) * 100
-                return (
+        onCsv={() =>
+          downloadCSV(selectedState ? `upi-pulse-geo-${selectedState.toLowerCase().replace(/\s+/g, '-')}.csv` : 'upi-pulse-geo.csv', [
+            [granularity, 'Volume Share %', 'Value Share %'],
+            ...allRows.map((g) => [g.name, g.vol, g.val]),
+          ])
+        }
+      >
+        {selectedState && (
+          <button className="mini-btn" onClick={() => setSelectedState(null)}>
+            ← All India
+          </button>
+        )}
+      </SectionHead>
+      <div className="row-2">
+        <div className="card">
+          <IndiaMap rows={monthRows} metric={metric} selectedState={selectedState} onStateClick={setSelectedState} clickable={canDrillDown} />
+          <p className="section-note" style={{ marginTop: 10 }}>
+            {canDrillDown ? 'Click a state for its districts.' : 'Shaded by state, hover for share.'}
+            {granularity === 'District' && ' Districts summed to their parent state.'}
+          </p>
+        </div>
+        <div className="card">
+          <div className="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>{granularity}</th>
+                  <th>Volume share</th>
+                  <th>Value share</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((g) => (
                   <tr key={g.name}>
                     <td className="name">{g.name}</td>
-                    <td>
-                      <div className="bar-cell">
-                        <div className="bar-track">
-                          <div className="bar-fill" style={{ width: `${metric === 'volume' ? pct : 0}%` }} />
-                        </div>
-                        <span>{g.vol}%</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="bar-cell">
-                        <div className="bar-track">
-                          <div className="bar-fill" style={{ width: `${metric === 'value' ? pct : 0}%`, background: '#3FC1A8' }} />
-                        </div>
-                        <span>{g.val}%</span>
-                      </div>
-                    </td>
+                    <td>{g.vol}%</td>
+                    <td>{g.val}%</td>
                   </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="section-note" style={{ marginTop: 10 }}>
+            {selectedState
+              ? `Showing top ${Math.min(10, allRows.length)} of ${allRows.length} districts in ${titleCase(selectedState)}.`
+              : `Showing top 10 of ${allRows.length} ${granularity.toLowerCase()}s nationally.`}
+          </p>
         </div>
-        <p className="section-note" style={{ marginTop: 10 }}>
-          Showing top 10 of {allRows.length} {granularity.toLowerCase()}s nationally.
-        </p>
-        {rawOpen && (
+      </div>
+      {rawOpen && (
+        <div className="card" style={{ marginTop: 18 }}>
           <div className="raw-panel open">
             <table>
               <thead>
@@ -487,8 +497,8 @@ function GeographySection({
               </tbody>
             </table>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

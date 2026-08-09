@@ -38,11 +38,7 @@ function Shell({ children }: { children: React.ReactNode }) {
 function Header() {
   return (
     <>
-      <p className="eyebrow">
-        <span className="dot" />
-        NPCI · UPI ecosystem tracker
-      </p>
-      <h1>UPI Pulse</h1>
+      <h1>Payments Pulse</h1>
       <p className="subtitle">India's UPI &amp; RBI payments data, live from NPCI and RBI.</p>
     </>
   )
