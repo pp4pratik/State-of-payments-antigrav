@@ -640,31 +640,11 @@ def snake(label):
     return re.sub(r"^_+|_+$", "", re.sub(r"[^a-z0-9]+", "_", label.lower()))
 
 
+from gdrive_sync import sync_table_data
+
+
 def json_upsert(table_name, unique_cols, rows, dry_run):
-    if not rows:
-        return
-    if dry_run:
-        print(f"  [dry-run] JSON: would update {len(rows)} row(s) into {table_name}.json")
-        return
-    json_path = PROJECT_DIR / "public" / "data" / f"{table_name}.json"
-    existing_rows = []
-    if json_path.exists():
-        with open(json_path) as f:
-            existing_rows = json.load(f)
-
-    # Upsert rows based on unique_cols
-    key_idx = {tuple(r.get(c) for c in unique_cols): i for i, r in enumerate(existing_rows)}
-    for row in rows:
-        k = tuple(row.get(c) for c in unique_cols)
-        if k in key_idx:
-            existing_rows[key_idx[k]] = row
-        else:
-            existing_rows.append(row)
-
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(json_path, "w") as f:
-        json.dump(existing_rows, f, indent=2)
-    print(f"  JSON: updated {len(rows)} row(s) into {table_name}.json")
+    sync_table_data(table_name, unique_cols, rows, dry_run=dry_run)
 
 
 def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, rows, dry_run):

@@ -285,30 +285,11 @@ def airtable_upsert(base_id, table_id, token, fields, dry_run):
     print(f"  Airtable: {'updated' if existing_id else 'created'} record for {month_iso}")
 
 
-def json_upsert(table_name, unique_cols, row, dry_run):
-    if dry_run:
-        print(f"  [dry-run] would update JSON data for {table_name} month {row.get('month')}")
-        return
-    json_path = PROJECT_DIR / "public" / "data" / f"{table_name}.json"
-    rows = []
-    if json_path.exists():
-        with open(json_path) as f:
-            rows = json.load(f)
-    
-    # Upsert by unique key
-    updated = False
-    for i, r in enumerate(rows):
-        if all(r.get(col) == row.get(col) for col in unique_cols):
-            rows[i] = row
-            updated = True
-            break
-    if not updated:
-        rows.append(row)
+from gdrive_sync import sync_table_data
 
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(json_path, "w") as f:
-        json.dump(rows, f, indent=2)
-    print(f"  JSON: updated {table_name}.json for {row.get('month')}")
+
+def json_upsert(table_name, unique_cols, row, dry_run):
+    sync_table_data(table_name, unique_cols, [row], dry_run=dry_run)
 
 
 def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, row, dry_run):
