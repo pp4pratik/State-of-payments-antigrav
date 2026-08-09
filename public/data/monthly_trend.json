@@ -1,0 +1,32 @@
+[
+  {
+    "month": "2024-09",
+    "total_volume_mn": 15041.5,
+    "total_value_cr": 2064000.0,
+    "banks_live": 612
+  },
+  {
+    "month": "2024-10",
+    "total_volume_mn": 16580.2,
+    "total_value_cr": 2352000.0,
+    "banks_live": 624
+  },
+  {
+    "month": "2024-11",
+    "total_volume_mn": 15480.0,
+    "total_value_cr": 2155000.0,
+    "banks_live": 630
+  },
+  {
+    "month": "2024-12",
+    "total_volume_mn": 16720.0,
+    "total_value_cr": 2389000.0,
+    "banks_live": 642
+  },
+  {
+    "month": "2025-01",
+    "total_volume_mn": 16980.5,
+    "total_value_cr": 2420000.0,
+    "banks_live": 650
+  }
+]

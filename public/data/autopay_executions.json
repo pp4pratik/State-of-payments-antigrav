@@ -1,0 +1,34 @@
+[
+  {
+    "bank": "State Bank of India",
+    "month": "2025-01",
+    "executions_mn": 48.2,
+    "approved_pct": 91.8,
+    "bd_pct": 4.8,
+    "td_pct": 3.4
+  },
+  {
+    "bank": "HDFC Bank",
+    "month": "2025-01",
+    "executions_mn": 32.5,
+    "approved_pct": 95.4,
+    "bd_pct": 2.8,
+    "td_pct": 1.8
+  },
+  {
+    "bank": "ICICI Bank",
+    "month": "2025-01",
+    "executions_mn": 28.0,
+    "approved_pct": 94.9,
+    "bd_pct": 3.1,
+    "td_pct": 2.0
+  },
+  {
+    "bank": "Axis Bank",
+    "month": "2025-01",
+    "executions_mn": 21.4,
+    "approved_pct": 93.8,
+    "bd_pct": 3.9,
+    "td_pct": 2.3
+  }
+]

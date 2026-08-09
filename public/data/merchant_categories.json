@@ -1,0 +1,42 @@
+[
+  {
+    "mcc": "5411",
+    "description": "Groceries & Supermarkets",
+    "type": "Everyday",
+    "month": "2025-01",
+    "volume_mn": 3200.0,
+    "value_cr": 150000.0
+  },
+  {
+    "mcc": "5812",
+    "description": "Restaurants & Dining",
+    "type": "Food",
+    "month": "2025-01",
+    "volume_mn": 1800.0,
+    "value_cr": 65000.0
+  },
+  {
+    "mcc": "5541",
+    "description": "Fuel Stations",
+    "type": "Utilities",
+    "month": "2025-01",
+    "volume_mn": 1200.0,
+    "value_cr": 85000.0
+  },
+  {
+    "mcc": "5311",
+    "description": "Department Stores",
+    "type": "Shopping",
+    "month": "2025-01",
+    "volume_mn": 950.0,
+    "value_cr": 72000.0
+  },
+  {
+    "mcc": "5912",
+    "description": "Pharmacies",
+    "type": "Health",
+    "month": "2025-01",
+    "volume_mn": 780.0,
+    "value_cr": 34000.0
+  }
+]

@@ -285,7 +285,36 @@ def airtable_upsert(base_id, table_id, token, fields, dry_run):
     print(f"  Airtable: {'updated' if existing_id else 'created'} record for {month_iso}")
 
 
+def json_upsert(table_name, unique_cols, row, dry_run):
+    if dry_run:
+        print(f"  [dry-run] would update JSON data for {table_name} month {row.get('month')}")
+        return
+    json_path = PROJECT_DIR / "public" / "data" / f"{table_name}.json"
+    rows = []
+    if json_path.exists():
+        with open(json_path) as f:
+            rows = json.load(f)
+    
+    # Upsert by unique key
+    updated = False
+    for i, r in enumerate(rows):
+        if all(r.get(col) == row.get(col) for col in unique_cols):
+            rows[i] = row
+            updated = True
+            break
+    if not updated:
+        rows.append(row)
+
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(json_path, "w") as f:
+        json.dump(rows, f, indent=2)
+    print(f"  JSON: updated {table_name}.json for {row.get('month')}")
+
+
 def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, row, dry_run):
+    json_upsert(pg_table, unique_cols, row, dry_run)
+    if not (supabase_url and service_role_key):
+        return
     if dry_run:
         print(f"  [dry-run] would upsert Supabase {pg_table} for {row.get('month')} ({len(row)} columns)")
         return
@@ -315,8 +344,6 @@ def main():
     airtable_token = env.get("AIRTABLE_TOKEN")
     supabase_url = env.get("SUPABASE_URL", "").rstrip("/")
     service_role_key = env.get("SUPABASE_SERVICE_ROLE_KEY")
-    if not (airtable_token and supabase_url and service_role_key):
-        sys.exit("Missing AIRTABLE_TOKEN, SUPABASE_URL, or SUPABASE_SERVICE_ROLE_KEY in .env")
 
     with open(PROJECT_DIR / "supabase" / "airtable_schema.json") as f:
         airtable_schema = json.load(f)
@@ -327,18 +354,21 @@ def main():
     print("Fetching RBI Cards (Bank-wise ATM/POS/Card Statistics)...")
     cards_fields = fetch_rbi_cards()
     print(f"  Found {cards_fields['Month']} ({len(cards_fields) - 1} metrics)")
-    airtable_upsert(base_id, cards_table_id, airtable_token, cards_fields, dry_run)
+    if airtable_token:
+        airtable_upsert(base_id, cards_table_id, airtable_token, cards_fields, dry_run)
     cards_row = {snake(k) if k != "Month" else "month": v for k, v in cards_fields.items()}
     supabase_upsert(supabase_url, service_role_key, "rbi_cards", ["month"], cards_row, dry_run)
 
     print("Fetching RBI Payments (Payment System Indicators)...")
     payments_fields = fetch_rbi_payments()
     print(f"  Found {payments_fields['Month']} ({len(payments_fields) - 1} metrics)")
-    airtable_upsert(base_id, payments_table_id, airtable_token, payments_fields, dry_run)
+    if airtable_token:
+        airtable_upsert(base_id, payments_table_id, airtable_token, payments_fields, dry_run)
     payments_row = {snake(k) if k != "Month" else "month": v for k, v in payments_fields.items()}
     supabase_upsert(supabase_url, service_role_key, "rbi_payments", ["month"], payments_row, dry_run)
 
     print("Done.")
+
 
 
 if __name__ == "__main__":

@@ -640,7 +640,37 @@ def snake(label):
     return re.sub(r"^_+|_+$", "", re.sub(r"[^a-z0-9]+", "_", label.lower()))
 
 
+def json_upsert(table_name, unique_cols, rows, dry_run):
+    if not rows:
+        return
+    if dry_run:
+        print(f"  [dry-run] JSON: would update {len(rows)} row(s) into {table_name}.json")
+        return
+    json_path = PROJECT_DIR / "public" / "data" / f"{table_name}.json"
+    existing_rows = []
+    if json_path.exists():
+        with open(json_path) as f:
+            existing_rows = json.load(f)
+
+    # Upsert rows based on unique_cols
+    key_idx = {tuple(r.get(c) for c in unique_cols): i for i, r in enumerate(existing_rows)}
+    for row in rows:
+        k = tuple(row.get(c) for c in unique_cols)
+        if k in key_idx:
+            existing_rows[key_idx[k]] = row
+        else:
+            existing_rows.append(row)
+
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(json_path, "w") as f:
+        json.dump(existing_rows, f, indent=2)
+    print(f"  JSON: updated {len(rows)} row(s) into {table_name}.json")
+
+
 def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, rows, dry_run):
+    json_upsert(pg_table, unique_cols, rows, dry_run)
+    if not (supabase_url and service_role_key):
+        return
     if not rows:
         return
     if dry_run:
@@ -775,8 +805,7 @@ def main():
     airtable_token = env.get("AIRTABLE_TOKEN")
     supabase_url = env.get("SUPABASE_URL", "").rstrip("/")
     service_role_key = env.get("SUPABASE_SERVICE_ROLE_KEY")
-    if not (airtable_token and supabase_url and service_role_key):
-        sys.exit("Missing AIRTABLE_TOKEN, SUPABASE_URL, or SUPABASE_SERVICE_ROLE_KEY in .env")
+
 
     with open(PROJECT_DIR / "supabase" / "airtable_schema.json") as f:
         airtable_schema = json.load(f)
@@ -793,7 +822,8 @@ def main():
             if kind == "single":
                 fields = fetch_fn(page)
                 print(f"  Found {fields['Month']}")
-                airtable_upsert_single_row(base_id, table_id, airtable_token, fields, dry_run)
+                if airtable_token:
+                    airtable_upsert_single_row(base_id, table_id, airtable_token, fields, dry_run)
                 supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows([fields]), dry_run)
 
             elif kind == "multi":
@@ -802,20 +832,22 @@ def main():
                     print("  No rows found, skipping")
                     continue
                 name_field = NAME_FIELDS.get(key)
-                if name_field:
+                if name_field and supabase_url and service_role_key:
                     target_month = rows[0]["Month"]
                     known_names = supabase_distinct_values(
                         supabase_url, service_role_key, pg_table, unique_cols[0], exclude_filter=f"month=neq.{target_month}"
                     )
                     rows = normalize_names(rows, name_field, known_names)
                 print(f"  Found {len(rows)} row(s) for {rows[0]['Month']}")
-                airtable_replace_month_rows(base_id, table_id, airtable_token, rows, dry_run)
+                if airtable_token:
+                    airtable_replace_month_rows(base_id, table_id, airtable_token, rows, dry_run)
                 supabase_replace_month(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
 
             elif kind == "circulars":
                 rows = fetch_circulars(page, years=[2025, 2026])
                 print(f"  Found {len(rows)} circular(s)")
-                airtable_replace_all_circulars(base_id, table_id, airtable_token, rows, dry_run)
+                if airtable_token:
+                    airtable_replace_all_circulars(base_id, table_id, airtable_token, rows, dry_run)
                 supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
 
         browser.close()

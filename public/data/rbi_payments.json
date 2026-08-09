@@ -1,0 +1,24 @@
+[
+  {
+    "month": "2024-12",
+    "upi_volume": 16720.0,
+    "upi_value": 2389000.0,
+    "neft_volume": 640.0,
+    "neft_value": 3050000.0,
+    "imps_volume": 510.0,
+    "imps_value": 610000.0,
+    "rtgs_total_volume": 21.5,
+    "rtgs_total_value": 14200000.0
+  },
+  {
+    "month": "2025-01",
+    "upi_volume": 16980.5,
+    "upi_value": 2420000.0,
+    "neft_volume": 650.0,
+    "neft_value": 3100000.0,
+    "imps_volume": 520.0,
+    "imps_value": 620000.0,
+    "rtgs_total_volume": 22.0,
+    "rtgs_total_value": 14500000.0
+  }
+]

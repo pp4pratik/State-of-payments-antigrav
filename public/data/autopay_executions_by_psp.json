@@ -1,0 +1,26 @@
+[
+  {
+    "psp": "PhonePe",
+    "month": "2025-01",
+    "executions_mn": 42.0,
+    "approved_pct": 95.1,
+    "bd_pct": 2.9,
+    "td_pct": 2.0
+  },
+  {
+    "psp": "Google Pay",
+    "month": "2025-01",
+    "executions_mn": 31.5,
+    "approved_pct": 93.6,
+    "bd_pct": 3.8,
+    "td_pct": 2.6
+  },
+  {
+    "psp": "Paytm",
+    "month": "2025-01",
+    "executions_mn": 9.8,
+    "approved_pct": 90.2,
+    "bd_pct": 5.8,
+    "td_pct": 4.0
+  }
+]

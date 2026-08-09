@@ -1,0 +1,32 @@
+[
+  {
+    "app_name": "PhonePe",
+    "month": "2025-01",
+    "volume_mn": 8200.0,
+    "value_cr": 1180000.0
+  },
+  {
+    "app_name": "Google Pay",
+    "month": "2025-01",
+    "volume_mn": 6200.0,
+    "value_cr": 890000.0
+  },
+  {
+    "app_name": "Paytm",
+    "month": "2025-01",
+    "volume_mn": 1100.0,
+    "value_cr": 140000.0
+  },
+  {
+    "app_name": "CRED",
+    "month": "2025-01",
+    "volume_mn": 250.0,
+    "value_cr": 65000.0
+  },
+  {
+    "app_name": "Amazon Pay",
+    "month": "2025-01",
+    "volume_mn": 180.0,
+    "value_cr": 22000.0
+  }
+]

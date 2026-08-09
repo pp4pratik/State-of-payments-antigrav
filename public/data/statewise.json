@@ -1,0 +1,47 @@
+[
+  {
+    "state": "Maharashtra",
+    "district": "Maharashtra",
+    "month": "2025-01",
+    "volume_mn": 2200.0,
+    "volume_share_pct": 13.0,
+    "value_cr": 315000.0,
+    "value_share_pct": 13.0
+  },
+  {
+    "state": "Karnataka",
+    "district": "Karnataka",
+    "month": "2025-01",
+    "volume_mn": 1650.0,
+    "volume_share_pct": 9.7,
+    "value_cr": 242000.0,
+    "value_share_pct": 10.0
+  },
+  {
+    "state": "Tamil Nadu",
+    "district": "Tamil Nadu",
+    "month": "2025-01",
+    "volume_mn": 1400.0,
+    "volume_share_pct": 8.2,
+    "value_cr": 198000.0,
+    "value_share_pct": 8.2
+  },
+  {
+    "state": "Uttar Pradesh",
+    "district": "Uttar Pradesh",
+    "month": "2025-01",
+    "volume_mn": 1550.0,
+    "volume_share_pct": 9.1,
+    "value_cr": 210000.0,
+    "value_share_pct": 8.7
+  },
+  {
+    "state": "Telangana",
+    "district": "Telangana",
+    "month": "2025-01",
+    "volume_mn": 1250.0,
+    "volume_share_pct": 7.4,
+    "value_cr": 182000.0,
+    "value_share_pct": 7.5
+  }
+]

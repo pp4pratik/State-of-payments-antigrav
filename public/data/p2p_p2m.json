@@ -1,0 +1,23 @@
+[
+  {
+    "month": "2024-11",
+    "p2p_volume_mn": 5400.0,
+    "p2p_value_cr": 1280000.0,
+    "p2m_volume_mn": 10080.0,
+    "p2m_value_cr": 875000.0
+  },
+  {
+    "month": "2024-12",
+    "p2p_volume_mn": 5800.0,
+    "p2p_value_cr": 1390000.0,
+    "p2m_volume_mn": 10920.0,
+    "p2m_value_cr": 999000.0
+  },
+  {
+    "month": "2025-01",
+    "p2p_volume_mn": 6000.0,
+    "p2p_value_cr": 1420000.0,
+    "p2m_volume_mn": 10980.0,
+    "p2m_value_cr": 1000000.0
+  }
+]

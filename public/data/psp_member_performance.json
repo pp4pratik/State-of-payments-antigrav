@@ -1,0 +1,29 @@
+[
+  {
+    "entity_name": "PhonePe",
+    "direction": "Payer",
+    "month": "2025-01",
+    "volume_mn": 7450.0,
+    "approved_pct": 98.4,
+    "bd_pct": 1.0,
+    "td_pct": 0.6
+  },
+  {
+    "entity_name": "Google Pay",
+    "direction": "Payer",
+    "month": "2025-01",
+    "volume_mn": 5600.0,
+    "approved_pct": 97.9,
+    "bd_pct": 1.3,
+    "td_pct": 0.8
+  },
+  {
+    "entity_name": "State Bank of India",
+    "direction": "Payee",
+    "month": "2025-01",
+    "volume_mn": 4900.0,
+    "approved_pct": 94.5,
+    "bd_pct": 3.5,
+    "td_pct": 2.0
+  }
+]

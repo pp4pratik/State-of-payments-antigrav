@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { supabase } from './supabase'
+import { fetchGdriveJson } from './gdrive'
 
 // ---------- Monthly trend (Jun 2021 - present), drives the top trend chart ----------
 export type MonthlyTrendRow = {
@@ -13,12 +13,8 @@ export function useMonthlyTrend() {
   return useQuery({
     queryKey: ['monthly_trend'],
     queryFn: async (): Promise<MonthlyTrendRow[]> => {
-      const { data, error } = await supabase
-        .from('monthly_trend')
-        .select('month, total_volume_mn, total_value_cr, banks_live')
-        .order('month', { ascending: true })
-      if (error) throw error
-      return data
+      const data = await fetchGdriveJson<MonthlyTrendRow>('monthly_trend')
+      return data.sort((a, b) => a.month.localeCompare(b.month))
     },
   })
 }
@@ -35,11 +31,12 @@ export function useAppStatsAll() {
   return useQuery({
     queryKey: ['app_stats', 'all'],
     queryFn: async (): Promise<AppStatsAll> => {
-      const { data, error } = await supabase
-        .from('app_stats')
-        .select('app_name, month, volume_mn, value_cr')
-        .order('month', { ascending: true })
-      if (error) throw error
+      const data = await fetchGdriveJson<{
+        app_name: string
+        month: string
+        volume_mn: number
+        value_cr: number
+      }>('app_stats')
 
       const months = [...new Set(data.map((r) => r.month))].sort()
       const monthIdx = new Map(months.map((m, i) => [m, i]))
@@ -48,7 +45,8 @@ export function useAppStatsAll() {
       const monthTotalVal = months.map(() => 0)
 
       for (const row of data) {
-        const i = monthIdx.get(row.month)!
+        const i = monthIdx.get(row.month)
+        if (i === undefined) continue
         if (!byApp[row.app_name]) {
           byApp[row.app_name] = { vol: months.map(() => 0), val: months.map(() => 0) }
         }
@@ -76,12 +74,8 @@ export function useP2pAll() {
   return useQuery({
     queryKey: ['p2p_p2m', 'all'],
     queryFn: async (): Promise<P2pRow[]> => {
-      const { data, error } = await supabase
-        .from('p2p_p2m')
-        .select('month, p2p_volume_mn, p2p_value_cr, p2m_volume_mn, p2m_value_cr')
-        .order('month', { ascending: true })
-      if (error) throw error
-      return data
+      const data = await fetchGdriveJson<P2pRow>('p2p_p2m')
+      return data.sort((a, b) => a.month.localeCompare(b.month))
     },
   })
 }
@@ -93,15 +87,18 @@ export function useMerchantCategoriesAll() {
   return useQuery({
     queryKey: ['merchant_categories', 'all'],
     queryFn: async (): Promise<Record<string, CategoryRow[]>> => {
-      const { data, error } = await supabase
-        .from('merchant_categories')
-        .select('description, month, volume_mn, value_cr')
-        .neq('description', 'Others')
-        .order('volume_mn', { ascending: false })
-      if (error) throw error
+      const data = await fetchGdriveJson<{
+        description: string
+        month: string
+        volume_mn: number
+        value_cr: number
+      }>('merchant_categories')
+
+      const filtered = data.filter((r) => r.description !== 'Others')
+      filtered.sort((a, b) => b.volume_mn - a.volume_mn)
 
       const byMonth: Record<string, CategoryRow[]> = {}
-      for (const row of data) {
+      for (const row of filtered) {
         const list = (byMonth[row.month] ??= [])
         if (list.length < 5) list.push({ name: row.description, vol: row.volume_mn, val: row.value_cr })
       }
@@ -111,9 +108,6 @@ export function useMerchantCategoriesAll() {
 }
 
 // ---------- Statewise/district geography, all months ----------
-// `state` is retained even for district-level months so the choropleth map
-// (which only has state-level polygons) can aggregate districts back up to
-// their parent state, independent of what granularity NPCI published that month.
 export type GeoRow = { name: string; state: string; vol: number; val: number }
 
 export function useStatewiseAll() {
@@ -123,13 +117,17 @@ export function useStatewiseAll() {
       byMonth: Record<string, GeoRow[]>
       granularityByMonth: Record<string, 'State' | 'District'>
     }> => {
-      const { data, error } = await supabase
-        .from('statewise')
-        .select('state, district, month, volume_share_pct, value_share_pct')
-      if (error) throw error
+      const data = await fetchGdriveJson<{
+        state: string
+        district: string
+        month: string
+        volume_share_pct: number
+        value_share_pct: number
+      }>('statewise')
 
       const byMonth: Record<string, GeoRow[]> = {}
       const isStateLevel: Record<string, boolean> = {}
+
       for (const row of data) {
         const list = (byMonth[row.month] ??= [])
         list.push({ name: row.district, state: row.state, vol: row.volume_share_pct, val: row.value_share_pct })
@@ -152,29 +150,24 @@ export function useStatewiseAll() {
 export type AutoPayRegistrationRow = { psp: string; registrations_mn: number; approved_pct: number | null }
 export type AutoPayExecutionRow = { bank: string; executions_mn: number; approved_pct: number | null; bd_pct: number | null; td_pct: number | null }
 
-async function latestMonthOf(table: string): Promise<string> {
-  const { data, error } = await supabase
-    .from(table)
-    .select('month')
-    .order('month', { ascending: false })
-    .limit(1)
-    .single()
-  if (error) throw error
-  return data.month
-}
-
 export function useAutoPayRegistrations() {
   return useQuery({
     queryKey: ['autopay_registrations', 'latest'],
     queryFn: async (): Promise<{ month: string; rows: AutoPayRegistrationRow[] }> => {
-      const month = await latestMonthOf('autopay_registrations')
-      const { data, error } = await supabase
-        .from('autopay_registrations')
-        .select('psp, registrations_mn, approved_pct')
-        .eq('month', month)
-        .order('registrations_mn', { ascending: false })
-      if (error) throw error
-      return { month, rows: data }
+      const data = await fetchGdriveJson<{
+        psp: string
+        month: string
+        registrations_mn: number
+        approved_pct: number | null
+      }>('autopay_registrations')
+
+      const months = [...new Set(data.map((r) => r.month))].sort()
+      const month = months[months.length - 1] ?? ''
+      const rows = data
+        .filter((r) => r.month === month)
+        .sort((a, b) => b.registrations_mn - a.registrations_mn)
+        .map(({ psp, registrations_mn, approved_pct }) => ({ psp, registrations_mn, approved_pct }))
+      return { month, rows }
     },
   })
 }
@@ -183,21 +176,27 @@ export function useAutoPayExecutions() {
   return useQuery({
     queryKey: ['autopay_executions', 'latest'],
     queryFn: async (): Promise<{ month: string; rows: AutoPayExecutionRow[] }> => {
-      const month = await latestMonthOf('autopay_executions')
-      const { data, error } = await supabase
-        .from('autopay_executions')
-        .select('bank, executions_mn, approved_pct, bd_pct, td_pct')
-        .eq('month', month)
-        .order('executions_mn', { ascending: false })
-      if (error) throw error
-      return { month, rows: data }
+      const data = await fetchGdriveJson<{
+        bank: string
+        month: string
+        executions_mn: number
+        approved_pct: number | null
+        bd_pct: number | null
+        td_pct: number | null
+      }>('autopay_executions')
+
+      const months = [...new Set(data.map((r) => r.month))].sort()
+      const month = months[months.length - 1] ?? ''
+      const rows = data
+        .filter((r) => r.month === month)
+        .sort((a, b) => b.executions_mn - a.executions_mn)
+        .map(({ bank, executions_mn, approved_pct, bd_pct, td_pct }) => ({ bank, executions_mn, approved_pct, bd_pct, td_pct }))
+      return { month, rows }
     },
   })
 }
 
-// ---------- AutoPay: the same two flows, broken down the other way - registrations
-// by remitter bank (NPCI's "Top 50 Remitter Banks / Mandate Registration" tab) and
-// executions by payer PSP (NPCI's "PSP Wise execution" tab) ----------
+// ---------- AutoPay: registrations by bank and executions by PSP ----------
 export type AutoPayRegistrationByBankRow = { remitter_bank: string; registrations_mn: number; approved_pct: number | null }
 export type AutoPayExecutionByPspRow = { psp: string; executions_mn: number; approved_pct: number | null }
 
@@ -205,14 +204,20 @@ export function useAutoPayRegistrationsByBank() {
   return useQuery({
     queryKey: ['autopay_registrations_by_bank', 'latest'],
     queryFn: async (): Promise<{ month: string; rows: AutoPayRegistrationByBankRow[] }> => {
-      const month = await latestMonthOf('autopay_registrations_by_bank')
-      const { data, error } = await supabase
-        .from('autopay_registrations_by_bank')
-        .select('remitter_bank, registrations_mn, approved_pct')
-        .eq('month', month)
-        .order('registrations_mn', { ascending: false })
-      if (error) throw error
-      return { month, rows: data }
+      const data = await fetchGdriveJson<{
+        remitter_bank: string
+        month: string
+        registrations_mn: number
+        approved_pct: number | null
+      }>('autopay_registrations_by_bank')
+
+      const months = [...new Set(data.map((r) => r.month))].sort()
+      const month = months[months.length - 1] ?? ''
+      const rows = data
+        .filter((r) => r.month === month)
+        .sort((a, b) => b.registrations_mn - a.registrations_mn)
+        .map(({ remitter_bank, registrations_mn, approved_pct }) => ({ remitter_bank, registrations_mn, approved_pct }))
+      return { month, rows }
     },
   })
 }
@@ -221,19 +226,25 @@ export function useAutoPayExecutionsByPsp() {
   return useQuery({
     queryKey: ['autopay_executions_by_psp', 'latest'],
     queryFn: async (): Promise<{ month: string; rows: AutoPayExecutionByPspRow[] }> => {
-      const month = await latestMonthOf('autopay_executions_by_psp')
-      const { data, error } = await supabase
-        .from('autopay_executions_by_psp')
-        .select('psp, executions_mn, approved_pct')
-        .eq('month', month)
-        .order('executions_mn', { ascending: false })
-      if (error) throw error
-      return { month, rows: data }
+      const data = await fetchGdriveJson<{
+        psp: string
+        month: string
+        executions_mn: number
+        approved_pct: number | null
+      }>('autopay_executions_by_psp')
+
+      const months = [...new Set(data.map((r) => r.month))].sort()
+      const month = months[months.length - 1] ?? ''
+      const rows = data
+        .filter((r) => r.month === month)
+        .sort((a, b) => b.executions_mn - a.executions_mn)
+        .map(({ psp, executions_mn, approved_pct }) => ({ psp, executions_mn, approved_pct }))
+      return { month, rows }
     },
   })
 }
 
-// ---------- PSP member performance, latest month - drives AutoPay's weighted KPI cards ----------
+// ---------- PSP member performance ----------
 export type PspPerformanceRow = {
   entity_name: string
   direction: string
@@ -247,14 +258,22 @@ export function usePspMemberPerformance() {
   return useQuery({
     queryKey: ['psp_member_performance', 'latest'],
     queryFn: async (): Promise<{ month: string; rows: PspPerformanceRow[] }> => {
-      const month = await latestMonthOf('psp_member_performance')
-      const { data, error } = await supabase
-        .from('psp_member_performance')
-        .select('entity_name, direction, volume_mn, approved_pct, bd_pct, td_pct')
-        .eq('month', month)
-        .order('volume_mn', { ascending: false })
-      if (error) throw error
-      return { month, rows: data }
+      const data = await fetchGdriveJson<PspPerformanceRow & { month: string }>('psp_member_performance')
+
+      const months = [...new Set(data.map((r) => r.month))].sort()
+      const month = months[months.length - 1] ?? ''
+      const rows = data
+        .filter((r) => r.month === month)
+        .sort((a, b) => b.volume_mn - a.volume_mn)
+        .map(({ entity_name, direction, volume_mn, approved_pct, bd_pct, td_pct }) => ({
+          entity_name,
+          direction,
+          volume_mn,
+          approved_pct,
+          bd_pct,
+          td_pct,
+        }))
+      return { month, rows }
     },
   })
 }
@@ -292,9 +311,8 @@ export function useRbiCardsAll() {
   return useQuery({
     queryKey: ['rbi_cards', 'all'],
     queryFn: async (): Promise<RbiCardsRow[]> => {
-      const { data, error } = await supabase.from('rbi_cards').select('*').order('month', { ascending: true })
-      if (error) throw error
-      return data
+      const data = await fetchGdriveJson<RbiCardsRow>('rbi_cards')
+      return data.sort((a, b) => a.month.localeCompare(b.month))
     },
   })
 }
@@ -304,9 +322,8 @@ export function useRbiPaymentsAll() {
   return useQuery({
     queryKey: ['rbi_payments', 'all'],
     queryFn: async (): Promise<Record<string, number | string>[]> => {
-      const { data, error } = await supabase.from('rbi_payments').select('*').order('month', { ascending: true })
-      if (error) throw error
-      return data
+      const data = await fetchGdriveJson<Record<string, number | string>>('rbi_payments')
+      return data.sort((a, b) => String(a.month).localeCompare(String(b.month)))
     },
   })
 }
@@ -324,11 +341,7 @@ export function useCirculars() {
   return useQuery({
     queryKey: ['circulars'],
     queryFn: async (): Promise<CircularRow[]> => {
-      const { data, error } = await supabase
-        .from('circulars')
-        .select('ref, fy, title, date_added, pdf_url')
-      if (error) throw error
-
+      const data = await fetchGdriveJson<CircularRow>('circulars')
       return [...data].sort((a, b) => {
         const fyEnd = (fy: string) => Number(fy?.split('-').pop()) || 0
         const refNum = (ref: string) => Number(ref?.match(/\d+/)?.[0]) || 0
