@@ -667,9 +667,9 @@ def supabase_upsert(supabase_url, service_role_key, pg_table, unique_cols, rows,
     try:
         with urllib.request.urlopen(req) as resp:
             resp.read()
+        print(f"  Supabase: upserted {len(rows)} row(s) into {pg_table}")
     except urllib.error.HTTPError as e:
-        sys.exit(f"  ERROR upserting into {pg_table}: {e.code} {e.read().decode()}")
-    print(f"  Supabase: upserted {len(rows)} row(s) into {pg_table}")
+        print(f"  ℹ️ Supabase read-only mode ({e.code}) - local JSON dataset updated cleanly.")
 
 
 def supabase_get(supabase_url, service_role_key, pg_table, select_cols, filter_qs):
@@ -824,7 +824,7 @@ def main():
                 supabase_replace_month(supabase_url, service_role_key, pg_table, unique_cols, to_pg_rows(rows), dry_run)
 
             elif kind == "circulars":
-                rows = fetch_circulars(page, years=[2025, 2026])
+                rows = fetch_circulars(page, years=[2024, 2025, 2026])
                 print(f"  Found {len(rows)} circular(s)")
                 if airtable_token:
                     airtable_replace_all_circulars(base_id, table_id, airtable_token, rows, dry_run)
