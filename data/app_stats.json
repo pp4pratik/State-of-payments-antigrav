@@ -12314,8 +12314,8 @@
   {
     "app_name": "Federal Bank Apps",
     "month": "2024-07-01",
-    "volume_mn": 5.95,
-    "value_cr": 848.66
+    "volume_mn": 2.68,
+    "value_cr": 460.69
   },
   {
     "app_name": "Jupiter Money",
@@ -24340,5 +24340,125 @@
     "month": "2026-06-01",
     "volume_mn": 0.026565,
     "value_cr": 1.81250322999999
+  },
+  {
+    "app_name": "Paytm Payments Bank App",
+    "month": "2024-01-01",
+    "volume_mn": 1569.63,
+    "value_cr": 192614.74
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-01-01",
+    "volume_mn": 108.86,
+    "value_cr": 38229.82
+  },
+  {
+    "app_name": "PAYTMWALLET",
+    "month": "2024-01-01",
+    "volume_mn": 0.03,
+    "value_cr": 3.11
+  },
+  {
+    "app_name": "Phonepe",
+    "month": "2024-02-01",
+    "volume_mn": 5760.01,
+    "value_cr": 915586.0
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-02-01",
+    "volume_mn": 111.53,
+    "value_cr": 38649.61
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-03-01",
+    "volume_mn": 132.31,
+    "value_cr": 44991.57
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-04-01",
+    "volume_mn": 138.46,
+    "value_cr": 43233.21
+  },
+  {
+    "app_name": "Paytm (OCL)",
+    "month": "2024-05-01",
+    "volume_mn": 1140.01,
+    "value_cr": 124704.8
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-05-01",
+    "volume_mn": 140.08,
+    "value_cr": 47547.15
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-06-01",
+    "volume_mn": 138.42,
+    "value_cr": 45720.01
+  },
+  {
+    "app_name": "Paytm (OCL )",
+    "month": "2024-07-01",
+    "volume_mn": 1128.97,
+    "value_cr": 123467.33
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-07-01",
+    "volume_mn": 142.56,
+    "value_cr": 48998.89
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-08-01",
+    "volume_mn": 147.48,
+    "value_cr": 50720.89
+  },
+  {
+    "app_name": "Paytm (OCL)",
+    "month": "2024-09-01",
+    "volume_mn": 1064.62,
+    "value_cr": 113351.54
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-09-01",
+    "volume_mn": 140.0,
+    "value_cr": 47982.71
+  },
+  {
+    "app_name": "Paytm (OCL)",
+    "month": "2024-10-01",
+    "volume_mn": 1165.01,
+    "value_cr": 129584.98
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-10-01",
+    "volume_mn": 152.28,
+    "value_cr": 55202.12
+  },
+  {
+    "app_name": "Paytm (OCL)",
+    "month": "2024-11-01",
+    "volume_mn": 1075.09,
+    "value_cr": 118004.06
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-11-01",
+    "volume_mn": 138.24,
+    "value_cr": 50560.48
+  },
+  {
+    "app_name": "Cred",
+    "month": "2024-12-01",
+    "volume_mn": 143.07,
+    "value_cr": 50979.94
   }
 ]
