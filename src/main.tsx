@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { RouterProvider, createRouter, createHashHistory } from '@tanstack/react-router'
 import './index.css'
 import './lib/chartSetup'
 import { initAnalytics } from './lib/analytics'
@@ -9,8 +9,8 @@ import { routeTree } from './routeTree.gen'
 
 initAnalytics()
 
-const basepath = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
-const router = createRouter({ routeTree, basepath })
+const hashHistory = createHashHistory()
+const router = createRouter({ routeTree, history: hashHistory })
 
 declare module '@tanstack/react-router' {
   interface Register {
