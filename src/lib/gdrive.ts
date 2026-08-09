@@ -1,14 +1,14 @@
 /**
- * Google Drive Data Fetcher
+ * Google Drive Data Fetcher with Resilient Local Fallback & Mismatch Prevention
  *
- * Fetches JSON files hosted on Google Drive or local public/data directory.
- * Configured via environment variables:
- * - VITE_GDRIVE_FOLDER_ID: Google Drive folder ID containing the JSON files.
- * - VITE_GDRIVE_FILE_IDS: JSON object string mapping table names to Google Drive File IDs.
- * - VITE_DATA_BASE_URL: Base URL for fetching static JSON data files.
+ * Primary: Fetches JSON files directly from Google Drive if VITE_GDRIVE_FILE_IDS or
+ * Google Drive direct URLs are configured.
+ *
+ * Resilience & Fallback: If Google Drive returns an error (404, 403, CORS, or unshared file),
+ * it automatically falls back to local static datasets (/data/{table}.json), ensuring
+ * the dashboard UI never breaks or displays empty charts.
  */
 
-const folderId = import.meta.env.VITE_GDRIVE_FOLDER_ID
 const fileIdsRaw = import.meta.env.VITE_GDRIVE_FILE_IDS
 let fileIdsMap: Record<string, string> = {}
 
@@ -24,25 +24,31 @@ const BASE_URL = import.meta.env.VITE_DATA_BASE_URL || `${import.meta.env.BASE_U
 
 export async function fetchGdriveJson<T>(table: string): Promise<T[]> {
   const fileId = fileIdsMap[table]
-  let url: string
+  const localUrl = `${BASE_URL}/${table}.json`
 
-  if (fileId) {
-    // Direct Google Drive file download link format
-    url = `https://drive.google.com/uc?export=download&id=${fileId}`
-  } else if (folderId && folderId.trim() !== '') {
-    // Google Drive direct download URL format for files inside target folder
-    // Uses Google Drive media export endpoint
-    url = `${BASE_URL}/${table}.json`
-  } else {
-    // Fallback to local static data directory
-    url = `${BASE_URL}/${table}.json`
+  // 1. Try Google Drive Direct URL if File ID is configured
+  if (fileId && fileId.trim() !== '') {
+    const gdriveUrl = `https://drive.google.com/uc?export=download&id=${fileId}`
+    try {
+      const resp = await fetch(gdriveUrl)
+      if (resp.ok) {
+        const gdriveData = await resp.json()
+        if (Array.isArray(gdriveData) && gdriveData.length > 0) {
+          return gdriveData as T[]
+        }
+      }
+      console.warn(`[GDrive Sync Warning] Google Drive file for '${table}' returned invalid or empty data. Falling back to local data.`)
+    } catch (err) {
+      console.warn(`[GDrive Sync Error] Could not fetch '${table}' from Google Drive (${err}). Falling back to local file: ${localUrl}`)
+    }
   }
 
-  const response = await fetch(url)
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data for ${table} from ${url}: ${response.statusText}`)
+  // 2. Primary / Fallback: Fetch from Local static JSON dataset (/data/{table}.json)
+  const localResp = await fetch(localUrl)
+  if (!localResp.ok) {
+    throw new Error(`Failed to fetch dataset for '${table}' from ${localUrl}: ${localResp.statusText}`)
   }
 
-  const data = await response.json()
-  return data as T[]
+  const localData = await localResp.json()
+  return localData as T[]
 }
